@@ -4,25 +4,15 @@
     "name": "mhattingpete",
     "email": "noreply@github.com"
   },
-  "metadata": {
-    "description": "Claude Code Skills for software engineering workflows - Git automation, testing, code review, and feature planning",
-    "version": "1.1.0"
-  },
   "plugins": [
     {
       "name": "engineering-workflow-skills",
-      "description": "Skills for common software engineering workflows including git operations, test fixing, code review implementation, and feature planning with plan-implementer agent",
       "source": "./",
-      "strict": false,
-      "skills": [
-        "./git-pushing",
-        "./test-fixing",
-        "./review-implementing",
-        "./feature-planning"
-      ],
-      "agents": [
-        "./plan-implementer"
-      ]
+      "description": "Skills for common software engineering workflows including git operations, test fixing, code review implementation, and feature planning with plan-implementer agent",
+      "version": "1.1.0",
+      "author": {
+        "name": "mhattingpete"
+      }
     }
   ]
 }
