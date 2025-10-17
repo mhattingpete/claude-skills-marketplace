@@ -13,6 +13,6 @@
     "./skills/feature-planning"
   ],
   "agents": [
-    "./agents/plan-implementer"
+    "./agents/plan-implementer/AGENT.md"
   ]
 }
