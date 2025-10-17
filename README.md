@@ -1,6 +1,29 @@
 # Claude Skills Marketplace
 
-A curated collection of Claude Code Skills for software engineering workflows, focusing on data processing, testing, and DevOps automation.
+A curated marketplace of Claude Code plugins for software engineering workflows.
+
+## Repository Structure
+
+```
+claude-skills-marketplace/
+├── .claude-plugin/
+│   └── marketplace.json              # Marketplace manifest
+├── engineering-workflow-plugin/       # Engineering workflow plugin
+│   ├── .claude-plugin/
+│   │   └── plugin.json               # Plugin manifest
+│   ├── agents/
+│   │   └── plan-implementer/         # Plan implementation agent
+│   ├── skills/
+│   │   ├── feature-planning/         # Feature planning skill
+│   │   ├── git-pushing/              # Git automation skill
+│   │   ├── review-implementing/      # Code review skill
+│   │   └── test-fixing/              # Test fixing skill
+│   ├── CHANGELOG.md
+│   ├── CONTRIBUTING.md
+│   └── SETUP.md
+├── LICENSE
+└── README.md
+```
 
 ## What are Skills and Agents?
 
@@ -22,25 +45,14 @@ Skills and Agents work together: Skills can orchestrate when to invoke Agents, a
 
 ## Installation
 
-### Install All Skills
+### Install from Marketplace
 
 ```bash
-# In Claude Code
+# In Claude Code - installs the entire plugin with all skills and agents
 /plugin marketplace add mhattingpete/claude-skills-marketplace
 ```
 
-### Install Individual Skills
-
-```bash
-# Clone this repository
-git clone https://github.com/mhattingpete/claude-skills-marketplace.git
-
-# Copy specific skill to your project
-cp -r claude-skills-marketplace/git-pushing .claude/skills/
-
-# Or copy to personal skills directory (available across all projects)
-cp -r claude-skills-marketplace/git-pushing ~/.claude/skills/
-```
+This installs the `engineering-workflow-plugin` which includes all skills and the plan-implementer agent.
 
 ## Available Skills
 
@@ -122,13 +134,20 @@ Focused agent for implementing code based on specific plans or task descriptions
 
 ---
 
-## Skill Locations
+## Plugin Development
 
-Skills can be installed in three locations:
+Want to add your own plugin to this marketplace? Follow this structure:
 
-- **Project Skills**: `.claude/skills/` (team-shared, version-controlled)
-- **Personal Skills**: `~/.claude/skills/` (available across all your projects)
-- **Plugin Skills**: Installed via plugin marketplace
+```
+your-plugin/
+├── .claude-plugin/
+│   └── plugin.json              # Plugin manifest
+├── agents/                       # Optional: Agent definitions
+├── skills/                       # Skills directory
+└── README.md                    # Plugin documentation
+```
+
+Then add it to `.claude-plugin/marketplace.json` in this repository.
 
 ## Creating Custom Skills
 
