@@ -1,0 +1,24 @@
+{
+  "name": "mhattingpete-claude-skills",
+  "owner": {
+    "name": "mhattingpete",
+    "email": "noreply@github.com"
+  },
+  "metadata": {
+    "description": "Claude Code Skills for software engineering workflows - Git automation, testing, and code review",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "engineering-workflow-skills",
+      "description": "Skills for common software engineering workflows including git operations, test fixing, and code review implementation",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./git-pushing",
+        "./test-fixing",
+        "./review-implementing"
+      ]
+    }
+  ]
+}
