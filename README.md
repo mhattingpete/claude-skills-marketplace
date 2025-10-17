@@ -2,14 +2,23 @@
 
 A curated collection of Claude Code Skills for software engineering workflows, focusing on data processing, testing, and DevOps automation.
 
-## What are Skills?
+## What are Skills and Agents?
 
-Skills are model-invoked capabilities that extend Claude Code's functionality. Unlike slash commands that require explicit user activation, Skills are automatically triggered by Claude based on context and the Skill's description.
+**Skills** are model-invoked capabilities that extend Claude Code's functionality. Unlike slash commands that require explicit user activation, Skills are automatically triggered by Claude based on context and the Skill's description.
 
 Each Skill consists of a `SKILL.md` file with:
 - YAML frontmatter (name, description, metadata)
 - Detailed instructions for Claude
 - Optional supporting files (scripts, templates, references)
+
+**Agents** are specialized Claude instances that can be invoked by Claude to handle specific types of work. They run independently with their own context and can use different models optimized for their task.
+
+Each Agent consists of an `AGENT.md` file with:
+- YAML frontmatter (name, description, model selection)
+- Specialized instructions and constraints
+- Decision-making frameworks for their domain
+
+Skills and Agents work together: Skills can orchestrate when to invoke Agents, and Agents can use Skills while executing their tasks.
 
 ## Installation
 
@@ -34,6 +43,22 @@ cp -r claude-skills-marketplace/git-pushing ~/.claude/skills/
 ```
 
 ## Available Skills
+
+### Feature Development
+
+#### `feature-planning`
+Break down feature requests into detailed, implementable plans with clear tasks that can be executed by the plan-implementer agent.
+
+**Activates when:** User requests a new feature, enhancement, or complex change requiring planning.
+
+**Example usage:**
+- "Add user authentication"
+- "Build a dashboard for analytics"
+- "Plan how to implement export functionality"
+
+**Works with:** `plan-implementer` agent for execution
+
+---
 
 ### Git & Version Control
 
@@ -74,6 +99,26 @@ Process and implement code review feedback systematically with todo tracking.
 - "Implement this review feedback: [paste comments]"
 - "Address these PR comments"
 - "The reviewer suggested these changes"
+
+---
+
+## Available Agents
+
+### Implementation
+
+#### `plan-implementer`
+Focused agent for implementing code based on specific plans or task descriptions. Uses Haiku model for efficient, cost-effective execution.
+
+**Use when:** You have a clear specification or plan to execute.
+
+**Invoked by:** `feature-planning` skill automatically, or manually via Task tool
+
+**Example usage:**
+- Implementing tasks from a feature plan
+- Executing specific implementation subtasks
+- Following project conventions for focused code changes
+
+**Model:** claude-3-5-haiku (fast and efficient for implementation tasks)
 
 ---
 
@@ -155,4 +200,29 @@ Issues and questions:
 
 ---
 
-**Note**: These skills are designed for the 25L Taxonomy Assistant project but are generalized for broader use. Adapt descriptions and instructions to fit your specific workflows.
+## Complete Workflow Example
+
+Here's how the skills and agent work together for a typical feature development flow:
+
+1. **User**: "Add user authentication to the app"
+2. **`feature-planning` skill** activates and:
+   - Asks clarifying questions (OAuth? JWT? Session-based?)
+   - Explores codebase for existing patterns
+   - Creates detailed plan with 8 discrete tasks
+   - Reviews plan with user
+3. **`plan-implementer` agent** executes each task:
+   - Implements User model
+   - Creates auth middleware
+   - Adds login/logout endpoints
+   - Builds frontend auth flow
+4. **`test-fixing` skill** automatically activates if tests fail:
+   - Identifies and groups test failures
+   - Fixes issues systematically
+5. **User**: "Push these changes"
+6. **`git-pushing` skill** activates:
+   - Creates conventional commit message
+   - Pushes to remote branch
+
+---
+
+**Note**: These skills are generalized for broad software engineering use. Adapt descriptions and instructions to fit your specific workflows.
