@@ -5,14 +5,5 @@
   "author": {
     "name": "mhattingpete",
     "email": "noreply@github.com"
-  },
-  "skills": [
-    "./skills/git-pushing",
-    "./skills/test-fixing",
-    "./skills/review-implementing",
-    "./skills/feature-planning"
-  ],
-  "agents": [
-    "./agents/plan-implementer"
-  ]
+  }
 }
