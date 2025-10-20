@@ -2,6 +2,8 @@
 
 A curated marketplace of Claude Code plugins for software engineering workflows.
 
+<img src="assets/skill-loading.gif" alt="Skill Loading Demo" width="600">
+
 ## Repository Structure
 
 ```
