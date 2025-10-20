@@ -150,24 +150,57 @@ Process and implement code review feedback systematically with todo tracking.
 
 ### Visual Documentation
 
-#### `visual-html-creator`
-Create stunning, professional visual HTML documentation with modern UI design, SVG diagrams, flowcharts, metric dashboards, timelines, and technical documentation.
+#### `flowchart-creator`
+Create stunning HTML flowcharts and process flow diagrams with decision trees, color-coded stages, and swimlanes.
 
-**Activates when:** User explicitly requests visual HTML documentation, process flow diagrams, metric dashboards, or project roadmaps.
+**Activates when:** User requests flowcharts, process diagrams, workflow visualizations, or decision trees.
 
 **Example usage:**
-- "Create a visual HTML for our deployment process"
-- "Make a dashboard showing project metrics"
-- "Generate a visual guide for our API workflow"
-- "Build a timeline for our product roadmap"
+- "Create a flowchart for our order processing"
+- "Generate a process flow diagram showing deployment steps"
+- "Make a decision tree for our approval workflow"
 
-**Features:**
-- Process flow diagrams with decision trees
-- Metric dashboards with KPI cards and charts
-- Technical documentation with code blocks
-- Project timelines and Gantt charts
-- Responsive mobile-first design
+---
+
+#### `dashboard-creator`
+Create professional HTML dashboards with KPI metric cards, bar/pie/line charts, and progress indicators.
+
+**Activates when:** User requests dashboards, metrics displays, KPI visualizations, or data charts.
+
+**Example usage:**
+- "Create a dashboard showing website analytics"
+- "Make a KPI dashboard for our sales metrics"
+- "Generate a performance dashboard with charts"
+
+---
+
+#### `technical-doc-creator`
+Create comprehensive HTML technical documentation with code blocks, API workflows, and system architecture diagrams.
+
+**Activates when:** User requests technical documentation, API docs, code examples, or system architecture.
+
+**Example usage:**
+- "Create API documentation for our user endpoints"
+- "Generate technical docs for our authentication system"
+- "Document our microservices architecture"
+
+---
+
+#### `timeline-creator`
+Create beautiful HTML timelines and project roadmaps with Gantt charts, milestones, and phase groupings.
+
+**Activates when:** User requests timelines, roadmaps, Gantt charts, project schedules, or milestone visualizations.
+
+**Example usage:**
+- "Create a timeline for our product launch"
+- "Generate a roadmap showing Q1-Q4 milestones"
+- "Make a Gantt chart for our project schedule"
+
+**Common Features (All Skills):**
+- Modern gradient backgrounds and responsive design
+- Semantic color system (success/warning/error/info)
 - Self-contained HTML (no external dependencies)
+- WCAG AA accessibility compliance
 
 ---
 

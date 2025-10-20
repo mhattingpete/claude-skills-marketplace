@@ -9,8 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Initial release of Visual Documentation Plugin
-- `visual-html-creator` skill for generating stunning HTML documentation
-- Four main visualization types:
+- Four focused skills for creating visual HTML documentation:
+  - `flowchart-creator` - Process flow diagrams and decision trees
+  - `dashboard-creator` - KPI dashboards and data visualizations
+  - `technical-doc-creator` - API docs and system architecture
+  - `timeline-creator` - Project timelines and Gantt charts
+- Shared resource library with:
   - Process flow diagrams with decision trees
   - Metric dashboards with KPI cards and charts
   - Technical documentation with code blocks

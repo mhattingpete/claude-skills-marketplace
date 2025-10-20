@@ -4,23 +4,49 @@ Create stunning, professional visual HTML documentation with modern UI design, S
 
 ## Skills Included
 
-### `visual-html-creator`
+### `flowchart-creator`
 
-Generate standalone HTML documentation files with embedded CSS and SVG graphics optimized for technical documentation and data visualization.
+Create stunning HTML flowcharts and process flow diagrams with decision trees, color-coded stages, arrows, and swimlanes.
 
-**Activates when:** User explicitly requests visual HTML documentation, process flow diagrams, metric dashboards, API workflow guides, deployment process visuals, or project roadmaps.
+**Activates when:** User requests flowcharts, process diagrams, workflow visualizations, or decision trees.
 
 **Example usage:**
-- "Create a visual HTML for our deployment process"
-- "Make a dashboard showing project metrics"
-- "Generate a visual guide for our API workflow"
-- "Build a timeline for our product roadmap"
+- "Create a flowchart for our order processing"
+- "Generate a process flow diagram showing deployment steps"
+- "Make a decision tree for our approval workflow"
 
-**Capabilities:**
-- **Process Flow Diagrams** - Flowcharts with decision trees, arrows, and color-coded stages
-- **Metric Dashboards** - KPI cards, bar charts, pie charts, and statistics displays
-- **Technical Documentation** - Code blocks, API workflows, and system architecture
-- **Project Timelines** - Gantt charts, roadmaps, and milestone visualizations
+### `dashboard-creator`
+
+Create professional HTML dashboards with KPI metric cards, charts, progress indicators, and data visualizations.
+
+**Activates when:** User requests dashboards, metrics displays, KPI visualizations, or data charts.
+
+**Example usage:**
+- "Create a dashboard showing website analytics"
+- "Make a KPI dashboard for our sales metrics"
+- "Generate a performance dashboard with charts"
+
+### `technical-doc-creator`
+
+Create comprehensive HTML technical documentation with code blocks, API workflows, system architecture diagrams, and syntax highlighting.
+
+**Activates when:** User requests technical documentation, API docs, code examples, or system architecture visualizations.
+
+**Example usage:**
+- "Create API documentation for our user endpoints"
+- "Generate technical docs for our authentication system"
+- "Document our microservices architecture"
+
+### `timeline-creator`
+
+Create beautiful HTML timelines and project roadmaps with Gantt charts, milestones, phase groupings, and progress indicators.
+
+**Activates when:** User requests timelines, roadmaps, Gantt charts, project schedules, or milestone visualizations.
+
+**Example usage:**
+- "Create a timeline for our product launch"
+- "Generate a roadmap showing Q1-Q4 milestones"
+- "Make a Gantt chart for our project schedule"
 
 **Design Features:**
 - Modern gradient backgrounds and color schemes
