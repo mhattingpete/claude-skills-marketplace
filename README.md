@@ -23,6 +23,14 @@ claude-skills-marketplace/
 │   ├── CHANGELOG.md
 │   ├── CONTRIBUTING.md
 │   └── SETUP.md
+├── visual-documentation-plugin/       # Visual documentation plugin
+│   ├── .claude-plugin/
+│   │   └── plugin.json               # Plugin manifest
+│   ├── skills/
+│   │   └── visual-html-creator/      # Visual HTML creation skill
+│   ├── CHANGELOG.md
+│   ├── README.md
+│   └── SETUP.md
 ├── LICENSE
 └── README.md
 ```
@@ -55,6 +63,30 @@ Skills and Agents work together: Skills can orchestrate when to invoke Agents, a
 ```
 
 This installs the `engineering-workflow-plugin` which includes all skills and the plan-implementer agent.
+
+To install individual plugins:
+
+```bash
+# Install only engineering workflows
+/plugin marketplace add mhattingpete/claude-skills-marketplace/engineering-workflow-plugin
+
+# Install only visual documentation
+/plugin marketplace add mhattingpete/claude-skills-marketplace/visual-documentation-plugin
+```
+
+## Available Plugins
+
+### Engineering Workflow Plugin
+
+Skills for common software engineering workflows including git operations, test fixing, code review implementation, and feature planning.
+
+[View Plugin Documentation →](engineering-workflow-plugin/README.md)
+
+### Visual Documentation Plugin
+
+Skills for creating stunning visual HTML documentation with modern UI design, SVG diagrams, flowcharts, dashboards, and timelines.
+
+[View Plugin Documentation →](visual-documentation-plugin/README.md)
 
 ## Available Skills
 
@@ -113,6 +145,29 @@ Process and implement code review feedback systematically with todo tracking.
 - "Implement this review feedback: [paste comments]"
 - "Address these PR comments"
 - "The reviewer suggested these changes"
+
+---
+
+### Visual Documentation
+
+#### `visual-html-creator`
+Create stunning, professional visual HTML documentation with modern UI design, SVG diagrams, flowcharts, metric dashboards, timelines, and technical documentation.
+
+**Activates when:** User explicitly requests visual HTML documentation, process flow diagrams, metric dashboards, or project roadmaps.
+
+**Example usage:**
+- "Create a visual HTML for our deployment process"
+- "Make a dashboard showing project metrics"
+- "Generate a visual guide for our API workflow"
+- "Build a timeline for our product roadmap"
+
+**Features:**
+- Process flow diagrams with decision trees
+- Metric dashboards with KPI cards and charts
+- Technical documentation with code blocks
+- Project timelines and Gantt charts
+- Responsive mobile-first design
+- Self-contained HTML (no external dependencies)
 
 ---
 

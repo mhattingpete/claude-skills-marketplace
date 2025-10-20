@@ -13,6 +13,15 @@
       "author": {
         "name": "mhattingpete"
       }
+    },
+    {
+      "name": "visual-documentation-skills",
+      "source": "./visual-documentation-plugin",
+      "description": "Skills for creating stunning visual HTML documentation with modern UI design, SVG diagrams, flowcharts, dashboards, timelines, and technical documentation",
+      "version": "1.0.0",
+      "author": {
+        "name": "mhattingpete"
+      }
     }
   ]
 }
