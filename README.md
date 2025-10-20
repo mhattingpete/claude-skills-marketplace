@@ -23,6 +23,14 @@ claude-skills-marketplace/
 │   ├── CHANGELOG.md
 │   ├── CONTRIBUTING.md
 │   └── SETUP.md
+├── visual-documentation-plugin/       # Visual documentation plugin
+│   ├── .claude-plugin/
+│   │   └── plugin.json               # Plugin manifest
+│   ├── skills/
+│   │   └── visual-html-creator/      # Visual HTML creation skill
+│   ├── CHANGELOG.md
+│   ├── README.md
+│   └── SETUP.md
 ├── LICENSE
 └── README.md
 ```
@@ -55,6 +63,30 @@ Skills and Agents work together: Skills can orchestrate when to invoke Agents, a
 ```
 
 This installs the `engineering-workflow-plugin` which includes all skills and the plan-implementer agent.
+
+To install individual plugins:
+
+```bash
+# Install only engineering workflows
+/plugin marketplace add mhattingpete/claude-skills-marketplace/engineering-workflow-plugin
+
+# Install only visual documentation
+/plugin marketplace add mhattingpete/claude-skills-marketplace/visual-documentation-plugin
+```
+
+## Available Plugins
+
+### Engineering Workflow Plugin
+
+Skills for common software engineering workflows including git operations, test fixing, code review implementation, and feature planning.
+
+[View Plugin Documentation →](engineering-workflow-plugin/README.md)
+
+### Visual Documentation Plugin
+
+Skills for creating stunning visual HTML documentation with modern UI design, SVG diagrams, flowcharts, dashboards, and timelines.
+
+[View Plugin Documentation →](visual-documentation-plugin/README.md)
 
 ## Available Skills
 
@@ -113,6 +145,62 @@ Process and implement code review feedback systematically with todo tracking.
 - "Implement this review feedback: [paste comments]"
 - "Address these PR comments"
 - "The reviewer suggested these changes"
+
+---
+
+### Visual Documentation
+
+#### `flowchart-creator`
+Create stunning HTML flowcharts and process flow diagrams with decision trees, color-coded stages, and swimlanes.
+
+**Activates when:** User requests flowcharts, process diagrams, workflow visualizations, or decision trees.
+
+**Example usage:**
+- "Create a flowchart for our order processing"
+- "Generate a process flow diagram showing deployment steps"
+- "Make a decision tree for our approval workflow"
+
+---
+
+#### `dashboard-creator`
+Create professional HTML dashboards with KPI metric cards, bar/pie/line charts, and progress indicators.
+
+**Activates when:** User requests dashboards, metrics displays, KPI visualizations, or data charts.
+
+**Example usage:**
+- "Create a dashboard showing website analytics"
+- "Make a KPI dashboard for our sales metrics"
+- "Generate a performance dashboard with charts"
+
+---
+
+#### `technical-doc-creator`
+Create comprehensive HTML technical documentation with code blocks, API workflows, and system architecture diagrams.
+
+**Activates when:** User requests technical documentation, API docs, code examples, or system architecture.
+
+**Example usage:**
+- "Create API documentation for our user endpoints"
+- "Generate technical docs for our authentication system"
+- "Document our microservices architecture"
+
+---
+
+#### `timeline-creator`
+Create beautiful HTML timelines and project roadmaps with Gantt charts, milestones, and phase groupings.
+
+**Activates when:** User requests timelines, roadmaps, Gantt charts, project schedules, or milestone visualizations.
+
+**Example usage:**
+- "Create a timeline for our product launch"
+- "Generate a roadmap showing Q1-Q4 milestones"
+- "Make a Gantt chart for our project schedule"
+
+**Common Features (All Skills):**
+- Modern gradient backgrounds and responsive design
+- Semantic color system (success/warning/error/info)
+- Self-contained HTML (no external dependencies)
+- WCAG AA accessibility compliance
 
 ---
 

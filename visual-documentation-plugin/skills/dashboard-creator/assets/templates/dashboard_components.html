@@ -1,0 +1,324 @@
+<!-- DASHBOARD COMPONENTS LIBRARY -->
+<!-- Copy and customize these patterns for metric dashboards and data visualizations -->
+
+<!-- ===== METRIC CARDS ===== -->
+
+<!-- Standard metric card (gradient background) -->
+<div class="metric-card">
+    <div class="metric-value">1,234</div>
+    <div class="metric-label">Total Items</div>
+</div>
+
+<!-- Metric card with subtitle -->
+<div class="metric-card">
+    <div class="metric-value">89%</div>
+    <div class="metric-label">Completion Rate<br><small>Last 30 days</small></div>
+</div>
+
+<!-- Metric card with custom colors -->
+<div class="metric-card" style="background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);">
+    <div class="metric-value">✓ 456</div>
+    <div class="metric-label">Completed Tasks</div>
+</div>
+
+<div class="metric-card" style="background: linear-gradient(135deg, #f56565 0%, #e53e3e 100%);">
+    <div class="metric-value">⚠ 23</div>
+    <div class="metric-label">Critical Issues</div>
+</div>
+
+<!-- ===== BAR CHARTS (SVG) ===== -->
+
+<svg viewBox="0 0 1200 400" style="width: 100%; height: auto;">
+    <!-- Chart title -->
+    <text x="600" y="30" text-anchor="middle" font-size="20" font-weight="bold" fill="#2d3748">
+        Distribution by Category
+    </text>
+
+    <!-- Axes -->
+    <line x1="100" y1="350" x2="1100" y2="350" stroke="#2d3748" stroke-width="2"/>
+    <line x1="100" y1="350" x2="100" y2="80" stroke="#2d3748" stroke-width="2"/>
+
+    <!-- Y-axis labels -->
+    <text x="80" y="355" text-anchor="end" font-size="12" fill="#718096">0</text>
+    <text x="80" y="280" text-anchor="end" font-size="12" fill="#718096">200</text>
+    <text x="80" y="205" text-anchor="end" font-size="12" fill="#718096">400</text>
+    <text x="80" y="130" text-anchor="end" font-size="12" fill="#718096">600</text>
+    <text x="80" y="85" text-anchor="end" font-size="12" fill="#718096">800</text>
+
+    <!-- Grid lines (optional) -->
+    <line x1="100" y1="280" x2="1100" y2="280" stroke="#e2e8f0" stroke-width="1" opacity="0.5"/>
+    <line x1="100" y1="205" x2="1100" y2="205" stroke="#e2e8f0" stroke-width="1" opacity="0.5"/>
+    <line x1="100" y1="130" x2="1100" y2="130" stroke="#e2e8f0" stroke-width="1" opacity="0.5"/>
+
+    <!-- Bar 1 -->
+    <rect x="200" y="120" width="200" height="230" rx="5"
+          fill="#4299e1" stroke="#2b6cb0" stroke-width="2"/>
+    <text x="300" y="250" text-anchor="middle" fill="white" font-size="24" font-weight="bold">
+        645
+    </text>
+    <text x="300" y="380" text-anchor="middle" font-size="14" fill="#2d3748">
+        Category A
+    </text>
+
+    <!-- Bar 2 -->
+    <rect x="500" y="180" width="200" height="170" rx="5"
+          fill="#48bb78" stroke="#2f855a" stroke-width="2"/>
+    <text x="600" y="270" text-anchor="middle" fill="white" font-size="24" font-weight="bold">
+        428
+    </text>
+    <text x="600" y="380" text-anchor="middle" font-size="14" fill="#2d3748">
+        Category B
+    </text>
+
+    <!-- Bar 3 -->
+    <rect x="800" y="260" width="200" height="90" rx="5"
+          fill="#f59e0b" stroke="#d97706" stroke-width="2"/>
+    <text x="900" y="310" text-anchor="middle" fill="white" font-size="24" font-weight="bold">
+        167
+    </text>
+    <text x="900" y="380" text-anchor="middle" font-size="14" fill="#2d3748">
+        Category C
+    </text>
+</svg>
+
+<!-- ===== HORIZONTAL BAR CHART ===== -->
+
+<svg viewBox="0 0 1200 500" style="width: 100%; height: auto;">
+    <text x="600" y="30" text-anchor="middle" font-size="20" font-weight="bold" fill="#2d3748">
+        Progress by Module
+    </text>
+
+    <!-- Module 1 -->
+    <text x="50" y="100" font-size="14" fill="#2d3748" font-weight="500">
+        Module A
+    </text>
+    <rect x="150" y="80" width="800" height="40" rx="20" fill="#e2e8f0"/>
+    <rect x="150" y="80" width="640" height="40" rx="20" fill="#48bb78"/>
+    <text x="970" y="105" font-size="14" fill="#2d3748" font-weight="bold">
+        80%
+    </text>
+
+    <!-- Module 2 -->
+    <text x="50" y="180" font-size="14" fill="#2d3748" font-weight="500">
+        Module B
+    </text>
+    <rect x="150" y="160" width="800" height="40" rx="20" fill="#e2e8f0"/>
+    <rect x="150" y="160" width="560" height="40" rx="20" fill="#4299e1"/>
+    <text x="970" y="185" font-size="14" fill="#2d3748" font-weight="bold">
+        70%
+    </text>
+
+    <!-- Module 3 -->
+    <text x="50" y="260" font-size="14" fill="#2d3748" font-weight="500">
+        Module C
+    </text>
+    <rect x="150" y="240" width="800" height="40" rx="20" fill="#e2e8f0"/>
+    <rect x="150" y="240" width="360" height="40" rx="20" fill="#f59e0b"/>
+    <text x="970" y="265" font-size="14" fill="#2d3748" font-weight="bold">
+        45%
+    </text>
+
+    <!-- Module 4 -->
+    <text x="50" y="340" font-size="14" fill="#2d3748" font-weight="500">
+        Module D
+    </text>
+    <rect x="150" y="320" width="800" height="40" rx="20" fill="#e2e8f0"/>
+    <rect x="150" y="320" width="200" height="40" rx="20" fill="#f56565"/>
+    <text x="970" y="345" font-size="14" fill="#2d3748" font-weight="bold">
+        25%
+    </text>
+
+    <!-- Legend -->
+    <text x="200" y="420" font-size="12" fill="#718096">
+        0%
+    </text>
+    <text x="550" y="420" font-size="12" fill="#718096">
+        50%
+    </text>
+    <text x="920" y="420" font-size="12" fill="#718096">
+        100%
+    </text>
+</svg>
+
+<!-- ===== PIE/DONUT CHART ===== -->
+
+<svg viewBox="0 0 600 600" style="width: 100%; height: auto;">
+    <text x="300" y="40" text-anchor="middle" font-size="20" font-weight="bold" fill="#2d3748">
+        Task Distribution
+    </text>
+
+    <!-- Donut chart segments (simplified - use proper arc paths for real charts) -->
+    <circle cx="300" cy="320" r="150" fill="none" stroke="#4299e1" stroke-width="80"
+            stroke-dasharray="471 0" transform="rotate(-90 300 320)"/>
+    <circle cx="300" cy="320" r="150" fill="none" stroke="#48bb78" stroke-width="80"
+            stroke-dasharray="235 236" stroke-dashoffset="0" transform="rotate(-90 300 320)"/>
+    <circle cx="300" cy="320" r="150" fill="none" stroke="#f59e0b" stroke-width="80"
+            stroke-dasharray="118 353" stroke-dashoffset="-235" transform="rotate(-90 300 320)"/>
+    <circle cx="300" cy="320" r="150" fill="none" stroke="#f56565" stroke-width="80"
+            stroke-dasharray="71 400" stroke-dashoffset="-353" transform="rotate(-90 300 320)"/>
+
+    <!-- Center text -->
+    <text x="300" y="310" text-anchor="middle" font-size="48" font-weight="bold" fill="#2d3748">
+        1,240
+    </text>
+    <text x="300" y="340" text-anchor="middle" font-size="16" fill="#718096">
+        Total Tasks
+    </text>
+
+    <!-- Legend -->
+    <g transform="translate(450, 200)">
+        <circle cx="0" cy="0" r="8" fill="#4299e1"/>
+        <text x="15" y="5" font-size="14" fill="#2d3748">Complete (50%)</text>
+    </g>
+    <g transform="translate(450, 240)">
+        <circle cx="0" cy="0" r="8" fill="#48bb78"/>
+        <text x="15" y="5" font-size="14" fill="#2d3748">In Progress (25%)</text>
+    </g>
+    <g transform="translate(450, 280)">
+        <circle cx="0" cy="0" r="8" fill="#f59e0b"/>
+        <text x="15" y="5" font-size="14" fill="#2d3748">Pending (15%)</text>
+    </g>
+    <g transform="translate(450, 320)">
+        <circle cx="0" cy="0" r="8" fill="#f56565"/>
+        <text x="15" y="5" font-size="14" fill="#2d3748">Blocked (10%)</text>
+    </g>
+</svg>
+
+<!-- ===== LINE CHART / TREND ===== -->
+
+<svg viewBox="0 0 1200 400" style="width: 100%; height: auto;">
+    <text x="600" y="30" text-anchor="middle" font-size="20" font-weight="bold" fill="#2d3748">
+        Performance Trend
+    </text>
+
+    <!-- Axes -->
+    <line x1="100" y1="350" x2="1100" y2="350" stroke="#2d3748" stroke-width="2"/>
+    <line x1="100" y1="350" x2="100" y2="80" stroke="#2d3748" stroke-width="2"/>
+
+    <!-- Grid lines -->
+    <line x1="100" y1="280" x2="1100" y2="280" stroke="#e2e8f0" stroke-width="1"/>
+    <line x1="100" y1="210" x2="1100" y2="210" stroke="#e2e8f0" stroke-width="1"/>
+    <line x1="100" y1="140" x2="1100" y2="140" stroke="#e2e8f0" stroke-width="1"/>
+
+    <!-- Y-axis labels -->
+    <text x="80" y="355" text-anchor="end" font-size="12" fill="#718096">0</text>
+    <text x="80" y="285" text-anchor="end" font-size="12" fill="#718096">25</text>
+    <text x="80" y="215" text-anchor="end" font-size="12" fill="#718096">50</text>
+    <text x="80" y="145" text-anchor="end" font-size="12" fill="#718096">75</text>
+    <text x="80" y="85" text-anchor="end" font-size="12" fill="#718096">100</text>
+
+    <!-- X-axis labels -->
+    <text x="200" y="375" text-anchor="middle" font-size="12" fill="#718096">Jan</text>
+    <text x="350" y="375" text-anchor="middle" font-size="12" fill="#718096">Feb</text>
+    <text x="500" y="375" text-anchor="middle" font-size="12" fill="#718096">Mar</text>
+    <text x="650" y="375" text-anchor="middle" font-size="12" fill="#718096">Apr</text>
+    <text x="800" y="375" text-anchor="middle" font-size="12" fill="#718096">May</text>
+    <text x="950" y="375" text-anchor="middle" font-size="12" fill="#718096">Jun</text>
+
+    <!-- Area under line (gradient fill) -->
+    <defs>
+        <linearGradient id="areaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#4299e1;stop-opacity:0.3" />
+            <stop offset="100%" style="stop-color:#4299e1;stop-opacity:0.05" />
+        </linearGradient>
+    </defs>
+    <path d="M 200 280 L 350 230 L 500 200 L 650 160 L 800 140 L 950 120 L 950 350 L 200 350 Z"
+          fill="url(#areaGradient)"/>
+
+    <!-- Line -->
+    <path d="M 200 280 L 350 230 L 500 200 L 650 160 L 800 140 L 950 120"
+          stroke="#4299e1" stroke-width="3" fill="none"/>
+
+    <!-- Data points -->
+    <circle cx="200" cy="280" r="6" fill="#4299e1" stroke="white" stroke-width="2"/>
+    <circle cx="350" cy="230" r="6" fill="#4299e1" stroke="white" stroke-width="2"/>
+    <circle cx="500" cy="200" r="6" fill="#4299e1" stroke="white" stroke-width="2"/>
+    <circle cx="650" cy="160" r="6" fill="#4299e1" stroke="white" stroke-width="2"/>
+    <circle cx="800" cy="140" r="6" fill="#4299e1" stroke="white" stroke-width="2"/>
+    <circle cx="950" cy="120" r="6" fill="#4299e1" stroke="white" stroke-width="2"/>
+
+    <!-- Value labels on data points -->
+    <text x="200" y="268" text-anchor="middle" font-size="11" fill="#2d3748" font-weight="bold">45</text>
+    <text x="350" y="218" text-anchor="middle" font-size="11" fill="#2d3748" font-weight="bold">58</text>
+    <text x="500" y="188" text-anchor="middle" font-size="11" fill="#2d3748" font-weight="bold">67</text>
+    <text x="650" y="148" text-anchor="middle" font-size="11" fill="#2d3748" font-weight="bold">78</text>
+    <text x="800" y="128" text-anchor="middle" font-size="11" fill="#2d3748" font-weight="bold">84</text>
+    <text x="950" y="108" text-anchor="middle" font-size="11" fill="#2d3748" font-weight="bold">92</text>
+</svg>
+
+<!-- ===== GAUGE / RADIAL PROGRESS ===== -->
+
+<svg viewBox="0 0 400 300" style="width: 100%; height: auto;">
+    <text x="200" y="30" text-anchor="middle" font-size="18" font-weight="bold" fill="#2d3748">
+        System Health
+    </text>
+
+    <!-- Background arc -->
+    <path d="M 100 200 A 100 100 0 0 1 300 200"
+          stroke="#e2e8f0" stroke-width="30" fill="none" stroke-linecap="round"/>
+
+    <!-- Progress arc (75% = 270 degrees) -->
+    <path d="M 100 200 A 100 100 0 1 1 271 129"
+          stroke="#48bb78" stroke-width="30" fill="none" stroke-linecap="round"/>
+
+    <!-- Center text -->
+    <text x="200" y="190" text-anchor="middle" font-size="48" font-weight="bold" fill="#2d3748">
+        75%
+    </text>
+    <text x="200" y="215" text-anchor="middle" font-size="14" fill="#718096">
+        Excellent
+    </text>
+</svg>
+
+<!-- ===== STATUS INDICATORS ===== -->
+
+<!-- Traffic light style -->
+<div style="display: flex; gap: 30px; justify-content: center; align-items: center; padding: 20px;">
+    <div style="text-align: center;">
+        <div style="width: 60px; height: 60px; border-radius: 50%; background: #48bb78; margin: 0 auto 10px;"></div>
+        <div style="font-size: 14px; color: #2d3748;">Good<br><strong>89%</strong></div>
+    </div>
+    <div style="text-align: center;">
+        <div style="width: 60px; height: 60px; border-radius: 50%; background: #f59e0b; margin: 0 auto 10px;"></div>
+        <div style="font-size: 14px; color: #2d3748;">Warning<br><strong>8%</strong></div>
+    </div>
+    <div style="text-align: center;">
+        <div style="width: 60px; height: 60px; border-radius: 50%; background: #f56565; margin: 0 auto 10px;"></div>
+        <div style="font-size: 14px; color: #2d3748;">Critical<br><strong>3%</strong></div>
+    </div>
+</div>
+
+<!-- ===== COMPARISON TABLE ===== -->
+
+<div style="background: #f7fafc; padding: 20px; border-radius: 10px; margin: 20px 0;">
+    <table style="width: 100%; border-collapse: collapse;">
+        <thead>
+            <tr style="border-bottom: 2px solid #667eea;">
+                <th style="padding: 15px; text-align: left; color: #2d3748; font-size: 14px;">Metric</th>
+                <th style="padding: 15px; text-align: center; color: #2d3748; font-size: 14px;">Current</th>
+                <th style="padding: 15px; text-align: center; color: #2d3748; font-size: 14px;">Target</th>
+                <th style="padding: 15px; text-align: center; color: #2d3748; font-size: 14px;">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="border-bottom: 1px solid #e2e8f0;">
+                <td style="padding: 15px; color: #4a5568;">Response Time</td>
+                <td style="padding: 15px; text-align: center; font-weight: bold; color: #2d3748;">245ms</td>
+                <td style="padding: 15px; text-align: center; color: #718096;">< 300ms</td>
+                <td style="padding: 15px; text-align: center;"><span style="color: #48bb78; font-weight: bold;">✓ On Track</span></td>
+            </tr>
+            <tr style="border-bottom: 1px solid #e2e8f0;">
+                <td style="padding: 15px; color: #4a5568;">Uptime</td>
+                <td style="padding: 15px; text-align: center; font-weight: bold; color: #2d3748;">99.8%</td>
+                <td style="padding: 15px; text-align: center; color: #718096;">99.9%</td>
+                <td style="padding: 15px; text-align: center;"><span style="color: #f59e0b; font-weight: bold;">⚠ Below Target</span></td>
+            </tr>
+            <tr>
+                <td style="padding: 15px; color: #4a5568;">Error Rate</td>
+                <td style="padding: 15px; text-align: center; font-weight: bold; color: #2d3748;">0.02%</td>
+                <td style="padding: 15px; text-align: center; color: #718096;">< 0.1%</td>
+                <td style="padding: 15px; text-align: center;"><span style="color: #48bb78; font-weight: bold;">✓ Exceeding</span></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
