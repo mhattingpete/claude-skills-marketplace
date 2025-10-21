@@ -1,6 +1,6 @@
 ---
 name: dashboard-creator
-description: Create stunning HTML dashboards with KPI metric cards, bar/pie/line charts, progress indicators, and data visualizations. Use when users explicitly request visual dashboards, metrics displays, KPI visualizations, or data charts in HTML format.
+description: Create stunning, interactive HTML dashboards with KPI metric cards, bar/pie/line charts, progress indicators, and data visualizations. Use when users request dashboards, metrics displays, KPI visualizations, data charts, or monitoring interfaces - regardless of whether they specify HTML format.
 ---
 
 # Dashboard Creator

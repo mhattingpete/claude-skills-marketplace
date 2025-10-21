@@ -1,6 +1,6 @@
 ---
 name: technical-doc-creator
-description: Create stunning HTML technical documentation with code blocks, API workflows, system architecture diagrams, and syntax highlighting. Use when users explicitly request technical documentation, API docs, code examples, or system architecture visualizations in HTML format.
+description: Create stunning, interactive HTML technical documentation with code blocks, API workflows, system architecture diagrams, and syntax highlighting. Use when users request technical documentation, API docs, API references, code examples, system architecture visualizations, or developer documentation - regardless of whether they specify HTML format.
 ---
 
 # Technical Documentation Creator
