@@ -1,6 +1,6 @@
 ---
 name: flowchart-creator
-description: Create stunning HTML flowcharts and process flow diagrams with decision trees, color-coded stages, arrows, and swimlanes. Use when users explicitly request visual flowcharts, process diagrams, workflow visualizations, or decision trees in HTML format.
+description: Create stunning, interactive HTML flowcharts and process flow diagrams with decision trees, color-coded stages, arrows, and swimlanes. Use when users request flowcharts, process diagrams, workflow visualizations, decision trees, or process flows - regardless of whether they specify HTML format.
 ---
 
 # Flowchart Creator

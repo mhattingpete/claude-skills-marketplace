@@ -1,6 +1,6 @@
 ---
 name: review-implementing
-description: Process and implement code review feedback systematically. Use when user provides reviewer comments, PR feedback, code review notes, or asks to implement suggestions from reviews. Activates on phrases like "implement this feedback", "address review comments", or when user pastes reviewer notes.
+description: Process and implement code review feedback systematically. Use when user provides reviewer comments, PR feedback, code review notes, or asks to implement suggestions from reviews. Activates on phrases like "implement this feedback", "address review comments", "fix review issues", "apply these suggestions", or when user pastes reviewer notes.
 ---
 
 # Review Feedback Implementation

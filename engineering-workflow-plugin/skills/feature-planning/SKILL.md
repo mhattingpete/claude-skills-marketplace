@@ -1,6 +1,6 @@
 ---
 name: feature-planning
-description: Break down feature requests into detailed, implementable plans with clear tasks. Use when user requests a new feature, enhancement, or complex change that requires planning before implementation. Activates on phrases like "add a feature", "implement X", "build Y", or "plan this feature".
+description: Break down feature requests into detailed, implementable plans with clear tasks. Use when user requests a new feature, enhancement, or complex change. Activates on phrases like "add a feature", "implement X", "build Y", "create X feature", "I need X", or "plan this feature".
 ---
 
 # Feature Planning Workflow

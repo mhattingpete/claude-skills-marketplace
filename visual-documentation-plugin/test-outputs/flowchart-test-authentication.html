@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Authentication Process</title>
+    <style>
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        /* ===== CONTAINER ===== */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 40px;
+        }
+
+        /* ===== TYPOGRAPHY ===== */
+        h1 {
+            text-align: center;
+            color: #2d3748;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #718096;
+            font-size: 1.1em;
+            margin-bottom: 40px;
+        }
+
+        h2.section-title {
+            font-size: 1.8em;
+            color: #2d3748;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        /* ===== LAYOUT SECTIONS ===== */
+        .section {
+            margin-bottom: 60px;
+        }
+
+        .diagram-container {
+            background: #f7fafc;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            border: 2px solid #e2e8f0;
+        }
+
+        /* ===== METRIC CARDS ===== */
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .metric-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .metric-value {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .metric-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        /* ===== LEGEND ===== */
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 20px 0;
+            padding: 20px;
+            background: #edf2f7;
+            border-radius: 10px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .legend-box {
+            width: 30px;
+            height: 30px;
+            border-radius: 5px;
+            border: 2px solid #2d3748;
+        }
+
+        /* ===== SVG STYLING ===== */
+        svg {
+            width: 100%;
+            height: auto;
+        }
+
+        svg text {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 30px;
+            background: #f7fafc;
+            border-radius: 10px;
+        }
+
+        .footer p {
+            margin: 10px 0;
+        }
+
+        .footer-main {
+            font-size: 1.1em;
+            color: #4a5568;
+            font-weight: 500;
+        }
+
+        .footer-sub {
+            font-size: 0.95em;
+            color: #718096;
+        }
+
+        .footer-meta {
+            font-size: 0.85em;
+            color: #a0aec0;
+            margin-top: 15px;
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .section-title {
+                font-size: 1.4em;
+            }
+
+            .metric-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .legend {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>User Authentication Process</h1>
+        <p class="subtitle">Secure login workflow with validation and error handling</p>
+
+        <!-- METRIC CARDS SECTION -->
+        <div class="metric-grid">
+            <div class="metric-card">
+                <div class="metric-value">3</div>
+                <div class="metric-label">Main Steps</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">2</div>
+                <div class="metric-label">Decision Points</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">5</div>
+                <div class="metric-label">Total Stages</div>
+            </div>
+        </div>
+
+        <!-- MAIN CONTENT SECTION -->
+        <div class="section">
+            <h2 class="section-title">Authentication Flow</h2>
+
+            <div class="diagram-container">
+                <svg viewBox="0 0 1200 700">
+                    <defs>
+                        <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <polygon points="0 0, 10 3, 0 6" fill="#2d3748"/>
+                        </marker>
+                        <marker id="arrowhead-success" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <polygon points="0 0, 10 3, 0 6" fill="#48bb78"/>
+                        </marker>
+                        <marker id="arrowhead-error" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <polygon points="0 0, 10 3, 0 6" fill="#f56565"/>
+                        </marker>
+                    </defs>
+
+                    <!-- START NODE -->
+                    <circle cx="100" cy="100" r="50" fill="#48bb78" stroke="#2f855a" stroke-width="3" opacity="0.9"/>
+                    <text x="100" y="105" text-anchor="middle" fill="white" font-size="16" font-weight="bold">START</text>
+
+                    <!-- Arrow to Step 1 -->
+                    <path d="M 150 100 L 250 100" stroke="#2d3748" stroke-width="3" marker-end="url(#arrowhead)"/>
+
+                    <!-- STEP 1: User submits credentials -->
+                    <rect x="250" y="50" width="220" height="100" rx="10" fill="#4299e1" stroke="#2b6cb0" stroke-width="3"/>
+                    <text x="360" y="90" text-anchor="middle" fill="white" font-size="15" font-weight="bold">User Enters Credentials</text>
+                    <text x="360" y="110" text-anchor="middle" fill="white" font-size="12">Username & Password</text>
+
+                    <!-- Arrow to Decision 1 -->
+                    <path d="M 470 100 L 550 100" stroke="#2d3748" stroke-width="3" marker-end="url(#arrowhead)"/>
+
+                    <!-- DECISION 1: Valid format? -->
+                    <path d="M 650 50 L 750 50 L 800 100 L 750 150 L 550 150 L 500 100 Z"
+                          fill="#fbbf24" stroke="#d97706" stroke-width="3"/>
+                    <text x="650" y="95" text-anchor="middle" font-size="14" font-weight="bold">Valid Format?</text>
+                    <text x="650" y="115" text-anchor="middle" font-size="11">Check inputs</text>
+
+                    <!-- NO path - Invalid format -->
+                    <path d="M 650 150 L 650 220 L 360 220 L 360 150" stroke="#f56565" stroke-width="3" marker-end="url(#arrowhead-error)"/>
+                    <text x="650" y="190" text-anchor="middle" fill="#f56565" font-weight="bold" font-size="13">NO</text>
+                    <text x="500" y="240" text-anchor="middle" fill="#718096" font-size="11">Show error message</text>
+
+                    <!-- YES path - Continue to validation -->
+                    <path d="M 800 100 L 900 100" stroke="#48bb78" stroke-width="3" marker-end="url(#arrowhead-success)"/>
+                    <text x="845" y="90" text-anchor="middle" fill="#48bb78" font-weight="bold" font-size="13">YES</text>
+
+                    <!-- STEP 2: Validate credentials -->
+                    <rect x="900" y="50" width="220" height="100" rx="10" fill="#9f7aea" stroke="#6b46c1" stroke-width="3"/>
+                    <text x="1010" y="90" text-anchor="middle" fill="white" font-size="15" font-weight="bold">Validate Credentials</text>
+                    <text x="1010" y="110" text-anchor="middle" fill="white" font-size="12">Check against database</text>
+
+                    <!-- Arrow down to Decision 2 -->
+                    <path d="M 1010 150 L 1010 270" stroke="#2d3748" stroke-width="3" marker-end="url(#arrowhead)"/>
+
+                    <!-- DECISION 2: Credentials valid? -->
+                    <path d="M 1010 370 L 1110 370 L 1160 420 L 1110 470 L 910 470 L 860 420 Z"
+                          fill="#fbbf24" stroke="#d97706" stroke-width="3"/>
+                    <text x="1010" y="415" text-anchor="middle" font-size="14" font-weight="bold">Credentials</text>
+                    <text x="1010" y="435" text-anchor="middle" font-size="14" font-weight="bold">Valid?</text>
+
+                    <!-- NO path - Invalid credentials -->
+                    <path d="M 860 420 L 750 420" stroke="#f56565" stroke-width="3" marker-end="url(#arrowhead-error)"/>
+                    <text x="800" y="410" text-anchor="middle" fill="#f56565" font-weight="bold" font-size="13">NO</text>
+
+                    <!-- Error box -->
+                    <rect x="550" y="370" width="200" height="100" rx="10" fill="#f56565" stroke="#c53030" stroke-width="3"/>
+                    <text x="650" y="405" text-anchor="middle" fill="white" font-size="15" font-weight="bold">✗ LOGIN FAILED</text>
+                    <text x="650" y="430" text-anchor="middle" fill="white" font-size="12">Show error message</text>
+                    <text x="650" y="450" text-anchor="middle" fill="white" font-size="11">Retry allowed</text>
+
+                    <!-- YES path - Success -->
+                    <path d="M 1010 470 L 1010 570" stroke="#48bb78" stroke-width="3" marker-end="url(#arrowhead-success)"/>
+                    <text x="1030" y="520" text-anchor="start" fill="#48bb78" font-weight="bold" font-size="13">YES</text>
+
+                    <!-- Success box -->
+                    <rect x="910" y="570" width="200" height="100" rx="10" fill="#48bb78" stroke="#2f855a" stroke-width="3"/>
+                    <text x="1010" y="605" text-anchor="middle" fill="white" font-size="15" font-weight="bold">✓ SUCCESS</text>
+                    <text x="1010" y="630" text-anchor="middle" fill="white" font-size="12">User authenticated</text>
+                    <text x="1010" y="650" text-anchor="middle" fill="white" font-size="11">Redirect to dashboard</text>
+
+                    <!-- Loop back from error -->
+                    <path d="M 650 370 L 650 280 L 360 280 L 360 150" stroke="#cbd5e0" stroke-width="2"
+                          stroke-dasharray="5,5" marker-end="url(#arrowhead)"/>
+                    <text x="500" y="300" text-anchor="middle" fill="#718096" font-size="10">Retry</text>
+
+                </svg>
+            </div>
+        </div>
+
+        <!-- LEGEND SECTION -->
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-box" style="background: #4299e1;"></div>
+                <span>User Action</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box" style="background: #9f7aea;"></div>
+                <span>System Process</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box" style="background: #fbbf24;"></div>
+                <span>Decision Point</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box" style="background: #48bb78;"></div>
+                <span>Success</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box" style="background: #f56565;"></div>
+                <span>Error/Failed</span>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <p class="footer-main"><strong>User Authentication Process v1.0</strong></p>
+            <p class="footer-sub">Flowchart Test - Visual Documentation Skills</p>
+            <p class="footer-meta">Generated: October 21, 2025</p>
+        </div>
+    </div>
+</body>
+</html>
