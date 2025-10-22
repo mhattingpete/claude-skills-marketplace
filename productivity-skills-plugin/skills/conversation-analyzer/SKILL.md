@@ -1,3 +1,8 @@
+---
+name: conversation-analyzer
+description: Analyzes your Claude Code conversation history to identify patterns, common mistakes, and opportunities for workflow improvement. Use when user wants to understand usage patterns, optimize workflow, identify automation opportunities, or check if they're following best practices. Also activates when user says "analyze my conversations", "review my history", "how can I improve my workflow", or similar usage analysis requests.
+---
+
 # Conversation Analyzer Skill
 
 ## Purpose

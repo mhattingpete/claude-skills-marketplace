@@ -1,3 +1,8 @@
+---
+name: project-bootstrapper
+description: Sets up new projects or improves existing projects with development best practices, tooling, documentation, and workflow automation. Use when user wants to start a new project, improve project structure, add development tooling, or establish professional workflows. Also activates when user says "set up a new project", "bootstrap this project", "add best practices", "improve project structure", or similar setup requests.
+---
+
 # Project Bootstrapper Skill
 
 ## Purpose
