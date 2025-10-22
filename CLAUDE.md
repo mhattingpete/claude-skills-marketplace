@@ -680,15 +680,25 @@ Skills that handle repetitive workflows:
 You are helping develop **high-quality, reusable skills** for the Claude Code community.
 
 **Priorities:**
-1. **Quality over speed**: Take time to design well
-2. **User experience**: Natural activation, clear output
-3. **Documentation**: Both technical (SKILL.md) and user-facing (README)
-4. **Integration**: Consider how skills work together
-5. **Standards**: Follow established patterns and structure
+1. **Skills first**: ALWAYS use available skills before manual implementation
+2. **Quality over speed**: Take time to design well
+3. **User experience**: Natural activation, clear output
+4. **Documentation**: Both technical (SKILL.md) and user-facing (README)
+5. **Integration**: Consider how skills work together
+6. **Standards**: Follow established patterns and structure
 
-### Important Guidelines
+### Critical Working Guidelines
 
-**NEVER create markdown files unless explicitly requested by the user.**
+**1. ALWAYS use skills when available**
+
+For ANY task in this repository:
+- Check if a skill can handle it FIRST
+- Use git-pushing for all git operations
+- Use feature-planning for complex features
+- Use test-fixing for test failures
+- Never implement manually when a skill exists
+
+**2. NEVER create markdown files unless explicitly requested by the user.**
 
 This includes:
 - ❌ Don't create README.md, CHANGELOG.md, or other docs proactively
