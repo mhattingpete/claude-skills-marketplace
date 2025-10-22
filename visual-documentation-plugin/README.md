@@ -1,253 +1,89 @@
 # Visual Documentation Plugin
 
-Create stunning, professional visual HTML documentation with modern UI design, SVG diagrams, flowcharts, dashboards, and timelines.
+Create stunning visual HTML documentation with modern UI design, SVG diagrams, and interactive visualizations.
 
-## Skills Included
-
-### `flowchart-creator`
-
-Create stunning HTML flowcharts and process flow diagrams with decision trees, color-coded stages, arrows, and swimlanes.
-
-**Activates when:** User requests flowcharts, process diagrams, workflow visualizations, or decision trees.
-
-**Example usage:**
-- "Create a flowchart for our order processing"
-- "Generate a process flow diagram showing deployment steps"
-- "Make a decision tree for our approval workflow"
-
-### `dashboard-creator`
-
-Create professional HTML dashboards with KPI metric cards, charts, progress indicators, and data visualizations.
-
-**Activates when:** User requests dashboards, metrics displays, KPI visualizations, or data charts.
-
-**Example usage:**
-- "Create a dashboard showing website analytics"
-- "Make a KPI dashboard for our sales metrics"
-- "Generate a performance dashboard with charts"
-
-### `technical-doc-creator`
-
-Create comprehensive HTML technical documentation with code blocks, API workflows, system architecture diagrams, and syntax highlighting.
-
-**Activates when:** User requests technical documentation, API docs, code examples, or system architecture visualizations.
-
-**Example usage:**
-- "Create API documentation for our user endpoints"
-- "Generate technical docs for our authentication system"
-- "Document our microservices architecture"
-
-### `timeline-creator`
-
-Create beautiful HTML timelines and project roadmaps with Gantt charts, milestones, phase groupings, and progress indicators.
-
-**Activates when:** User requests timelines, roadmaps, Gantt charts, project schedules, or milestone visualizations.
-
-**Example usage:**
-- "Create a timeline for our product launch"
-- "Generate a roadmap showing Q1-Q4 milestones"
-- "Make a Gantt chart for our project schedule"
-
-**Design Features:**
-- Modern gradient backgrounds and color schemes
-- Semantic color system (success/warning/error/info)
-- Responsive mobile-first design
-- WCAG AA accessibility compliance
-- Self-contained HTML (no external dependencies)
-
-## Installation
-
-### From Marketplace
-
-```bash
-# In Claude Code
-/plugin marketplace add mhattingpete/claude-skills-marketplace/visual-documentation-plugin
-```
-
-### Manual Installation
-
-1. Copy the `visual-documentation-plugin` directory to your Claude plugins folder
-2. Reload Claude Code
-
-## Quick Start
-
-Once installed, simply ask Claude to create visual documentation:
-
-```
-"Create a visual HTML showing our deployment pipeline with these stages:
-- Development (commit to main)
-- Build (automated tests)
-- Staging deployment
-- Production deployment"
-```
-
-Claude will generate a complete, standalone HTML file with:
-- Professional gradient design
-- SVG flowchart diagram
-- Color-coded process stages
-- Responsive layout
-- All styling embedded
-
-## Example Outputs
-
-### Process Flow Example
-**Request:** "Create a visual guide for our deployment process"
-
-**Generates:**
-- Decision tree showing deployment paths (prod/staging/dev)
-- Status indicators for each stage
-- Color-coded boxes for different deployment types
-- Arrow flow showing sequential and parallel steps
-- Legend explaining status colors
-
-### Dashboard Example
-**Request:** "Make a dashboard showing project metrics"
-
-**Generates:**
-- Metric cards: total tasks, completed, in progress, blocked
-- Bar chart showing task distribution by category
-- Timeline visualization of milestone completion
-- Color-coded status indicators
-- Summary statistics in footer
-
-### API Workflow Example
-**Request:** "Create visual HTML showing our API workflow"
-
-**Generates:**
-- Sequential flow: Client → API Gateway → Services → Database
-- Request/response boxes with sample JSON
-- Authentication flow decision tree
-- Error handling paths
-- Code examples with syntax highlighting
-
-### Timeline Example
-**Request:** "Build a timeline for our product roadmap"
-
-**Generates:**
-- Horizontal timeline with quarters marked
-- Milestone markers with descriptions
-- Phase groupings (Planning, Development, Testing, Launch)
-- Dependency arrows between related items
-- Color-coded priorities
-
-## Bundled Resources
-
-### Templates (`assets/templates/`)
-- `base_template.html` - Complete CSS framework and document structure
-- `flowchart_components.html` - Process flow and decision tree patterns
-- `dashboard_components.html` - Metric cards, charts, and visualizations
-- `timeline_components.html` - Timeline and roadmap layouts
-
-### References (`references/`)
-- `design_patterns.md` - Complete design system with colors, typography, spacing
-- `svg_library.md` - Comprehensive SVG component library with shapes and patterns
-
-## Design System
-
-### Color Palette
-
-**Semantic Colors:**
-- Success/Confirmed: `#48bb78` (green)
-- Warning/Uncertain: `#f59e0b` (amber)
-- Info/Primary: `#4299e1` (blue)
-- Error/Critical: `#f56565` (red)
-- Process/Action: `#ed8936` (orange)
-- Special/Highlight: `#9f7aea` (purple)
-
-**Primary Gradient:**
-```css
-background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-```
-
-### Typography
-- Font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
-- Headings: 2.5em (h1), 1.8em (h2), 1.4em (h3)
-- Code: 'Courier New', monospace
-
-### Responsive Design
-- Max container width: 1400px
-- Desktop padding: 40px
-- Mobile padding: 20px
-- Breakpoint: 768px
-
-## Technical Details
-
-**Output Format:**
-- Standalone HTML5 files
-- All CSS embedded in `<style>` tags
-- All SVG inline (no external images)
-- Responsive viewBox-based SVG scaling
-- Cross-browser compatible (modern browsers)
-
-**File Size:**
-- Typical output: 50-150 KB
-- No external dependencies
-- Fast loading and rendering
-
-**Accessibility:**
-- WCAG AA compliant color contrast (4.5:1 minimum)
-- Semantic HTML structure
-- Text labels for all visual elements
-- Keyboard navigation support
-
-## Customization
-
-The skill automatically adapts to your content while maintaining:
-- Consistent design language
-- Professional visual hierarchy
-- Responsive layout
-- Accessibility standards
-
-Customize by providing:
-- Specific data and metrics
-- Process steps and relationships
-- Color preferences (will map to semantic system)
-- Content sections and organization
-
-## Best Practices
-
-1. **Be specific about content** - Provide actual data, process steps, or structure
-2. **Request iterative refinement** - Ask for changes to colors, layout, or styling
-3. **Combine visualization types** - Mix flowcharts with metrics, timelines with dashboards
-4. **Save outputs** - Specify file path to save the generated HTML
-5. **Test responsiveness** - View on different screen sizes
-
-## Troubleshooting
-
-**Issue:** SVG not displaying correctly
-- Check that the HTML is opened in a modern browser
-- Ensure file is saved with `.html` extension
-
-**Issue:** Layout broken on mobile
-- The design is responsive by default
-- Verify viewport meta tag is present
-
-**Issue:** Colors look different than expected
-- All colors use consistent hex values
-- Check browser color profile settings
-
-## Contributing
-
-Want to improve this plugin?
-
-1. Fork the repository
-2. Create your feature branch
-3. Add or modify templates in `assets/templates/`
-4. Update references in `references/`
-5. Test with various content types
-6. Submit a pull request
-
-## License
-
-Apache 2.0 - See LICENSE file for details.
-
-## Support
-
-- [Open an issue](https://github.com/mhattingpete/claude-skills-marketplace/issues)
-- [Claude Code Documentation](https://docs.claude.com/en/docs/claude-code/skills)
+**Version:** 1.0.0
 
 ---
 
-**Version:** 1.0.0
-**Author:** mhattingpete
-**Plugin Type:** Visual Documentation & Diagramming
+## Skills
+
+### flowchart-creator
+
+**Activates when you say:**
+- "Create a flowchart for deployment"
+- "Make a process flow diagram"
+- "Generate a decision tree"
+
+**What it does:**
+Creates HTML flowcharts with color-coded stages, decision trees, arrows, and swimlanes.
+
+---
+
+### dashboard-creator
+
+**Activates when you say:**
+- "Create a dashboard for metrics"
+- "Make a KPI visualization"
+- "Generate a performance dashboard"
+
+**What it does:**
+Creates HTML dashboards with metric cards, charts, progress indicators, and data visualizations.
+
+---
+
+### technical-doc-creator
+
+**Activates when you say:**
+- "Create API documentation"
+- "Document the architecture"
+- "Generate technical docs"
+
+**What it does:**
+Creates comprehensive HTML documentation with code blocks, API workflows, and system diagrams.
+
+---
+
+### timeline-creator
+
+**Activates when you say:**
+- "Create a project timeline"
+- "Make a roadmap"
+- "Generate a Gantt chart"
+
+**What it does:**
+Creates HTML timelines and roadmaps with milestones, phase groupings, and progress indicators.
+
+---
+
+## Features
+
+- Modern gradient design with semantic color system
+- Responsive, mobile-first layout
+- WCAG AA accessibility compliance
+- Self-contained HTML (no external dependencies)
+- SVG diagrams and visualizations
+
+---
+
+## Installation
+
+Add to your `.claude-plugin/marketplace.json`:
+
+```json
+{
+  "plugins": [
+    {
+      "name": "visual-documentation-plugin",
+      "source": "github:anthropics/claude-skills-marketplace/visual-documentation-plugin",
+      "version": "1.0.0"
+    }
+  ]
+}
+```
+
+---
+
+## Author
+
+**mhattingpete**
