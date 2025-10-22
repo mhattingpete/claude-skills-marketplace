@@ -696,7 +696,14 @@ For ANY task in this repository:
 - Use git-pushing for all git operations
 - Use feature-planning for complex features
 - Use test-fixing for test failures
+- **Use skill-creator for creating new skills** - ensures proper structure
 - Never implement manually when a skill exists
+
+**CRITICAL: When creating new skills:**
+- ALWAYS use the skill-creator skill from example-skills
+- Never manually create skill structure
+- skill-creator ensures all required files and structure are correct
+- Manual creation often leads to missing files (skill.json, proper directories, etc.)
 
 **2. NEVER create markdown files unless explicitly requested by the user.**
 
