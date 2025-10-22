@@ -30,22 +30,34 @@ This is the **Claude Skills Marketplace** - a collection of reusable skills and 
 ```
 {plugin-name}-plugin/
 ├── .claude-plugin/
-│   └── plugin.json              # REQUIRED: Plugin metadata
-├── {skill-name}/
-│   ├── SKILL.md                 # REQUIRED: Skill specification
-│   ├── references/              # OPTIONAL: Reference materials (markdown)
-│   │   └── *.md                 # Additional context/guides
-│   └── scripts/                 # OPTIONAL: Helper scripts
-│       └── *.py                 # Python scripts, shell scripts, etc.
-├── agents/                      # OPTIONAL: If plugin includes agents
+│   └── plugin.json              # REQUIRED: Plugin metadata ONLY (no skills array)
+├── skills/                      # Skills directory (auto-discovered)
+│   └── {skill-name}/
+│       ├── SKILL.md             # REQUIRED: Skill specification
+│       ├── references/          # OPTIONAL: Reference materials (markdown)
+│       │   └── *.md             # Additional context/guides
+│       └── scripts/             # OPTIONAL: Helper scripts
+│           └── *.py             # Python scripts, shell scripts, etc.
+├── agents/                      # OPTIONAL: Agents directory (auto-discovered)
 │   └── {agent-name}/
 │       └── AGENT.md             # Agent specification
+├── commands/                    # OPTIONAL: Commands directory (auto-discovered)
+│   └── {command-name}.md
 ├── README.md                    # REQUIRED: Plugin documentation
 ├── CHANGELOG.md                 # RECOMMENDED: Version history
 └── EXAMPLES.md                  # RECOMMENDED: Usage examples
 ```
 
+**CRITICAL: Skills are auto-discovered!**
+- Skills MUST be in `skills/` subdirectory at plugin root
+- Skills are automatically discovered - NO listing in plugin.json
+- plugin.json contains ONLY metadata (name, version, description, author)
+- Same applies to agents/ and commands/ - all auto-discovered
+
 **Directory purposes:**
+- `skills/` - All skills (auto-discovered from SKILL.md files)
+- `agents/` - All agents (auto-discovered from AGENT.md files)
+- `commands/` - All commands (auto-discovered from .md files)
 - `references/` - Markdown documentation, guides, best practices
 - `scripts/` - Executable scripts (Python, shell, etc.) that skills can use
 
@@ -62,32 +74,16 @@ This is the **Claude Skills Marketplace** - a collection of reusable skills and 
   "description": "Clear, concise description of what the plugin provides",
   "author": {
     "name": "author-name"
-  },
-  "skills": [
-    {
-      "name": "skill-name",
-      "source": "./skill-directory",
-      "description": "When this skill activates and what it does. Include activation phrases.",
-      "gitignored": false,
-      "project": false
-    }
-  ],
-  "agents": [
-    {
-      "name": "agent-name",
-      "source": "./agents/agent-directory",
-      "description": "What this agent does",
-      "model": "claude-3-5-haiku-20241022"
-    }
-  ]
+  }
 }
 ```
 
 **Key points:**
-- `description` in skills should include **activation phrases** for discoverability
-- Use `"gitignored": false, "project": false` for general-purpose skills
-- Use `"project": true` for project-specific skills
-- Agents can specify model preference
+- **ONLY metadata** - name, version, description, author
+- **NO skills array** - skills are auto-discovered from skills/ directory
+- **NO agents array** - agents are auto-discovered from agents/ directory
+- **NO commands array** - commands are auto-discovered from commands/ directory
+- Keep it simple - just plugin metadata!
 
 #### 2. `SKILL.md`
 
