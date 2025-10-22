@@ -17,19 +17,49 @@ Automatically activate when the user:
 
 ## Workflow
 
-### 1. Check Git Status
+### Fast Path (Recommended)
+
+Use the automated script for maximum speed:
+
+```bash
+bash scripts/smart_commit.sh
+```
+
+This script handles:
+- ✅ Staging all changes
+- ✅ Auto-generating conventional commit messages
+- ✅ Adding Claude Code footer
+- ✅ Pushing to remote (with -u for new branches)
+- ✅ Showing PR link for GitHub repos
+
+**With custom message:**
+```bash
+bash scripts/smart_commit.sh "feat: add new feature"
+```
+
+The script automatically:
+- Determines commit type (feat/fix/docs/test/chore/refactor)
+- Extracts scope from changed files
+- Handles new vs existing branches
+- Shows colored output for better UX
+
+### Manual Path (Fallback)
+
+Use when script is unavailable or custom workflow needed:
+
+**1. Check Git Status**
 
 Run `git status` to understand:
 - Which files have changed
 - What will be committed
 - Current branch name
 
-### 2. Stage Changes
+**2. Stage Changes**
 
 - Run `git add .` to stage all changes
 - Alternatively, stage specific files if partial commit is needed
 
-### 3. Create Commit Message
+**3. Create Commit Message**
 
 **If user provided a message:**
 - Use it directly
@@ -60,12 +90,13 @@ EOF
 )"
 ```
 
-### 4. Push to Remote
+**4. Push to Remote**
 
 - Run `git push` to push commits
+- If new branch, use `git push -u origin <branch>`
 - If push fails due to diverged branches, inform user and ask how to proceed
 
-### 5. Confirm Success
+**5. Confirm Success**
 
 - Report commit hash
 - Summarize what was committed
