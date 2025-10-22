@@ -1,0 +1,38 @@
+{
+  "name": "productivity-skills",
+  "version": "1.0.0",
+  "description": "Productivity and workflow optimization skills for analyzing usage patterns, auditing code, bootstrapping projects, and generating documentation",
+  "author": {
+    "name": "mhattingpete"
+  },
+  "skills": [
+    {
+      "name": "conversation-analyzer",
+      "source": "./conversation-analyzer",
+      "description": "Analyze Claude Code conversation history to identify patterns, common mistakes, and opportunities for workflow improvement. Activates when users want to understand their usage patterns, optimize workflows, or find automation opportunities.",
+      "gitignored": false,
+      "project": false
+    },
+    {
+      "name": "code-auditor",
+      "source": "./code-auditor",
+      "description": "Perform comprehensive codebase analysis covering architecture, quality, security, performance, testing, and maintainability. Activates when users want code audits, technical debt assessment, security reviews, or quality checks.",
+      "gitignored": false,
+      "project": false
+    },
+    {
+      "name": "project-bootstrapper",
+      "source": "./project-bootstrapper",
+      "description": "Set up new projects or improve existing ones with best practices, tooling, documentation, testing, and workflow automation. Activates when users want to bootstrap projects, add development tooling, or standardize setups.",
+      "gitignored": false,
+      "project": false
+    },
+    {
+      "name": "codebase-documenter",
+      "source": "./codebase-documenter",
+      "description": "Generate comprehensive documentation explaining codebase architecture, components, data flow, and development guidelines. Activates when users want to understand unfamiliar code, create onboarding docs, or document systems.",
+      "gitignored": false,
+      "project": false
+    }
+  ]
+}

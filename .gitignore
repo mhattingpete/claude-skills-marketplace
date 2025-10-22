@@ -36,3 +36,10 @@ Temporary Items
 # Testing
 test_outputs/
 *.log
+
+
+# Local files
+ANALYSIS_SUMMARY.md
+IMPROVEMENT_GUIDE.md
+conversation_analysis.txt
+recommendations.txt

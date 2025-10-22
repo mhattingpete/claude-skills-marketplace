@@ -22,6 +22,15 @@
       "author": {
         "name": "mhattingpete"
       }
+    },
+    {
+      "name": "productivity-skills",
+      "source": "./productivity-skills-plugin",
+      "description": "Productivity and workflow optimization skills for analyzing usage patterns, auditing code, bootstrapping projects, and generating documentation",
+      "version": "1.0.0",
+      "author": {
+        "name": "mhattingpete"
+      }
     }
   ]
 }
