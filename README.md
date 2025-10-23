@@ -14,23 +14,32 @@ claude-skills-marketplace/
 │   ├── .claude-plugin/
 │   │   └── plugin.json               # Plugin manifest
 │   ├── agents/
-│   │   └── plan-implementer/         # Plan implementation agent
+│   │   └── plan-implementer.md       # Plan implementation agent
 │   ├── skills/
 │   │   ├── feature-planning/         # Feature planning skill
 │   │   ├── git-pushing/              # Git automation skill
 │   │   ├── review-implementing/      # Code review skill
 │   │   └── test-fixing/              # Test fixing skill
-│   ├── CHANGELOG.md
-│   ├── CONTRIBUTING.md
-│   └── SETUP.md
+│   └── README.md
 ├── visual-documentation-plugin/       # Visual documentation plugin
 │   ├── .claude-plugin/
 │   │   └── plugin.json               # Plugin manifest
 │   ├── skills/
-│   │   └── visual-html-creator/      # Visual HTML creation skill
-│   ├── CHANGELOG.md
-│   ├── README.md
-│   └── SETUP.md
+│   │   ├── dashboard-creator/        # Dashboard creation skill
+│   │   ├── flowchart-creator/        # Flowchart creation skill
+│   │   ├── technical-doc-creator/    # Technical documentation skill
+│   │   └── timeline-creator/         # Timeline creation skill
+│   ├── EXAMPLES.md
+│   └── README.md
+├── productivity-skills-plugin/        # Productivity & optimization plugin
+│   ├── .claude-plugin/
+│   │   └── plugin.json               # Plugin manifest
+│   ├── skills/
+│   │   ├── code-auditor/             # Code auditing skill
+│   │   ├── codebase-documenter/      # Codebase documentation skill
+│   │   ├── conversation-analyzer/    # Usage analysis skill
+│   │   └── project-bootstrapper/     # Project setup skill
+│   └── README.md
 ├── LICENSE
 └── README.md
 ```
@@ -72,6 +81,9 @@ To install individual plugins:
 
 # Install only visual documentation
 /plugin marketplace add mhattingpete/claude-skills-marketplace/visual-documentation-plugin
+
+# Install only productivity skills
+/plugin marketplace add mhattingpete/claude-skills-marketplace/productivity-skills-plugin
 ```
 
 ## Available Plugins
@@ -87,6 +99,12 @@ Skills for common software engineering workflows including git operations, test 
 Skills for creating stunning visual HTML documentation with modern UI design, SVG diagrams, flowcharts, dashboards, and timelines.
 
 [View Plugin Documentation →](visual-documentation-plugin/README.md)
+
+### Productivity Skills Plugin
+
+Productivity and workflow optimization skills for analyzing usage patterns, auditing code quality, bootstrapping projects, and generating comprehensive documentation.
+
+[View Plugin Documentation →](productivity-skills-plugin/README.md)
 
 ## Available Skills
 
@@ -145,6 +163,59 @@ Process and implement code review feedback systematically with todo tracking.
 - "Implement this review feedback: [paste comments]"
 - "Address these PR comments"
 - "The reviewer suggested these changes"
+
+---
+
+### Productivity & Analysis
+
+#### `conversation-analyzer`
+Analyze Claude Code conversation history to identify patterns, common mistakes, and workflow optimization opportunities.
+
+**Activates when:** User wants to understand usage patterns, optimize workflow, or check best practices.
+
+**Example usage:**
+- "Analyze my conversations"
+- "Review my history"
+- "How can I improve my workflow"
+
+---
+
+#### `code-auditor`
+Comprehensive codebase analysis covering architecture, code quality, security, performance, testing, and maintainability.
+
+**Activates when:** User wants to audit code quality, identify technical debt, find security issues, or assess test coverage.
+
+**Example usage:**
+- "Audit the code"
+- "Check for issues"
+- "Review the codebase"
+- "Security audit"
+
+---
+
+#### `codebase-documenter`
+Generate comprehensive documentation explaining how a codebase works, including architecture, key components, data flow, and development guidelines.
+
+**Activates when:** User wants to understand unfamiliar code, create onboarding docs, document architecture, or explain how the system works.
+
+**Example usage:**
+- "Explain this codebase"
+- "Document the architecture"
+- "How does this code work"
+- "Create developer documentation"
+
+---
+
+#### `project-bootstrapper`
+Set up new projects or improve existing projects with development best practices, tooling, documentation, and workflow automation.
+
+**Activates when:** User wants to start a new project, improve project structure, add development tooling, or establish professional workflows.
+
+**Example usage:**
+- "Set up a new project"
+- "Bootstrap this project"
+- "Add best practices"
+- "Improve project structure"
 
 ---
 
