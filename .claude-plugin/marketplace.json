@@ -31,6 +31,15 @@
       "author": {
         "name": "mhattingpete"
       }
+    },
+    {
+      "name": "code-operations-skills",
+      "source": "./code-operations-plugin",
+      "description": "High-precision code manipulation operations including line-based insertion, bulk refactoring, and file analysis - converted from code-copy-mcp",
+      "version": "1.0.0",
+      "author": {
+        "name": "mhattingpete"
+      }
     }
   ]
 }

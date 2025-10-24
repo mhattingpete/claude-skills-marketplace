@@ -1,0 +1,9 @@
+{
+  "name": "code-operations-skills",
+  "version": "1.0.0",
+  "description": "Skills for code manipulation operations including line-based code transfer, bulk refactoring, and file analysis - converted from code-copy-mcp",
+  "author": {
+    "name": "mhattingpete",
+    "email": "noreply@github.com"
+  }
+}
