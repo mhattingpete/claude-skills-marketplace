@@ -40,6 +40,16 @@ claude-skills-marketplace/
 │   │   ├── conversation-analyzer/    # Usage analysis skill
 │   │   └── project-bootstrapper/     # Project setup skill
 │   └── README.md
+├── code-operations-plugin/            # Code manipulation plugin
+│   ├── .claude-plugin/
+│   │   └── plugin.json               # Plugin manifest
+│   ├── skills/
+│   │   ├── code-transfer/            # Code transfer skill
+│   │   │   └── scripts/
+│   │   │       └── line_insert.py    # Line-based insertion script
+│   │   ├── code-refactor/            # Bulk refactoring skill
+│   │   └── file-operations/          # File analysis skill
+│   └── README.md
 ├── LICENSE
 └── README.md
 ```
@@ -84,6 +94,9 @@ To install individual plugins:
 
 # Install only productivity skills
 /plugin marketplace add mhattingpete/claude-skills-marketplace/productivity-skills-plugin
+
+# Install only code operations
+/plugin marketplace add mhattingpete/claude-skills-marketplace/code-operations-plugin
 ```
 
 ## Available Plugins
@@ -105,6 +118,12 @@ Skills for creating stunning visual HTML documentation with modern UI design, SV
 Productivity and workflow optimization skills for analyzing usage patterns, auditing code quality, bootstrapping projects, and generating comprehensive documentation.
 
 [View Plugin Documentation →](productivity-skills-plugin/README.md)
+
+### Code Operations Plugin
+
+High-precision code manipulation operations including line-based insertion, bulk refactoring, and file analysis. Converted from [code-copy-mcp](https://github.com/mhattingpete/code-copy-mcp) to native Claude Code skills.
+
+[View Plugin Documentation →](code-operations-plugin/README.md)
 
 ## Available Skills
 
@@ -163,6 +182,49 @@ Process and implement code review feedback systematically with todo tracking.
 - "Implement this review feedback: [paste comments]"
 - "Address these PR comments"
 - "The reviewer suggested these changes"
+
+---
+
+### Code Operations
+
+#### `code-transfer`
+Transfer code between files with line-based precision using the included `line_insert.py` script.
+
+**Activates when:** User requests copying code between files, moving functions/classes, extracting code, or inserting at specific line numbers.
+
+**Example usage:**
+- "Copy the authenticate function from auth.py to utils.py"
+- "Move this class to a separate file"
+- "Extract this function to a new file"
+- "Insert this code at line 45"
+
+**Key feature:** Includes Python script for precise line-number-based insertion where Edit tool's string matching isn't suitable.
+
+---
+
+#### `code-refactor`
+Perform bulk code refactoring operations like renaming variables/functions across files and replacing patterns.
+
+**Activates when:** User requests renaming identifiers, replacing deprecated patterns, updating API calls, or making consistent changes across multiple locations.
+
+**Example usage:**
+- "Rename getUserData to fetchUserData everywhere"
+- "Replace all var declarations with let or const"
+- "Update all authentication API calls to use the new endpoint"
+- "Convert callbacks to async/await"
+
+---
+
+#### `file-operations`
+Analyze files and get detailed metadata without modifying them.
+
+**Activates when:** User requests file information, statistics, or analysis without making changes.
+
+**Example usage:**
+- "Analyze this file"
+- "How many lines in app.py?"
+- "Compare the sizes of all Python files"
+- "Give me code quality metrics for the project"
 
 ---
 
