@@ -1,0 +1,5 @@
+{
+  "hooks": {
+    "SessionStart": "bash .claude/install-gh.sh"
+  }
+}
