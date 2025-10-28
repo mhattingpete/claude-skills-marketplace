@@ -1,5 +1,15 @@
 {
   "hooks": {
-    "SessionStart": "bash .claude/install-gh.sh"
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/install-gh.sh"
+          }
+        ]
+      }
+    ]
   }
 }
