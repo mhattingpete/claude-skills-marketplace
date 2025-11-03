@@ -2,11 +2,24 @@
 
 Create stunning visual HTML documentation with modern UI design, SVG diagrams, and interactive visualizations.
 
-**Version:** 1.0.0
+**Version:** 1.1.0
 
 ---
 
 ## Skills
+
+### architecture-diagram-creator
+
+**Activates when you say:**
+- "Create an architecture diagram"
+- "Generate a project architecture overview"
+- "Document the system architecture"
+- "Create a high-level system design"
+
+**What it does:**
+Creates comprehensive HTML architecture diagrams covering business objectives, data flows, processing pipelines, features (functional and non-functional), system architecture, deployment information, and reference tables. Perfect for documenting entire software projects.
+
+---
 
 ### flowchart-creator
 
@@ -76,7 +89,7 @@ Add to your `.claude-plugin/marketplace.json`:
     {
       "name": "visual-documentation-plugin",
       "source": "github:anthropics/claude-skills-marketplace/visual-documentation-plugin",
-      "version": "1.0.0"
+      "version": "1.1.0"
     }
   ]
 }

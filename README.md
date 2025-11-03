@@ -25,6 +25,7 @@ claude-skills-marketplace/
 │   ├── .claude-plugin/
 │   │   └── plugin.json               # Plugin manifest
 │   ├── skills/
+│   │   ├── architecture-diagram-creator/  # Architecture diagram skill
 │   │   ├── dashboard-creator/        # Dashboard creation skill
 │   │   ├── flowchart-creator/        # Flowchart creation skill
 │   │   ├── technical-doc-creator/    # Technical documentation skill
@@ -109,7 +110,7 @@ Skills for common software engineering workflows including git operations, test 
 
 ### Visual Documentation Plugin
 
-Skills for creating stunning visual HTML documentation with modern UI design, SVG diagrams, flowcharts, dashboards, and timelines.
+Skills for creating stunning visual HTML documentation with modern UI design, SVG diagrams, flowcharts, dashboards, timelines, and comprehensive project architecture diagrams.
 
 [View Plugin Documentation →](visual-documentation-plugin/README.md)
 
@@ -282,6 +283,18 @@ Set up new projects or improve existing projects with development best practices
 ---
 
 ### Visual Documentation
+
+#### `architecture-diagram-creator`
+Create comprehensive HTML architecture diagrams covering business objectives, data flows, processing pipelines, features (functional and non-functional), system architecture, and deployment information.
+
+**Activates when:** User requests architecture diagrams, system overviews, project documentation, or high-level system design.
+
+**Example usage:**
+- "Create an architecture diagram for this project"
+- "Generate a project architecture overview"
+- "Document the system architecture with data flows and processing pipeline"
+
+---
 
 #### `flowchart-creator`
 Create stunning HTML flowcharts and process flow diagrams with decision trees, color-coded stages, and swimlanes.

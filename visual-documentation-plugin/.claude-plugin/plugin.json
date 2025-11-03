@@ -1,7 +1,7 @@
 {
   "name": "visual-documentation-skills",
-  "version": "1.0.0",
-  "description": "Skills for creating stunning visual HTML documentation with modern UI design, SVG diagrams, flowcharts, dashboards, timelines, and technical documentation",
+  "version": "1.1.0",
+  "description": "Skills for creating stunning visual HTML documentation with modern UI design, SVG diagrams, flowcharts, dashboards, timelines, technical documentation, and comprehensive project architecture diagrams",
   "author": {
     "name": "mhattingpete",
     "email": "noreply@github.com"

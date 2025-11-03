@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataFlow ETL Pipeline Architecture</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 2rem;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 3rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #718096;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .metric-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            color: white;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .section {
+            margin: 2rem 0;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: #2d3748;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .diagram-container {
+            background: #f7fafc;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+
+        svg {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #f7fafc;
+            border-radius: 12px;
+            justify-content: center;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .legend-box {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            border: 2px solid #2d3748;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .feature-card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .feature-card h3 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .feature-card ul {
+            list-style: none;
+            color: #4a5568;
+            line-height: 1.8;
+        }
+
+        .feature-card ul li:before {
+            content: "→ ";
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        footer {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid #e2e8f0;
+            text-align: center;
+            color: #718096;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔄 DataFlow ETL Pipeline</h1>
+        <p class="subtitle">Customer Data Integration & Analytics Platform</p>
+
+        <!-- Key Metrics -->
+        <div class="metric-grid">
+            <div class="metric-card">
+                <div class="metric-value">3</div>
+                <div class="metric-label">Data Sources</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">5</div>
+                <div class="metric-label">Processing Stages</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">100K</div>
+                <div class="metric-label">Records/Day</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">99.9%</div>
+                <div class="metric-label">Uptime SLA</div>
+            </div>
+        </div>
+
+        <!-- Business Context -->
+        <div class="section">
+            <h2 class="section-title">📊 Business Objectives & End Users</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>Primary Objective</h3>
+                    <ul>
+                        <li>Consolidate customer data from multiple sources</li>
+                        <li>Provide unified view for analytics and reporting</li>
+                        <li>Enable real-time data-driven decision making</li>
+                        <li>Ensure data quality and consistency</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h3>End Users</h3>
+                    <ul>
+                        <li>Business Analysts (data exploration)</li>
+                        <li>Data Scientists (ML model training)</li>
+                        <li>Marketing Team (campaign targeting)</li>
+                        <li>Customer Success (account insights)</li>
+                        <li>Executive Dashboard (KPI monitoring)</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h3>Business Value</h3>
+                    <ul>
+                        <li>Reduce manual data reconciliation (80% time savings)</li>
+                        <li>Improve data accuracy and completeness</li>
+                        <li>Enable faster business insights</li>
+                        <li>Scale data processing capacity</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Input Overview -->
+        <div class="section">
+            <h2 class="section-title">📥 Data Input Overview</h2>
+            <div class="diagram-container">
+                <svg viewBox="0 0 1200 500">
+                    <defs>
+                        <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <polygon points="0 0, 10 3, 0 6" fill="#2d3748"/>
+                        </marker>
+                        <marker id="arrowhead-green" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <polygon points="0 0, 10 3, 0 6" fill="#48bb78"/>
+                        </marker>
+                    </defs>
+
+                    <!-- Source 1: CRM API -->
+                    <rect x="50" y="50" width="220" height="150" rx="15" fill="#4299e1" stroke="#2b6cb0" stroke-width="3"/>
+                    <text x="160" y="85" text-anchor="middle" fill="white" font-size="16" font-weight="bold">Source 1: CRM API</text>
+                    <text x="160" y="110" text-anchor="middle" fill="white" font-size="12">(Salesforce)</text>
+                    <text x="160" y="135" text-anchor="middle" fill="white" font-size="10">Format: JSON REST API</text>
+                    <text x="160" y="150" text-anchor="middle" fill="white" font-size="10">~50K records/day</text>
+                    <text x="160" y="165" text-anchor="middle" fill="white" font-size="10">Customer profiles</text>
+                    <text x="160" y="180" text-anchor="middle" fill="white" font-size="10">Real-time sync</text>
+
+                    <!-- Source 2: Database -->
+                    <rect x="50" y="220" width="220" height="150" rx="15" fill="#9f7aea" stroke="#6b46c1" stroke-width="3"/>
+                    <text x="160" y="255" text-anchor="middle" fill="white" font-size="16" font-weight="bold">Source 2: Orders DB</text>
+                    <text x="160" y="280" text-anchor="middle" fill="white" font-size="12">(MySQL)</text>
+                    <text x="160" y="305" text-anchor="middle" fill="white" font-size="10">Format: SQL queries</text>
+                    <text x="160" y="320" text-anchor="middle" fill="white" font-size="10">~30K orders/day</text>
+                    <text x="160" y="335" text-anchor="middle" fill="white" font-size="10">Transaction data</text>
+                    <text x="160" y="350" text-anchor="middle" fill="white" font-size="10">Hourly batch</text>
+
+                    <!-- Source 3: CSV Files -->
+                    <rect x="50" y="390" width="220" height="80" rx="15" fill="#ed8936" stroke="#c05621" stroke-width="3"/>
+                    <text x="160" y="420" text-anchor="middle" fill="white" font-size="16" font-weight="bold">Source 3: CSV Export</text>
+                    <text x="160" y="440" text-anchor="middle" fill="white" font-size="10">~20K records/day</text>
+                    <text x="160" y="455" text-anchor="middle" fill="white" font-size="10">Support tickets (S3)</text>
+
+                    <!-- ETL Pipeline -->
+                    <rect x="400" y="175" width="280" height="150" rx="15" fill="#ed8936" stroke="#c05621" stroke-width="3"/>
+                    <text x="540" y="210" text-anchor="middle" fill="white" font-size="16" font-weight="bold">ETL Pipeline</text>
+                    <text x="540" y="235" text-anchor="middle" fill="white" font-size="11">AWS Lambda + Airflow</text>
+                    <text x="540" y="260" text-anchor="middle" fill="white" font-size="10">• Data validation</text>
+                    <text x="540" y="278" text-anchor="middle" fill="white" font-size="10">• Schema transformation</text>
+                    <text x="540" y="296" text-anchor="middle" fill="white" font-size="10">• Deduplication</text>
+                    <text x="540" y="314" text-anchor="middle" fill="white" font-size="10">• Enrichment</text>
+
+                    <!-- Data Warehouse -->
+                    <rect x="820" y="150" width="300" height="200" rx="15" fill="#48bb78" stroke="#2f855a" stroke-width="3"/>
+                    <text x="970" y="190" text-anchor="middle" fill="white" font-size="16" font-weight="bold">Data Warehouse</text>
+                    <text x="970" y="215" text-anchor="middle" fill="white" font-size="12">(BigQuery)</text>
+                    <text x="970" y="245" text-anchor="middle" fill="white" font-size="10">Unified customer view</text>
+                    <text x="970" y="263" text-anchor="middle" fill="white" font-size="10">360° analytics</text>
+                    <text x="970" y="281" text-anchor="middle" fill="white" font-size="10">Historical trends</text>
+                    <text x="970" y="299" text-anchor="middle" fill="white" font-size="10">ML-ready datasets</text>
+                    <text x="970" y="325" text-anchor="middle" fill="white" font-size="10">✓ GDPR compliant</text>
+
+                    <!-- Arrows -->
+                    <path d="M 270 125 L 400 225" stroke="#2d3748" stroke-width="3" marker-end="url(#arrowhead)"/>
+                    <path d="M 270 295 L 400 275" stroke="#2d3748" stroke-width="3" marker-end="url(#arrowhead)"/>
+                    <path d="M 270 430 L 400 300" stroke="#2d3748" stroke-width="3" marker-end="url(#arrowhead)"/>
+                    <path d="M 680 250 L 820 250" stroke="#48bb78" stroke-width="3" marker-end="url(#arrowhead-green)"/>
+
+                    <!-- Labels -->
+                    <text x="330" y="165" fill="#2d3748" font-size="10" font-weight="bold">Customer data</text>
+                    <text x="330" y="285" fill="#2d3748" font-size="10" font-weight="bold">Order data</text>
+                    <text x="330" y="370" fill="#2d3748" font-size="10" font-weight="bold">Support data</text>
+                    <text x="740" y="240" fill="#48bb78" font-size="11" font-weight="bold">Processed</text>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Processing Pipeline -->
+        <div class="section">
+            <h2 class="section-title">⚙️ Data Processing Pipeline</h2>
+            <div class="diagram-container">
+                <svg viewBox="0 0 1400 600">
+                    <defs>
+                        <marker id="arrow-pipeline" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <polygon points="0 0, 10 3, 0 6" fill="#2d3748"/>
+                        </marker>
+                    </defs>
+
+                    <!-- Stage 1 -->
+                    <rect x="50" y="50" width="200" height="100" rx="10" fill="#4299e1" stroke="#2b6cb0" stroke-width="2"/>
+                    <text x="150" y="80" text-anchor="middle" fill="white" font-size="14" font-weight="bold">1. Data Ingestion</text>
+                    <text x="150" y="100" text-anchor="middle" fill="white" font-size="10">Pull from sources</text>
+                    <text x="150" y="115" text-anchor="middle" fill="white" font-size="10">API + SQL + S3</text>
+                    <text x="150" y="130" text-anchor="middle" fill="white" font-size="10">Raw data storage</text>
+
+                    <!-- Stage 2 -->
+                    <rect x="50" y="180" width="200" height="100" rx="10" fill="#ed8936" stroke="#c05621" stroke-width="2"/>
+                    <text x="150" y="210" text-anchor="middle" fill="white" font-size="14" font-weight="bold">2. Validation</text>
+                    <text x="150" y="230" text-anchor="middle" fill="white" font-size="10">Schema checks</text>
+                    <text x="150" y="245" text-anchor="middle" fill="white" font-size="10">Data quality rules</text>
+                    <text x="150" y="260" text-anchor="middle" fill="white" font-size="10">Error logging</text>
+
+                    <!-- Stage 3 -->
+                    <rect x="50" y="310" width="200" height="100" rx="10" fill="#9f7aea" stroke="#6b46c1" stroke-width="2"/>
+                    <text x="150" y="340" text-anchor="middle" fill="white" font-size="14" font-weight="bold">3. Transformation</text>
+                    <text x="150" y="360" text-anchor="middle" fill="white" font-size="10">Normalize formats</text>
+                    <text x="150" y="375" text-anchor="middle" fill="white" font-size="10">Map fields</text>
+                    <text x="150" y="390" text-anchor="middle" fill="white" font-size="10">Type conversions</text>
+
+                    <!-- Stage 4 -->
+                    <rect x="320" y="50" width="200" height="120" rx="10" fill="#38b2ac" stroke="#2c7a7b" stroke-width="2"/>
+                    <text x="420" y="80" text-anchor="middle" fill="white" font-size="14" font-weight="bold">4. Deduplication</text>
+                    <text x="420" y="100" text-anchor="middle" fill="white" font-size="10">Fuzzy matching</text>
+                    <text x="420" y="115" text-anchor="middle" fill="white" font-size="10">Customer ID merge</text>
+                    <text x="420" y="130" text-anchor="middle" fill="white" font-size="10">Conflict resolution</text>
+                    <text x="420" y="145" text-anchor="middle" fill="white" font-size="10">Master record creation</text>
+
+                    <!-- Stage 5 -->
+                    <rect x="320" y="200" width="200" height="100" rx="10" fill="#805ad5" stroke="#6b46c1" stroke-width="2"/>
+                    <text x="420" y="230" text-anchor="middle" fill="white" font-size="14" font-weight="bold">5. Enrichment</text>
+                    <text x="420" y="250" text-anchor="middle" fill="white" font-size="10">Geo-location lookup</text>
+                    <text x="420" y="265" text-anchor="middle" fill="white" font-size="10">Industry tagging</text>
+                    <text x="420" y="280" text-anchor="middle" fill="white" font-size="10">Score calculations</text>
+
+                    <!-- Stage 6 -->
+                    <rect x="590" y="100" width="200" height="120" rx="10" fill="#48bb78" stroke="#2f855a" stroke-width="2"/>
+                    <text x="690" y="130" text-anchor="middle" fill="white" font-size="14" font-weight="bold">6. Load</text>
+                    <text x="690" y="150" text-anchor="middle" fill="white" font-size="10">Write to warehouse</text>
+                    <text x="690" y="165" text-anchor="middle" fill="white" font-size="10">Update indexes</text>
+                    <text x="690" y="180" text-anchor="middle" fill="white" font-size="10">Trigger downstream</text>
+                    <text x="690" y="195" text-anchor="middle" fill="white" font-size="10">✓ Complete</text>
+
+                    <!-- Arrows -->
+                    <path d="M 150 150 L 150 180" stroke="#2d3748" stroke-width="2" marker-end="url(#arrow-pipeline)"/>
+                    <path d="M 150 280 L 150 310" stroke="#2d3748" stroke-width="2" marker-end="url(#arrow-pipeline)"/>
+                    <path d="M 250 100 L 320 110" stroke="#2d3748" stroke-width="2" marker-end="url(#arrow-pipeline)"/>
+                    <path d="M 420 170 L 420 200" stroke="#2d3748" stroke-width="2" marker-end="url(#arrow-pipeline)"/>
+                    <path d="M 520 250 L 590 180" stroke="#2d3748" stroke-width="2" marker-end="url(#arrow-pipeline)"/>
+
+                    <!-- Configuration note -->
+                    <rect x="900" y="100" width="400" height="180" rx="10" fill="#f7fafc" stroke="#cbd5e0" stroke-width="2"/>
+                    <text x="1100" y="135" text-anchor="middle" fill="#2d3748" font-size="13" font-weight="bold">Pipeline Configuration</text>
+                    <text x="930" y="165" fill="#4a5568" font-size="10" font-weight="bold">Orchestration:</text>
+                    <text x="930" y="180" fill="#4a5568" font-size="9">• Apache Airflow (DAG scheduling)</text>
+                    <text x="930" y="195" fill="#4a5568" font-size="9">• AWS Lambda (serverless compute)</text>
+                    <text x="930" y="210" fill="#4a5568" font-size="9">• S3 (intermediate storage)</text>
+                    <text x="930" y="230" fill="#4a5568" font-size="9" font-weight="bold">Monitoring:</text>
+                    <text x="930" y="245" fill="#4a5568" font-size="9">• CloudWatch logs & metrics</text>
+                    <text x="930" y="260" fill="#4a5568" font-size="9">• PagerDuty alerts</text>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Functional Features -->
+        <div class="section">
+            <h2 class="section-title">✨ Functional Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>Data Validation</h3>
+                    <ul>
+                        <li>JSON schema validation for API data</li>
+                        <li>SQL constraint checks for database records</li>
+                        <li>Custom business rule engine</li>
+                        <li>Automated error notifications</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h3>Intelligent Deduplication</h3>
+                    <ul>
+                        <li>Fuzzy string matching (Levenshtein distance)</li>
+                        <li>Multi-field entity resolution</li>
+                        <li>Confidence scoring for matches</li>
+                        <li>Manual review queue for uncertain cases</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h3>Data Enrichment</h3>
+                    <ul>
+                        <li>Geo-location from IP/address</li>
+                        <li>Company firmographic data</li>
+                        <li>Industry classification</li>
+                        <li>Customer lifecycle scoring</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Non-Functional Features -->
+        <div class="section">
+            <h2 class="section-title">🛡️ Non-Functional Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>Performance</h3>
+                    <ul>
+                        <li>Processes 100K records in &lt;30 minutes</li>
+                        <li>Parallel processing across 10 Lambda workers</li>
+                        <li>Optimized SQL queries with indexes</li>
+                        <li>Incremental data loading strategy</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h3>Reliability</h3>
+                    <ul>
+                        <li>99.9% uptime SLA</li>
+                        <li>Automatic retry with exponential backoff</li>
+                        <li>Dead-letter queue for failed records</li>
+                        <li>Point-in-time recovery capability</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h3>Security & Compliance</h3>
+                    <ul>
+                        <li>End-to-end encryption (TLS 1.3)</li>
+                        <li>GDPR-compliant data handling</li>
+                        <li>Role-based access control (RBAC)</li>
+                        <li>Audit logging of all data access</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- System Architecture -->
+        <div class="section">
+            <h2 class="section-title">🏗️ System Architecture</h2>
+            <div class="diagram-container">
+                <svg viewBox="0 0 1400 700">
+                    <defs>
+                        <marker id="arrow-arch" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <polygon points="0 0, 10 3, 0 6" fill="#2d3748"/>
+                        </marker>
+                    </defs>
+
+                    <!-- Layer 1: Data Sources -->
+                    <text x="50" y="40" fill="#2d3748" font-size="16" font-weight="bold">Layer 1: Data Sources</text>
+                    <rect x="50" y="60" width="180" height="100" rx="10" fill="#4299e1" stroke="#2b6cb0" stroke-width="2"/>
+                    <text x="140" y="95" text-anchor="middle" fill="white" font-size="12" font-weight="bold">CRM API</text>
+                    <text x="140" y="115" text-anchor="middle" fill="white" font-size="10">Salesforce REST</text>
+                    <text x="140" y="130" text-anchor="middle" fill="white" font-size="10">OAuth 2.0</text>
+
+                    <rect x="260" y="60" width="180" height="100" rx="10" fill="#4299e1" stroke="#2b6cb0" stroke-width="2"/>
+                    <text x="350" y="95" text-anchor="middle" fill="white" font-size="12" font-weight="bold">Orders DB</text>
+                    <text x="350" y="115" text-anchor="middle" fill="white" font-size="10">MySQL 8.0</text>
+                    <text x="350" y="130" text-anchor="middle" fill="white" font-size="10">Read replica</text>
+
+                    <rect x="470" y="60" width="180" height="100" rx="10" fill="#4299e1" stroke="#2b6cb0" stroke-width="2"/>
+                    <text x="560" y="95" text-anchor="middle" fill="white" font-size="12" font-weight="bold">CSV Files</text>
+                    <text x="560" y="115" text-anchor="middle" fill="white" font-size="10">S3 Bucket</text>
+                    <text x="560" y="130" text-anchor="middle" fill="white" font-size="10">Daily exports</text>
+
+                    <!-- Layer 2: Processing -->
+                    <text x="50" y="220" fill="#2d3748" font-size="16" font-weight="bold">Layer 2: Processing</text>
+                    <rect x="50" y="240" width="250" height="100" rx="10" fill="#ed8936" stroke="#c05621" stroke-width="2"/>
+                    <text x="175" y="275" text-anchor="middle" fill="white" font-size="12" font-weight="bold">Airflow DAGs</text>
+                    <text x="175" y="295" text-anchor="middle" fill="white" font-size="10">Python 3.11</text>
+                    <text x="175" y="310" text-anchor="middle" fill="white" font-size="10">Orchestration & scheduling</text>
+
+                    <rect x="330" y="240" width="250" height="100" rx="10" fill="#ed8936" stroke="#c05621" stroke-width="2"/>
+                    <text x="455" y="275" text-anchor="middle" fill="white" font-size="12" font-weight="bold">Lambda Functions</text>
+                    <text x="455" y="295" text-anchor="middle" fill="white" font-size="10">Node.js 20</text>
+                    <text x="455" y="310" text-anchor="middle" fill="white" font-size="10">Data transformations</text>
+
+                    <!-- Layer 3: External Services -->
+                    <text x="50" y="400" fill="#2d3748" font-size="16" font-weight="bold">Layer 3: External Services</text>
+                    <rect x="50" y="420" width="220" height="100" rx="10" fill="#9f7aea" stroke="#6b46c1" stroke-width="2"/>
+                    <text x="160" y="455" text-anchor="middle" fill="white" font-size="12" font-weight="bold">Geo API</text>
+                    <text x="160" y="475" text-anchor="middle" fill="white" font-size="10">Location enrichment</text>
+                    <text x="160" y="490" text-anchor="middle" fill="white" font-size="10">MaxMind GeoIP2</text>
+
+                    <rect x="300" y="420" width="220" height="100" rx="10" fill="#9f7aea" stroke="#6b46c1" stroke-width="2"/>
+                    <text x="410" y="455" text-anchor="middle" fill="white" font-size="12" font-weight="bold">Clearbit</text>
+                    <text x="410" y="475" text-anchor="middle" fill="white" font-size="10">Company data</text>
+                    <text x="410" y="490" text-anchor="middle" fill="white" font-size="10">Firmographics API</text>
+
+                    <!-- Layer 4: Storage -->
+                    <text x="50" y="580" fill="#2d3748" font-size="16" font-weight="bold">Layer 4: Output & Storage</text>
+                    <rect x="50" y="600" width="250" height="80" rx="10" fill="#48bb78" stroke="#2f855a" stroke-width="2"/>
+                    <text x="175" y="635" text-anchor="middle" fill="white" font-size="12" font-weight="bold">BigQuery</text>
+                    <text x="175" y="655" text-anchor="middle" fill="white" font-size="10">Data warehouse</text>
+
+                    <rect x="330" y="600" width="250" height="80" rx="10" fill="#48bb78" stroke="#2f855a" stroke-width="2"/>
+                    <text x="455" y="635" text-anchor="middle" fill="white" font-size="12" font-weight="bold">Redis Cache</text>
+                    <text x="455" y="655" text-anchor="middle" fill="white" font-size="10">Query acceleration</text>
+
+                    <!-- Arrows -->
+                    <path d="M 140 160 L 175 240" stroke="#2d3748" stroke-width="2" marker-end="url(#arrow-arch)"/>
+                    <path d="M 350 160 L 300 240" stroke="#2d3748" stroke-width="2" marker-end="url(#arrow-arch)"/>
+                    <path d="M 175 340 L 160 420" stroke="#2d3748" stroke-width="2" marker-end="url(#arrow-arch)"/>
+                    <path d="M 175 340 L 175 600" stroke="#2d3748" stroke-width="2" marker-end="url(#arrow-arch)"/>
+
+                    <!-- Supporting info -->
+                    <rect x="750" y="240" width="600" height="260" rx="15" fill="#f7fafc" stroke="#cbd5e0" stroke-width="2"/>
+                    <text x="1050" y="275" text-anchor="middle" fill="#2d3748" font-size="14" font-weight="bold">Technology Stack</text>
+
+                    <text x="780" y="310" fill="#2d3748" font-size="11" font-weight="bold">Languages & Frameworks:</text>
+                    <text x="780" y="330" fill="#4a5568" font-size="10">• Python 3.11 (data processing)</text>
+                    <text x="780" y="345" fill="#4a5568" font-size="10">• Node.js 20 (Lambda functions)</text>
+                    <text x="780" y="360" fill="#4a5568" font-size="10">• SQL (data queries)</text>
+
+                    <text x="780" y="390" fill="#2d3748" font-size="11" font-weight="bold">AWS Services:</text>
+                    <text x="780" y="410" fill="#4a5568" font-size="10">• Lambda (serverless compute)</text>
+                    <text x="780" y="425" fill="#4a5568" font-size="10">• S3 (object storage)</text>
+                    <text x="780" y="440" fill="#4a5568" font-size="10">• CloudWatch (monitoring)</text>
+                    <text x="780" y="455" fill="#4a5568" font-size="10">• IAM (access control)</text>
+
+                    <text x="780" y="480" fill="#2d3748" font-size="11" font-weight="bold">Dependencies:</text>
+                    <text x="780" y="500" fill="#4a5568" font-size="10">• pandas, SQLAlchemy (Python)</text>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Deployment -->
+        <div class="section">
+            <h2 class="section-title">🚀 Deployment & Usage</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>Deployment Model</h3>
+                    <ul>
+                        <li>Cloud-hosted (AWS)</li>
+                        <li>Serverless architecture</li>
+                        <li>Multi-region for redundancy</li>
+                        <li>Infrastructure as Code (Terraform)</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h3>Prerequisites</h3>
+                    <ul>
+                        <li>AWS account with appropriate IAM roles</li>
+                        <li>Salesforce API credentials</li>
+                        <li>MySQL read replica access</li>
+                        <li>BigQuery project setup</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h3>Typical Workflow</h3>
+                    <ul>
+                        <li>1. Configure data source connections</li>
+                        <li>2. Deploy Airflow DAGs</li>
+                        <li>3. Run initial backfill</li>
+                        <li>4. Monitor daily incremental runs</li>
+                        <li>5. Query unified data in BigQuery</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Legend -->
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-box" style="background: #4299e1;"></div>
+                <span>Data Sources</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box" style="background: #ed8936;"></div>
+                <span>Processing Logic</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box" style="background: #9f7aea;"></div>
+                <span>External Services</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box" style="background: #48bb78;"></div>
+                <span>Output/Storage</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box" style="background: #38b2ac;"></div>
+                <span>Data Quality</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box" style="background: #805ad5;"></div>
+                <span>Enrichment</span>
+            </div>
+        </div>
+
+        <footer>
+            <strong>DataFlow ETL Pipeline Architecture v1.0</strong><br>
+            Generated: 2025-11-03 | Customer Data Integration Platform<br>
+            Technologies: Python, Node.js, AWS Lambda, Apache Airflow, BigQuery, MySQL
+        </footer>
+    </div>
+</body>
+</html>
