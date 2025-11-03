@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[PROJECT_NAME] Architecture</title>
+    <style>
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 2rem;
+            min-height: 100vh;
+        }
+
+        /* ===== CONTAINER ===== */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 3rem;
+        }
+
+        /* ===== TYPOGRAPHY ===== */
+        h1 {
+            font-size: 2.5rem;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #718096;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        /* ===== SECTIONS ===== */
+        .section {
+            margin: 2rem 0;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: #2d3748;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #667eea;
+        }
+
+        /* ===== METRIC CARDS ===== */
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .metric-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            color: white;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* ===== FEATURE CARDS ===== */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .feature-card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .feature-card h3 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .feature-card ul {
+            list-style: none;
+            color: #4a5568;
+            line-height: 1.8;
+        }
+
+        .feature-card ul li:before {
+            content: "→ ";
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        /* ===== DIAGRAMS ===== */
+        .diagram-container {
+            background: #f7fafc;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+
+        svg {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* ===== LEGEND ===== */
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #f7fafc;
+            border-radius: 12px;
+            justify-content: center;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .legend-box {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            border: 2px solid #2d3748;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid #e2e8f0;
+            text-align: center;
+            color: #718096;
+            font-size: 0.9rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            .container {
+                padding: 1.5rem;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .metric-grid,
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <h1>[PROJECT_ICON] [PROJECT_NAME]</h1>
+        <p class="subtitle">[PROJECT_DESCRIPTION]</p>
+
+        <!-- KEY METRICS -->
+        <div class="metric-grid">
+            <!-- Metric cards will be inserted here -->
+        </div>
+
+        <!-- BUSINESS OBJECTIVES -->
+        <div class="section">
+            <h2 class="section-title">📊 Business Objectives & End Users</h2>
+            <div class="feature-grid">
+                <!-- Feature cards will be inserted here -->
+            </div>
+        </div>
+
+        <!-- DATA INPUT OVERVIEW -->
+        <div class="section">
+            <h2 class="section-title">📥 Data Input Overview</h2>
+            <div class="diagram-container">
+                <svg viewBox="0 0 1200 600">
+                    <!-- Data flow diagram will be inserted here -->
+                </svg>
+            </div>
+        </div>
+
+        <!-- PROCESSING PIPELINE -->
+        <div class="section">
+            <h2 class="section-title">⚙️ Data Processing Pipeline</h2>
+            <div class="diagram-container">
+                <svg viewBox="0 0 1400 700">
+                    <!-- Pipeline diagram will be inserted here -->
+                </svg>
+            </div>
+        </div>
+
+        <!-- FUNCTIONAL FEATURES -->
+        <div class="section">
+            <h2 class="section-title">✨ Functional Features</h2>
+            <div class="feature-grid">
+                <!-- Feature cards will be inserted here -->
+            </div>
+        </div>
+
+        <!-- NON-FUNCTIONAL FEATURES -->
+        <div class="section">
+            <h2 class="section-title">🛡️ Non-Functional Features</h2>
+            <div class="feature-grid">
+                <!-- Feature cards will be inserted here -->
+            </div>
+        </div>
+
+        <!-- SYSTEM ARCHITECTURE -->
+        <div class="section">
+            <h2 class="section-title">🏗️ System Architecture</h2>
+            <div class="diagram-container">
+                <svg viewBox="0 0 1400 800">
+                    <!-- Architecture diagram will be inserted here -->
+                </svg>
+            </div>
+        </div>
+
+        <!-- DEPLOYMENT & USAGE -->
+        <div class="section">
+            <h2 class="section-title">🚀 Deployment & Usage</h2>
+            <div class="feature-grid">
+                <!-- Deployment info cards will be inserted here -->
+            </div>
+        </div>
+
+        <!-- LEGEND -->
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-box" style="background: #4299e1;"></div>
+                <span>Data Sources</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box" style="background: #ed8936;"></div>
+                <span>Processing Logic</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box" style="background: #9f7aea;"></div>
+                <span>AI Services</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box" style="background: #48bb78;"></div>
+                <span>Output/Results</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box" style="background: #f59e0b;"></div>
+                <span>Configuration</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box" style="background: #718096;"></div>
+                <span>Supporting Tools</span>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <footer>
+            <strong>[PROJECT_NAME] Architecture v[VERSION]</strong><br>
+            Generated: [DATE] | [SHORT_DESCRIPTION]<br>
+            Technologies: [TECH_STACK]
+        </footer>
+    </div>
+</body>
+</html>

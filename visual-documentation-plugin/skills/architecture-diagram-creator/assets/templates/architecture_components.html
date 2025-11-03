@@ -1,0 +1,304 @@
+<!-- ========================================
+     ARCHITECTURE DIAGRAM SVG COMPONENTS
+     Reusable SVG patterns for architecture diagrams
+     ======================================== -->
+
+<!-- ===== SVG MARKERS & DEFINITIONS ===== -->
+<defs>
+    <!-- Standard arrow marker -->
+    <marker id="arrowhead" markerWidth="10" markerHeight="10"
+            refX="9" refY="3" orient="auto">
+        <polygon points="0 0, 10 3, 0 6" fill="#2d3748"/>
+    </marker>
+
+    <!-- Green arrow marker (for success paths) -->
+    <marker id="arrowhead-green" markerWidth="10" markerHeight="10"
+            refX="9" refY="3" orient="auto">
+        <polygon points="0 0, 10 3, 0 6" fill="#48bb78"/>
+    </marker>
+
+    <!-- Blue arrow marker (for data flow) -->
+    <marker id="arrowhead-blue" markerWidth="10" markerHeight="10"
+            refX="9" refY="3" orient="auto">
+        <polygon points="0 0, 10 3, 0 6" fill="#4299e1"/>
+    </marker>
+
+    <!-- Orange arrow marker (for processing) -->
+    <marker id="arrowhead-orange" markerWidth="10" markerHeight="10"
+            refX="9" refY="3" orient="auto">
+        <polygon points="0 0, 10 3, 0 6" fill="#ed8936"/>
+    </marker>
+</defs>
+
+
+<!-- ===== DATA SOURCE BOX ===== -->
+<!-- Blue box for data input sources -->
+<g class="data-source-component">
+    <rect x="50" y="50" width="250" height="200" rx="15"
+          fill="#4299e1" stroke="#2b6cb0" stroke-width="3"/>
+    <text x="175" y="85" text-anchor="middle" fill="white"
+          font-size="16" font-weight="bold">Source Name</text>
+    <text x="175" y="110" text-anchor="middle" fill="white"
+          font-size="12">Source Type</text>
+
+    <!-- Details section -->
+    <text x="175" y="140" text-anchor="middle" fill="white"
+          font-size="11" font-weight="bold">Details:</text>
+    <text x="175" y="160" text-anchor="middle" fill="white"
+          font-size="10">• Field 1</text>
+    <text x="175" y="175" text-anchor="middle" fill="white"
+          font-size="10">• Field 2</text>
+    <text x="175" y="190" text-anchor="middle" fill="white"
+          font-size="10">• Field 3</text>
+</g>
+
+
+<!-- ===== PROCESSING ENGINE BOX ===== -->
+<!-- Orange box for processing/transformation logic -->
+<g class="processing-component">
+    <rect x="450" y="200" width="300" height="150" rx="15"
+          fill="#ed8936" stroke="#c05621" stroke-width="3"/>
+    <text x="600" y="235" text-anchor="middle" fill="white"
+          font-size="16" font-weight="bold">Processing Engine</text>
+
+    <!-- Processing steps -->
+    <text x="600" y="260" text-anchor="middle" fill="white"
+          font-size="11">• Step 1: Description</text>
+    <text x="600" y="280" text-anchor="middle" fill="white"
+          font-size="11">• Step 2: Description</text>
+    <text x="600" y="300" text-anchor="middle" fill="white"
+          font-size="11">• Step 3: Description</text>
+    <text x="600" y="320" text-anchor="middle" fill="white"
+          font-size="11">• Step 4: Description</text>
+</g>
+
+
+<!-- ===== OUTPUT/RESULT BOX ===== -->
+<!-- Green box for outputs and results -->
+<g class="output-component">
+    <rect x="900" y="175" width="250" height="200" rx="15"
+          fill="#48bb78" stroke="#2f855a" stroke-width="3"/>
+    <text x="1025" y="210" text-anchor="middle" fill="white"
+          font-size="16" font-weight="bold">Output Name</text>
+    <text x="1025" y="235" text-anchor="middle" fill="white"
+          font-size="11" font-weight="bold">Output Details:</text>
+
+    <!-- Output details -->
+    <text x="1025" y="255" text-anchor="middle" fill="white"
+          font-size="10">• Format: Type</text>
+    <text x="1025" y="270" text-anchor="middle" fill="white"
+          font-size="10">• Size: Amount</text>
+    <text x="1025" y="285" text-anchor="middle" fill="white"
+          font-size="10">• Destination: Location</text>
+
+    <!-- Status indicators -->
+    <text x="1025" y="310" text-anchor="middle" fill="white"
+          font-size="10">✓ Status indicator</text>
+</g>
+
+
+<!-- ===== AI/ML SERVICE BOX ===== -->
+<!-- Purple box for AI/ML services -->
+<g class="ai-service-component">
+    <rect x="320" y="400" width="250" height="120" rx="15"
+          fill="#9f7aea" stroke="#6b46c1" stroke-width="3"/>
+    <text x="445" y="435" text-anchor="middle" fill="white"
+          font-size="16" font-weight="bold">AI Service</text>
+    <text x="445" y="460" text-anchor="middle" fill="white"
+          font-size="11">Model/Provider Name</text>
+    <text x="445" y="480" text-anchor="middle" fill="white"
+          font-size="10">• Capability 1</text>
+    <text x="445" y="495" text-anchor="middle" fill="white"
+          font-size="10">• Capability 2</text>
+</g>
+
+
+<!-- ===== CONFIGURATION BOX ===== -->
+<!-- Amber box for configuration and settings -->
+<g class="config-component">
+    <rect x="470" y="60" width="180" height="100" rx="10"
+          fill="#f59e0b" stroke="#d97706" stroke-width="2"/>
+    <text x="560" y="90" text-anchor="middle" fill="white"
+          font-size="14" font-weight="bold">Configuration</text>
+    <text x="560" y="110" text-anchor="middle" fill="white"
+          font-size="10">Config file</text>
+    <text x="560" y="125" text-anchor="middle" fill="white"
+          font-size="10">• Settings</text>
+    <text x="560" y="140" text-anchor="middle" fill="white"
+          font-size="10">• Parameters</text>
+</g>
+
+
+<!-- ===== SUPPORTING TOOL BOX ===== -->
+<!-- Gray box for supporting tools/utilities -->
+<g class="tool-component">
+    <rect x="750" y="240" width="200" height="70" rx="10"
+          fill="#718096" stroke="#4a5568" stroke-width="2"/>
+    <text x="850" y="265" text-anchor="middle" fill="white"
+          font-size="11" font-weight="bold">Tool Name</text>
+    <text x="850" y="283" text-anchor="middle" fill="white"
+          font-size="9">Description</text>
+    <text x="850" y="297" text-anchor="middle" fill="white"
+          font-size="9">Purpose</text>
+</g>
+
+
+<!-- ===== PIPELINE STAGE BOX ===== -->
+<!-- Compact pipeline stage for multi-stage diagrams -->
+<g class="pipeline-stage">
+    <rect x="50" y="50" width="200" height="100" rx="10"
+          fill="#4299e1" stroke="#2b6cb0" stroke-width="2"/>
+    <text x="150" y="80" text-anchor="middle" fill="white"
+          font-size="14" font-weight="bold">Stage Name</text>
+    <text x="150" y="100" text-anchor="middle" fill="white"
+          font-size="10">Operation</text>
+    <text x="150" y="115" text-anchor="middle" fill="white"
+          font-size="10">Technology</text>
+    <text x="150" y="130" text-anchor="middle" fill="white"
+          font-size="10">Output format</text>
+</g>
+
+
+<!-- ===== LAYERED ARCHITECTURE COMPONENT ===== -->
+<!-- Stack of layers for architecture diagrams -->
+<g class="architecture-layer">
+    <!-- Layer 1 -->
+    <rect x="100" y="100" width="400" height="80" rx="10"
+          fill="#4299e1" stroke="#2b6cb0" stroke-width="2"/>
+    <text x="300" y="145" text-anchor="middle" fill="white"
+          font-size="13" font-weight="bold">Layer 1: Data Sources</text>
+
+    <!-- Layer 2 -->
+    <rect x="100" y="200" width="400" height="80" rx="10"
+          fill="#ed8936" stroke="#c05621" stroke-width="2"/>
+    <text x="300" y="245" text-anchor="middle" fill="white"
+          font-size="13" font-weight="bold">Layer 2: Processing</text>
+
+    <!-- Layer 3 -->
+    <rect x="100" y="300" width="400" height="80" rx="10"
+          fill="#9f7aea" stroke="#6b46c1" stroke-width="2"/>
+    <text x="300" y="345" text-anchor="middle" fill="white"
+          font-size="13" font-weight="bold">Layer 3: Services</text>
+
+    <!-- Layer 4 -->
+    <rect x="100" y="400" width="400" height="80" rx="10"
+          fill="#48bb78" stroke="#2f855a" stroke-width="2"/>
+    <text x="300" y="445" text-anchor="middle" fill="white"
+          font-size="13" font-weight="bold">Layer 4: Output</text>
+</g>
+
+
+<!-- ===== CONNECTORS & ARROWS ===== -->
+<!-- Simple horizontal arrow -->
+<g class="arrow-horizontal">
+    <path d="M 300 150 L 450 150" stroke="#2d3748"
+          stroke-width="3" marker-end="url(#arrowhead)"/>
+    <text x="375" y="140" text-anchor="middle" fill="#2d3748"
+          font-size="11" font-weight="bold">Label</text>
+</g>
+
+<!-- Diagonal arrow (down-right) -->
+<g class="arrow-diagonal">
+    <path d="M 300 150 L 450 250" stroke="#2d3748"
+          stroke-width="3" marker-end="url(#arrowhead)"/>
+    <text x="360" y="190" fill="#2d3748"
+          font-size="11" font-weight="bold">Label</text>
+</g>
+
+<!-- Vertical arrow (downward) -->
+<g class="arrow-vertical">
+    <path d="M 150 150 L 150 280" stroke="#2d3748"
+          stroke-width="3" marker-end="url(#arrowhead)"/>
+    <text x="160" y="215" fill="#2d3748"
+          font-size="11" font-weight="bold">Label</text>
+</g>
+
+<!-- L-shaped connector (right then down) -->
+<g class="connector-l-shape">
+    <path d="M 300 150 L 450 150 L 450 280" stroke="#2d3748"
+          stroke-width="3" marker-end="url(#arrowhead)"/>
+</g>
+
+<!-- Dashed line (for optional/uncertain paths) -->
+<g class="arrow-dashed">
+    <path d="M 300 150 L 450 150" stroke="#718096"
+          stroke-width="2" stroke-dasharray="5,5"
+          marker-end="url(#arrowhead)"/>
+    <text x="375" y="140" text-anchor="middle" fill="#718096"
+          font-size="10" font-style="italic">Optional</text>
+</g>
+
+
+<!-- ===== ANNOTATION/CALLOUT BOX ===== -->
+<!-- Info box with border and background -->
+<g class="annotation-box">
+    <rect x="880" y="150" width="220" height="120" rx="10"
+          fill="#fff5f5" stroke="#fc8181" stroke-width="2"/>
+    <text x="990" y="180" text-anchor="middle" fill="#742a2a"
+          font-size="12" font-weight="bold">⚠️ Important Note</text>
+    <text x="990" y="200" text-anchor="middle" fill="#5a1919"
+          font-size="9">Line 1 of note text</text>
+    <text x="990" y="215" text-anchor="middle" fill="#5a1919"
+          font-size="9">Line 2 of note text</text>
+    <text x="990" y="230" text-anchor="middle" fill="#5a1919"
+          font-size="9">Line 3 of note text</text>
+    <text x="990" y="245" text-anchor="middle" fill="#5a1919"
+          font-size="9">Line 4 of note text</text>
+</g>
+
+
+<!-- ===== REFERENCE TABLE ROW ===== -->
+<!-- Table header row -->
+<g class="table-header">
+    <rect x="50" y="50" width="140" height="40"
+          fill="#667eea" stroke="#5a67d8" stroke-width="2"/>
+    <text x="120" y="75" text-anchor="middle" fill="white"
+          font-size="12" font-weight="bold">Column 1</text>
+
+    <rect x="190" y="50" width="180" height="40"
+          fill="#667eea" stroke="#5a67d8" stroke-width="2"/>
+    <text x="280" y="75" text-anchor="middle" fill="white"
+          font-size="12" font-weight="bold">Column 2</text>
+
+    <rect x="370" y="50" width="140" height="40"
+          fill="#667eea" stroke="#5a67d8" stroke-width="2"/>
+    <text x="440" y="75" text-anchor="middle" fill="white"
+          font-size="12" font-weight="bold">Column 3</text>
+</g>
+
+<!-- Table data row -->
+<g class="table-row">
+    <rect x="50" y="90" width="140" height="50"
+          fill="#e6fffa" stroke="#81e6d9" stroke-width="1"/>
+    <text x="120" y="120" text-anchor="middle" fill="#234e52"
+          font-size="11" font-weight="bold">Data 1</text>
+
+    <rect x="190" y="90" width="180" height="50"
+          fill="#e6fffa" stroke="#81e6d9" stroke-width="1"/>
+    <text x="280" y="120" text-anchor="middle" fill="#234e52"
+          font-size="10">Data 2</text>
+
+    <rect x="370" y="90" width="140" height="50"
+          fill="#e6fffa" stroke="#81e6d9" stroke-width="1"/>
+    <text x="440" y="120" text-anchor="middle" fill="#234e52"
+          font-size="10">Data 3</text>
+</g>
+
+
+<!-- ===== COLOR PALETTE REFERENCE ===== -->
+<!--
+Data Sources / Inputs:     #4299e1 (blue)     stroke: #2b6cb0
+Processing / Logic:        #ed8936 (orange)   stroke: #c05621
+AI/ML Services:            #9f7aea (purple)   stroke: #6b46c1
+Output / Success:          #48bb78 (green)    stroke: #2f855a
+Configuration:             #f59e0b (amber)    stroke: #d97706
+Supporting Tools:          #718096 (gray)     stroke: #4a5568
+Warning / Critical:        #e53e3e (red)      stroke: #c53030
+Information / Teal:        #38b2ac (teal)     stroke: #2c7a7b
+Special / Highlight:       #805ad5 (purple2)  stroke: #6b46c1
+Text dark:                 #2d3748
+Text medium:               #4a5568
+Text light:                #718096
+Background light:          #f7fafc
+Border light:              #e2e8f0
+-->

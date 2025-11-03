@@ -1,10 +1,70 @@
 # Visual Documentation Skills - Examples
 
-This document provides example prompts and use cases for each of the four visual documentation skills.
+This document provides example prompts and use cases for each of the visual documentation skills.
 
 ---
 
-## 1. Flowchart Creator
+## 1. Architecture Diagram Creator
+
+**When to use:** Comprehensive project documentation, system architecture overviews, technical specifications, project onboarding, stakeholder presentations
+
+### Example Prompts
+
+**Simple:**
+```
+Create an architecture diagram for this project
+```
+
+**Detailed:**
+```
+Create a comprehensive architecture diagram for my data processing pipeline project:
+
+**Project Context:**
+- Consolidates customer data from 3 sources (Salesforce API, MySQL database, CSV exports)
+- Processes ~100K records daily using Python ETL scripts
+- Uses AWS services (S3, Lambda, RDS)
+- Outputs to data warehouse for analytics
+
+**Key Features:**
+- Automated data validation and deduplication
+- Real-time anomaly detection with ML model
+- Configurable transformation rules
+- Error handling and retry logic
+
+**End Users:**
+- Data analysts and scientists
+- Business intelligence team
+- Marketing automation systems
+
+Include sections for: business objectives, data flow diagram, processing pipeline,
+system architecture (layers), functional and non-functional features, and deployment info.
+```
+
+**From Existing Codebase:**
+```
+Analyze the current project directory and create a comprehensive architecture diagram
+documenting: data sources, processing logic, external APIs/services, output artifacts,
+features, and deployment model. Read CLAUDE.md, README.md, and source files to gather context.
+```
+
+### Expected Output
+- Professional HTML file with multiple sections:
+  - Business objectives and end users
+  - Key project metrics (sources, stages, dependencies)
+  - Data flow diagram (source → processing → output)
+  - Multi-stage processing pipeline visualization
+  - System architecture with layers (data, processing, services, output)
+  - Functional features (with feature cards)
+  - Non-functional features (performance, security, etc.)
+  - Deployment information
+  - Reference tables (data mappings, configurations)
+- Modern gradient styling with semantic colors
+- Responsive design for mobile and desktop
+- Self-contained HTML with no external dependencies
+
+---
+
+## 2. Flowchart Creator
 
 **When to use:** Process flows, decision trees, workflow diagrams, authentication flows, state machines
 
@@ -42,7 +102,7 @@ Use different colors for user actions, system processes, and decision points.
 
 ---
 
-## 2. Dashboard Creator
+## 3. Dashboard Creator
 
 **When to use:** Metrics dashboards, KPI displays, monitoring interfaces, analytics views, system health displays
 
@@ -87,7 +147,7 @@ Use color coding (green/yellow/red) based on status and include progress bars fo
 
 ---
 
-## 3. Timeline Creator
+## 4. Timeline Creator
 
 **When to use:** Project timelines, roadmaps, Gantt charts, milestone tracking, release schedules, project planning
 
@@ -135,7 +195,7 @@ Show completed milestones in green, current work in yellow, and future work in g
 
 ---
 
-## 4. Technical Documentation Creator
+## 5. Technical Documentation Creator
 
 **When to use:** API documentation, developer guides, code examples, system architecture docs, integration guides
 
@@ -212,6 +272,13 @@ Include code examples in JavaScript and Python.
 2. **Specify colors/themes**: Mention color schemes or status indicators you want
 3. **Include hierarchy**: Describe relationships, groupings, or phases
 4. **Mention interactivity**: Ask for legends, tooltips, or navigation if needed
+
+### Architecture Diagrams
+- Describe the project's purpose and users
+- List all data sources and outputs
+- Mention key technologies and frameworks
+- Identify processing stages or components
+- Note any external services or APIs
 
 ### Flowcharts
 - List all steps in order
