@@ -5,6 +5,41 @@
 
 ---
 
+## ⚠️ Critical Architecture Understanding
+
+**Your MCP servers remain UNCHANGED.** This pattern doesn't replace your MCP servers—it enhances them.
+
+### The Architecture
+
+```
+Traditional MCP (Direct Tool Calls):
+  LLM → MCP Tool Call → MCP Server → Result → LLM Context
+  (Every result passes through context, massive token usage)
+
+Code Execution with MCP (Thin Wrappers):
+  LLM → Generates Python Code →
+    Thin Wrappers (discovered via filesystem) →
+      YOUR MCP Server (unchanged) →
+        Results stay in Python execution environment →
+          Only summary returned to LLM Context
+  (Intermediate data never enters context, 90%+ token reduction)
+```
+
+### What This Means for Your Outlook MCP
+
+1. **Your Outlook MCP server runs as-is** (`node dist/index.js`)
+2. **Create thin Python wrappers** that call your MCP server via MCP protocol
+3. **LLM discovers wrappers** via filesystem (progressive disclosure)
+4. **LLM generates Python code** that imports and uses wrappers
+5. **Code executes**, calling your real MCP server, keeping data in memory
+6. **Only summaries** returned to LLM context
+
+**Key Insight:** Wrappers are bridges to your existing MCP infrastructure, not replacements.
+
+See `outlook_mcp_production_example.py` for complete working example.
+
+---
+
 ## Core Learnings from the Article
 
 ### The Problem
