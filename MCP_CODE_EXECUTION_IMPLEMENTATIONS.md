@@ -8,21 +8,60 @@
 ## Core Learnings from the Article
 
 ### The Problem
-- **Traditional MCP**: Load all 50+ tool schemas upfront (25,000+ tokens)
-- **Every result**: Passed through context window (exponential token growth)
-- **Complex workflows**: 150,000+ tokens for multi-step operations
+Traditional MCP implementations have two critical inefficiencies:
 
-### The Solution
-1. **Thin wrappers**: Expose MCP tools as Python modules/functions
-2. **Dynamic discovery**: LLM discovers tools via filesystem (like `ls /mcp_tools`)
-3. **Code execution**: LLM writes Python code instead of making tool calls
-4. **Local processing**: Intermediate results stay in Python variables
-5. **Summary returns**: Only final aggregated results go back to context
+1. **Tool definition overload**: Agents connected to thousands of tools must process "hundreds of thousands of tokens before reading a request"
+2. **Intermediate result bloat**: Data passes through the model multiple times, requiring reprocessing at each step
 
-### The Impact
-- **Token reduction**: 90-98% (150K → 2K tokens)
-- **Composability**: Full Python capabilities (loops, filters, functions)
-- **Scalability**: Process unlimited data with fixed token cost
+**Real example from Anthropic:** Google Drive-to-Salesforce workflow consumed **150,000 tokens**
+
+### The Solution: Code Execution with MCP
+
+Present MCP servers as **code APIs** organized in filesystem hierarchies. Agents write code to interact with tools instead of direct tool calling.
+
+**Reference Implementation Structure (from article):**
+```
+servers/
+├── google-drive/
+│   ├── getDocument.ts
+│   └── index.ts
+└── salesforce/
+    ├── updateRecord.ts
+    └── index.ts
+```
+
+Agents explore directories to discover tools, reading only necessary definitions on-demand.
+
+### The Impact: 5 Major Benefits
+
+1. **Progressive Disclosure** (98.7% token reduction)
+   - Models navigate filesystems efficiently
+   - Load tool definitions on-demand, not upfront
+   - **Example:** 150,000 → 2,000 tokens (Google Drive → Salesforce)
+
+2. **Context-Efficient Filtering**
+   - Large datasets filtered in execution environment
+   - **Example:** Extract 5 rows from 10,000-row spreadsheet without passing all data through context
+
+3. **Privacy Preservation** 🔒
+   - Intermediate results isolated from model
+   - **PII can be tokenized automatically**
+   - Sensitive data flows between systems without entering model context
+   - Critical for email, calendar, health data, financial records
+
+4. **State Persistence**
+   - Maintain progress across operations via filesystem
+   - Enables resumable work and skill development
+   - Agent can save/load state between executions
+
+5. **Control Flow Efficiency**
+   - Loops and conditionals execute natively
+   - No repeated agent iterations
+   - Dramatically improved latency
+
+### Industry Validation
+
+Cloudflare published similar findings, calling this pattern **"Code Mode"**. The core insight: LLMs excel at code generation—leverage this strength for efficient MCP integration.
 
 ---
 
@@ -84,11 +123,16 @@ def execute_code(code: str, timeout: int = 30) -> Dict[str, Any]:
     """
     Execute Python code in a restricted environment.
 
-    Security:
+    Security (CRITICAL from Anthropic article):
+    "Requires a secure execution environment with appropriate sandboxing,
+    resource limits, and monitoring"
+
     - Runs in subprocess with timeout
-    - No network access (can be configured)
+    - Sandboxing (Docker, gVisor, or VM isolation)
+    - Resource limits (CPU, memory, disk)
+    - No network access (unless explicitly allowed)
     - Limited filesystem access
-    - Resource limits
+    - Monitoring and logging
     """
     try:
         result = subprocess.run(
@@ -262,10 +306,13 @@ from typing import List, Optional
 
 class LazyMCPRegistry:
     """
-    Registry that loads MCP tools on-demand.
+    Registry that loads MCP tools on-demand using Progressive Disclosure.
+
+    From Anthropic article: "Models navigate filesystems efficiently,
+    loading tool definitions on-demand rather than upfront."
 
     Instead of loading all tool schemas upfront, tools are discovered
-    dynamically via the filesystem and loaded only when accessed.
+    via the filesystem and loaded only when accessed.
     """
 
     def __init__(self, tools_dir: Optional[str] = None):
@@ -631,6 +678,152 @@ result = (
 
 ---
 
+---
+
+## Critical Benefit: Privacy Preservation & PII Handling
+
+**From Anthropic article:** "PII can be tokenized automatically, preventing sensitive data from entering model context while still flowing between systems."
+
+This is especially critical for:
+- Email/calendar data (Outlook, Gmail)
+- Healthcare records
+- Financial information
+- Customer data
+
+### Implementation Pattern
+
+```python
+def process_emails_with_pii_protection():
+    """
+    Example: Process customer emails without exposing PII to model.
+
+    Traditional approach: All email content goes through model context
+    Code execution: PII stays in execution environment, only metadata returned
+    """
+    from outlook_mcp import OutlookEmail
+    import hashlib
+
+    email = OutlookEmail()
+
+    # Fetch emails (PII stays in memory)
+    customer_emails = email.search_emails("customer inquiry")
+
+    # Tokenize PII in execution environment
+    processed = []
+    for msg in customer_emails:
+        # Extract insights without exposing actual content
+        pii_hash = hashlib.sha256(msg['from'].encode()).hexdigest()[:8]
+
+        processed.append({
+            'sender_token': f"USER_{pii_hash}",  # Tokenized email
+            'subject_category': categorize(msg['subject']),  # Metadata only
+            'sentiment': analyze_sentiment(msg['body']),  # Analysis only
+            'urgency': calculate_urgency(msg),  # Derived metric
+            # ACTUAL PII NEVER SENT TO MODEL
+        })
+
+    # Return anonymized insights only
+    return {
+        'total_inquiries': len(customer_emails),
+        'by_category': aggregate_by_category(processed),
+        'avg_sentiment': calculate_avg_sentiment(processed),
+        'urgent_count': sum(1 for p in processed if p['urgency'] == 'high')
+    }
+```
+
+**Key insight:** Sensitive data flows through the execution environment to perform operations (e.g., email → database, email → ticket system) but never enters the model's context window.
+
+### Use Cases for PII Protection
+
+1. **Healthcare:** Process patient records without exposing PHI
+2. **Finance:** Analyze transactions without showing account numbers
+3. **HR:** Process resumes/applications without exposing personal details
+4. **Customer Support:** Handle tickets without revealing customer identities
+5. **Legal:** Process documents while maintaining privilege
+
+---
+
+## Advanced Feature: State Persistence
+
+**From Anthropic article:** "Agents maintain progress across operations via filesystem access, enabling resumable work and skill development."
+
+### Implementation Pattern
+
+```python
+import json
+from pathlib import Path
+
+class StatefulMCPAgent:
+    """
+    Agent that maintains state across executions.
+
+    Benefits:
+    - Resume interrupted workflows
+    - Build knowledge over time
+    - Track progress on long-running tasks
+    """
+
+    def __init__(self, state_dir: str = ".mcp_state"):
+        self.state_dir = Path(state_dir)
+        self.state_dir.mkdir(exist_ok=True)
+
+    def save_state(self, task_id: str, state: dict):
+        """Save progress to filesystem."""
+        state_file = self.state_dir / f"{task_id}.json"
+        with open(state_file, 'w') as f:
+            json.dump(state, f)
+
+    def load_state(self, task_id: str) -> dict:
+        """Load previous progress."""
+        state_file = self.state_dir / f"{task_id}.json"
+        if state_file.exists():
+            with open(state_file, 'r') as f:
+                return json.load(f)
+        return {}
+
+    def resumable_workflow(self, task_id: str):
+        """
+        Example: Process 1000 emails with checkpointing.
+
+        If interrupted, resume from last checkpoint.
+        """
+        from outlook_mcp import OutlookEmail
+
+        email = OutlookEmail()
+        state = self.load_state(task_id)
+
+        # Resume from last processed index
+        start_index = state.get('last_processed', 0)
+        processed_count = state.get('processed_count', 0)
+
+        all_emails = email.list_emails(limit=1000)
+
+        for i, msg in enumerate(all_emails[start_index:], start=start_index):
+            # Process email
+            process_email(msg)
+            processed_count += 1
+
+            # Checkpoint every 100 emails
+            if processed_count % 100 == 0:
+                self.save_state(task_id, {
+                    'last_processed': i + 1,
+                    'processed_count': processed_count,
+                    'timestamp': datetime.now().isoformat()
+                })
+
+        return {'total_processed': processed_count}
+```
+
+### State Persistence Use Cases
+
+1. **Long-running migrations:** Resume multi-hour data migrations
+2. **Incremental learning:** Agent builds knowledge over time
+3. **Progress tracking:** Monitor completion of large batch operations
+4. **Error recovery:** Resume from failure point
+5. **Skill development:** Agent improves through accumulated experience
+
+---
+
 ## Comparison Table
 
 | Feature | Implementation 1 (Code Executor) | Implementation 2 (Lazy Registry) | Implementation 3 (Data Pipeline) |
@@ -670,12 +863,26 @@ result = (
 
 ## Key Takeaway
 
-**Code execution with MCP = 90-98% token reduction**
+**Code execution with MCP = 98.7% token reduction (150K → 2K tokens)**
 
-Instead of passing data through context:
-✅ Write Python code that processes data locally
-✅ Load tools on-demand via filesystem discovery
-✅ Keep intermediate results in memory
-✅ Return only aggregated summaries
+From Anthropic's article, this pattern provides:
 
-Result: Process unlimited data with fixed token cost
+### Token Efficiency
+✅ **Progressive disclosure:** Load tools on-demand via filesystem navigation
+✅ **Context-efficient filtering:** Process data locally, return only summaries
+✅ **Native control flow:** Loops and conditionals execute without repeated agent iterations
+
+### Privacy & Security
+🔒 **PII protection:** Sensitive data flows between systems without entering model context
+🔒 **Automatic tokenization:** Personal information replaced with hashes/IDs
+🔒 **Sandboxing required:** Secure execution environment with monitoring
+
+### Advanced Capabilities
+💾 **State persistence:** Resume workflows, build knowledge over time
+🚀 **Latency reduction:** Single execution instead of multiple round trips
+♾️ **Unlimited scale:** Process unlimited data with fixed token cost
+
+### Industry Validation
+Cloudflare calls this **"Code Mode"** - the future of efficient LLM integration.
+
+**Core insight:** LLMs excel at code generation. Leverage this strength instead of traditional tool calling.
