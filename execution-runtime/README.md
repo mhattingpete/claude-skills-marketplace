@@ -1,83 +1,54 @@
-# Claude Skills Marketplace - Execution Runtime
+# Claude Code - Execution Runtime
 
-**Code execution environment implementing the [Anthropic code execution pattern](https://www.anthropic.com/engineering/code-execution-with-mcp) for 90%+ token savings.**
+**Python package for Claude Code implementing the [Anthropic code execution pattern](https://www.anthropic.com/engineering/code-execution-with-mcp) for 90%+ token savings.**
 
 ## Overview
 
-The Execution Runtime enables Claude to execute Python code locally with access to powerful APIs for file operations, code analysis, transformations, and git operations. Instead of loading all code and data through the context window, Claude writes Python scripts that execute locally and return only results—achieving up to **99% token reduction** for complex operations.
+The Execution Runtime provides pre-built Python APIs for bulk code operations with massive token savings. Instead of loading all code and data through the context window, you write Python scripts that execute locally and return only results—achieving up to **99% token reduction** for complex operations.
+
+**What Claude Code already provides:** Sandboxing, resource limits, timeouts, directory restrictions
+
+**What this package adds:** Pre-built APIs for bulk operations, PII/secret masking, metadata-only code analysis
 
 ## Key Benefits
 
 ✅ **90-99% Token Savings** - Process 100 files using 1,000 tokens instead of 100,000
-✅ **Faster Operations** - Local execution is significantly faster than multiple API round-trips
+✅ **Faster Operations** - Local execution vs multiple API round-trips
 ✅ **Stateful Workflows** - Resume multi-step refactoring across sessions
-✅ **Automatic Security** - PII/secret detection and sandboxed execution
+✅ **Automatic PII Masking** - Secret detection before results return to context
 ✅ **Reusable Skills** - Save transformation functions for future use
 
-## Architecture
+## Quick Start
 
-```
-execution-runtime/
-├── api/                      # Importable API library
-│   ├── filesystem.py         # File operations (copy, paste, search, batch)
-│   ├── code_analysis.py      # AST parsing (returns metadata, not source)
-│   ├── code_transform.py     # Refactoring operations
-│   └── git_operations.py     # Git command wrappers
-├── mcp-server/
-│   ├── mcp_server.py         # FastMCP server with execution tools
-│   └── security/
-│       ├── sandbox.py        # RestrictedPython execution environment
-│       └── pii_detector.py   # Automatic secret/PII masking
-├── pyproject.toml            # Dependencies
-├── setup.sh                  # One-command installation
-└── README.md                 # This file
-```
-
-## Installation
-
-### Quick Setup (Recommended)
-
-```bash
-# 1. Install marketplace plugin (if not already installed)
-/plugin marketplace add mhattingpete/claude-skills-marketplace
-
-# 2. Run setup script
-~/.claude/plugins/marketplaces/mhattingpete-claude-skills/execution-runtime/setup.sh
-```
-
-The script will:
-- Detect your OS and Claude installation
-- Configure MCP server in Claude config
-- Set up allowed directories for security
-- Install dependencies
-
-### Manual Setup
-
-1. **Add to Claude config** (`~/Library/Application Support/Claude/claude_desktop_config.json` on macOS):
-
-```json
-{
-  "mcpServers": {
-    "marketplace-execution": {
-      "command": "uv",
-      "args": ["run", "python", "~/.claude/plugins/marketplaces/mhattingpete-claude-skills/execution-runtime/mcp-server/mcp_server.py"],
-      "env": {
-        "ALLOWED_DIRECTORIES": "/Users/yourname/Documents,/Users/yourname/Projects",
-        "MASK_SECRETS": "true"
-      }
-    }
-  }
-}
-```
-
-2. **Install dependencies**:
-
+**1. Install the package:**
 ```bash
 cd ~/.claude/plugins/marketplaces/mhattingpete-claude-skills/execution-runtime
-uv pip install -e .
+pip install -e .
 ```
 
-3. **Restart Claude Code/Desktop**
+**2. Use in your prompts:**
+```python
+from execution_runtime import fs, code, transform, git
+
+# Example: Find all functions
+functions = code.find_functions('app.py')
+print(f"Found {len(functions)} functions")
+
+# Example: Rename identifier across codebase
+result = transform.rename_identifier('.', 'old_name', 'new_name', '**/*.py')
+print(f"Modified {result['files_modified']} files")
+
+# Example: Copy lines between files
+code_block = fs.copy_lines('source.py', 10, 20)
+fs.paste_code('target.py', 50, code_block)
+
+# Example: PII masking when needed
+from execution_runtime import mask_secrets
+result = {'api_key': 'sk_live_abc123'}
+safe_output = mask_secrets(str(result))  # Masks secrets automatically
+```
+
+**That's it!** Claude Code's built-in sandbox handles security, you get the pre-built APIs and token savings.
 
 ## Usage
 
@@ -100,9 +71,9 @@ User: "Rename getUserData to fetchUserData in all 50 Python files"
 
 Claude writes Python script:
 ```python
-from api.code_transform import rename_identifier
+from execution_runtime import transform
 
-result = rename_identifier(
+result = transform.rename_identifier(
     pattern='.',
     old_name='getUserData',
     new_name='fetchUserData',
@@ -124,16 +95,15 @@ Total: ~600 tokens ✅ (99.4% savings)
 ### Example 2: Extract Functions to New File
 
 ```python
-from api.code_analysis import find_functions
-from api.filesystem import copy_lines, paste_code
+from execution_runtime import code, fs
 
 # Find all utility functions (metadata only, no source in context)
-functions = find_functions('app.py', pattern='.*_util$')
+functions = code.find_functions('app.py', pattern='.*_util$')
 
 # Copy each function to utils.py
 for func in functions:
-    code = copy_lines('app.py', func['start_line'], func['end_line'])
-    paste_code('utils.py', -1, code)  # Append to end
+    code_block = fs.copy_lines('app.py', func['start_line'], func['end_line'])
+    fs.paste_code('utils.py', -1, code_block)  # Append to end
 
 result = {
     "functions_extracted": len(functions),
@@ -144,15 +114,15 @@ result = {
 ### Example 3: Code Audit Across 100 Files
 
 ```python
-from api.code_analysis import analyze_dependencies, find_unused_imports
+from execution_runtime import code
 from pathlib import Path
 
 files = list(Path('.').glob('**/*.py'))
 
 audit_results = []
 for file in files:
-    deps = analyze_dependencies(str(file))
-    unused = find_unused_imports(str(file))
+    deps = code.analyze_dependencies(str(file))
+    unused = code.find_unused_imports(str(file))
 
     if unused or deps['complexity'] > 10:
         audit_results.append({
@@ -170,24 +140,19 @@ result = {
 
 ## Available APIs
 
-### 1. Filesystem Operations (`api.filesystem`)
+### 1. Filesystem Operations (`fs`)
 
 ```python
-from api.filesystem import (
-    read_file, write_file,
-    copy_lines, paste_code,
-    search_replace,
-    batch_copy, batch_transform
-)
+from execution_runtime import fs
 
 # Copy specific lines
-code = copy_lines('source.py', start_line=10, end_line=20)
+code = fs.copy_lines('source.py', start_line=10, end_line=20)
 
 # Paste at line number
-paste_code('target.py', line_number=50, code=code, create_backup=True)
+fs.paste_code('target.py', line_number=50, code=code, create_backup=True)
 
 # Search and replace across files
-search_replace(
+fs.search_replace(
     file_pattern='**/*.py',
     search='old_function',
     replace='new_function',
@@ -200,45 +165,36 @@ operations = [
      'target_file': 'b.py', 'target_line': 5},
     # ... more operations
 ]
-batch_copy(operations)
+fs.batch_copy(operations)
 ```
 
-### 2. Code Analysis (`api.code_analysis`)
+### 2. Code Analysis (`code`)
 
 **Returns metadata only, not source code → massive token savings**
 
 ```python
-from api.code_analysis import (
-    find_functions, find_classes,
-    extract_imports, get_function_calls,
-    analyze_dependencies, find_unused_imports
-)
+from execution_runtime import code
 
 # Find functions (returns line numbers, not code)
-functions = find_functions('app.py', pattern='handle_.*')
+functions = code.find_functions('app.py', pattern='handle_.*')
 # Returns: [{'name': 'handle_request', 'start_line': 45, 'end_line': 60, ...}]
 
 # Find classes with methods
-classes = find_classes('models.py')
+classes = code.find_classes('models.py')
 # Returns: [{'name': 'User', 'methods': ['__init__', 'save'], ...}]
 
 # Analyze complexity
-deps = analyze_dependencies('complex_file.py')
+deps = code.analyze_dependencies('complex_file.py')
 # Returns: {'functions': 25, 'complexity': 87, 'lines': 450}
 ```
 
-### 3. Code Transformation (`api.code_transform`)
+### 3. Code Transformation (`transform`)
 
 ```python
-from api.code_transform import (
-    rename_identifier,
-    remove_debug_statements,
-    add_docstrings,
-    batch_refactor
-)
+from execution_runtime import transform
 
 # Rename across entire codebase
-rename_identifier(
+transform.rename_identifier(
     pattern='.',
     old_name='oldName',
     new_name='newName',
@@ -246,118 +202,84 @@ rename_identifier(
 )
 
 # Remove debug prints
-remove_debug_statements('app.py')
+transform.remove_debug_statements('app.py')
 
 # Add docstrings to functions missing them
-add_docstrings('module.py', style='google')
+transform.add_docstrings('module.py', style='google')
 ```
 
-### 4. Git Operations (`api.git_operations`)
+### 4. Git Operations (`git`)
 
 ```python
-from api.git_operations import (
-    git_status, git_add, git_commit, git_push,
-    create_branch, git_diff, git_log
-)
+from execution_runtime import git
 
 # Check status
-status = git_status()
+status = git.git_status()
 # Returns: {'files': {'modified': [...], 'untracked': [...]}}
 
 # Stage and commit
-git_add(['.'])
-git_commit('feat: refactor authentication module')
+git.git_add(['.'])
+git.git_commit('feat: refactor authentication module')
 
 # Create branch and push
-create_branch('feature/new-auth', checkout=True)
-git_push('origin', 'feature/new-auth')
+git.create_branch('feature/new-auth', checkout=True)
+git.git_push('origin', 'feature/new-auth')
 ```
 
-## Advanced Features
-
-### Stateful Refactoring Sessions
-
-For complex multi-step operations that might be interrupted:
+### 5. Sessions and Skills
 
 ```python
-# Create session
-session = create_refactoring_session(
-    "modernize-codebase",
-    "Update to Python 3.11+ syntax"
-)
+from execution_runtime import Session, save_skill, load_skill
 
-# Process files and save progress
-for i, file in enumerate(files):
-    # ... do work ...
+# Create stateful session for complex work
+session = Session("modernize-codebase", "Update to Python 3.11+ syntax")
 
-    if i % 10 == 0:
-        save_session_state(session['id'], {
-            'processed': files[:i],
-            'remaining': files[i:],
-            'errors': errors
-        })
-```
+# Save progress periodically
+session.save_state({
+    'processed': files[:10],
+    'remaining': files[10:],
+    'errors': []
+})
 
-If interrupted, resume later by loading session state.
+# Resume later
+state = session.load_state()
+print(f"Processed: {state['processed']}")
 
-### Reusable Transformation Skills
-
-Save frequently-used transformations:
-
-```python
-save_reusable_skill(
+# Save reusable transformation skill
+save_skill(
     name="remove_debug_logs",
     code="""
 def transform(code):
     import re
-    # Remove print statements
     code = re.sub(r'^\\s*print\\(.*\\)\\n?', '', code, flags=re.MULTILINE)
-    # Remove pdb
-    code = re.sub(r'^\\s*import pdb.*\\n?', '', code, flags=re.MULTILINE)
-    code = re.sub(r'^\\s*pdb\\.set_trace\\(\\)\\n?', '', code, flags=re.MULTILINE)
     return code
 """,
-    description="Remove debug print and pdb statements"
+    description="Remove debug print statements"
 )
-
-# Use in future sessions
-from skills.remove_debug_logs import transform
-cleaned_code = transform(original_code)
 ```
 
 ## Security
 
-### Sandboxed Execution
-- **RestrictedPython** environment
-- **Resource limits**: 30s timeout, 256MB memory
-- **Restricted imports**: Only `api.*` and safe stdlib modules
-- **No dangerous builtins**: `eval`, `exec`, `__import__` disabled
+**Claude Code handles:** Sandboxing, resource limits, timeouts, directory restrictions
+
+**This package adds:**
 
 ### Automatic PII/Secret Masking
 
-All execution results are automatically scanned for:
+```python
+from execution_runtime import mask_secrets
+
+# Mask sensitive data before returning to context
+result = {'api_key': 'sk_live_abc123xyz', 'status': 'success'}
+safe_output = mask_secrets(str(result))
+# Returns: {'api_key': '[REDACTED_API_KEY]', 'status': 'success'}
+```
+
+Automatically detects and masks:
 - API keys, tokens, passwords
 - AWS/GCP/GitHub credentials
 - Private keys, JWT tokens
 - Database URLs with credentials
-- (Optional) Emails, phone numbers, SSNs, credit cards
-
-Example:
-```python
-# Your code contains:
-api_key = "sk_live_abc123xyz"
-
-# Results automatically masked:
-api_key = "[REDACTED_API_KEY]"
-```
-
-### Directory Restrictions
-
-Only files within `ALLOWED_DIRECTORIES` can be accessed. Configure in setup or `.env`:
-
-```bash
-ALLOWED_DIRECTORIES=/Users/you/Documents,/Users/you/Projects
-```
 
 ## Performance Benchmarks
 
@@ -371,56 +293,21 @@ ALLOWED_DIRECTORIES=/Users/you/Documents,/Users/you/Projects
 
 ## Troubleshooting
 
-### "Module 'api' not found"
+### "Module 'execution_runtime' not found"
 
-Ensure MCP server is running and Python path is configured. Restart Claude.
-
-### "Import not allowed in sandbox"
-
-Only `api.*` and safe stdlib modules are allowed. Check allowed imports list.
+Install the package:
+```bash
+cd ~/.claude/plugins/marketplaces/mhattingpete-claude-skills/execution-runtime
+pip install -e .
+```
 
 ### "Permission denied" errors
 
-Verify `ALLOWED_DIRECTORIES` includes the files you're trying to access.
+Claude Code's sandbox controls file access. Ensure files are in an allowed directory.
 
-### MCP server not starting
+### Import errors
 
-Check logs at `~/.claude/logs/execution-runtime.log`
-
-## Configuration
-
-Create `.env` file in execution-runtime directory:
-
-```bash
-# Security
-ALLOWED_DIRECTORIES=/Users/you/Documents,/Users/you/Projects
-MASK_SECRETS=true
-AGGRESSIVE_MASKING=false  # Also mask emails, IPs, etc.
-
-# Resource Limits
-EXECUTION_TIMEOUT=30
-MEMORY_LIMIT_MB=256
-
-# Logging
-LOG_LEVEL=INFO
-```
-
-## Development
-
-### Running Tests
-
-```bash
-cd execution-runtime
-uv pip install -e ".[dev]"
-pytest
-```
-
-### Adding New APIs
-
-1. Create module in `api/` directory
-2. Add imports to `api/__init__.py`
-3. Update `mcp_server.py` to expose in `list_available_apis`
-4. Write tests and documentation
+The package uses `from execution_runtime import fs, code, transform, git`. If you see import errors, verify the package is installed correctly.
 
 ## Resources
 

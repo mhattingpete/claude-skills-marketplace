@@ -14,27 +14,36 @@ Execute Python locally with API access. **90-99% token savings** for bulk operat
 - Iterative processing across many files
 - User mentions efficiency/performance
 
-## Check Availability
+## How to Use
 
-Tool exists: `mcp__marketplace_execution__execute_python`
+Use direct Python imports in Claude Code:
 
-If not available, guide user: `~/.claude/plugins/marketplaces/mhattingpete-claude-skills/execution-runtime/setup.sh`
+```python
+from execution_runtime import fs, code, transform, git
+
+# Code analysis (metadata only!)
+functions = code.find_functions('app.py', pattern='handle_.*')
+
+# File operations
+code_block = fs.copy_lines('source.py', 10, 20)
+fs.paste_code('target.py', 50, code_block)
+
+# Bulk transformations
+result = transform.rename_identifier('.', 'oldName', 'newName', '**/*.py')
+
+# Git operations
+git.git_add(['.'])
+git.git_commit('feat: refactor code')
+```
+
+**If not installed:** Run `~/.claude/plugins/marketplaces/mhattingpete-claude-skills/execution-runtime/setup.sh`
 
 ## Available APIs
 
-```python
-# Filesystem - returns only what you need
-from api.filesystem import copy_lines, paste_code, search_replace, batch_copy
-
-# Code Analysis - returns METADATA only (not source code!)
-from api.code_analysis import find_functions, find_classes, analyze_dependencies
-
-# Transformations - bulk refactoring
-from api.code_transform import rename_identifier, remove_debug_statements, batch_refactor
-
-# Git operations
-from api.git_operations import git_status, git_add, git_commit
-```
+- **Filesystem** (`fs`): copy_lines, paste_code, search_replace, batch_copy
+- **Code Analysis** (`code`): find_functions, find_classes, analyze_dependencies - returns METADATA only!
+- **Transformations** (`transform`): rename_identifier, remove_debug_statements, batch_refactor
+- **Git** (`git`): git_status, git_add, git_commit, git_push
 
 ## Pattern
 
@@ -46,34 +55,33 @@ from api.git_operations import git_status, git_add, git_commit
 
 **Bulk refactor (50 files):**
 ```python
-from api.code_transform import rename_identifier
-result = rename_identifier('.', 'oldName', 'newName', '**/*.py')
+from execution_runtime import transform
+result = transform.rename_identifier('.', 'oldName', 'newName', '**/*.py')
 # Returns: {'files_modified': 50, 'total_replacements': 247}
 ```
 
 **Extract functions:**
 ```python
-from api.code_analysis import find_functions
-from api.filesystem import copy_lines, paste_code
+from execution_runtime import code, fs
 
-functions = find_functions('app.py', pattern='.*_util$')  # Metadata only!
+functions = code.find_functions('app.py', pattern='.*_util$')  # Metadata only!
 for func in functions:
-    code = copy_lines('app.py', func['start_line'], func['end_line'])
-    paste_code('utils.py', -1, code)
+    code_block = fs.copy_lines('app.py', func['start_line'], func['end_line'])
+    fs.paste_code('utils.py', -1, code_block)
 
 result = {'functions_moved': len(functions)}
 ```
 
 **Code audit (100 files):**
 ```python
-from api.code_analysis import analyze_dependencies
+from execution_runtime import code
 from pathlib import Path
 
 files = list(Path('.').glob('**/*.py'))
 issues = []
 
 for file in files:
-    deps = analyze_dependencies(str(file))  # Metadata only!
+    deps = code.analyze_dependencies(str(file))  # Metadata only!
     if deps.get('complexity', 0) > 15:
         issues.append({'file': str(file), 'complexity': deps['complexity']})
 
