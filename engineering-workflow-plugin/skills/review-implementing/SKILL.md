@@ -1,6 +1,6 @@
 ---
 name: review-implementing
-description: Process and implement code review feedback systematically. Use when user provides reviewer comments, PR feedback, code review notes, or asks to implement suggestions from reviews. Activates on phrases like "implement this feedback", "address review comments", "fix review issues", "apply these suggestions", or when user pastes reviewer notes.
+description: Process and implement code review feedback systematically. Use when user provides reviewer comments, PR feedback, code review notes, or asks to implement suggestions from reviews.
 ---
 
 # Review Feedback Implementation
@@ -9,12 +9,11 @@ Systematically process and implement changes based on code review feedback.
 
 ## When to Use
 
-Automatically activate when the user:
 - Provides reviewer comments or feedback
 - Pastes PR review notes
 - Mentions implementing review suggestions
 - Says "address these comments" or "implement feedback"
-- Shares a list of changes requested by reviewers
+- Shares list of changes requested by reviewers
 
 ## Systematic Workflow
 
@@ -24,7 +23,7 @@ Identify individual feedback items:
 - Split numbered lists (1., 2., etc.)
 - Handle bullet points or unnumbered feedback
 - Extract distinct change requests
-- Clarify any ambiguous items before starting
+- Clarify ambiguous items before starting
 
 ### 2. Create Todo List
 
@@ -111,7 +110,7 @@ Keep user informed:
 
 **Conflicting feedback:**
 - Ask user for guidance
-- Explain the conflict clearly
+- Explain conflict clearly
 
 **Breaking changes required:**
 - Notify user before implementing
@@ -135,21 +134,3 @@ Keep user informed:
 - **Run tests** if changes affect tested code
 - **Follow CLAUDE.md conventions** for all code changes
 - **Use conventional commits** if creating commits afterward
-
-## Example
-
-User: "Implement these review comments:
-1. Add type hints to the extract function
-2. Fix the duplicate tag detection logic
-3. Update the docstring in chain.py"
-
-**Actions:**
-1. Create TodoWrite with 3 items
-2. Mark item 1 as in_progress
-3. Grep for extract function
-4. Read file containing function
-5. Edit to add type hints
-6. Mark item 1 completed
-7. Mark item 2 in_progress
-8. Repeat process for remaining items
-9. Summarize all changes made
