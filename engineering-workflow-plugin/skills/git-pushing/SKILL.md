@@ -17,62 +17,15 @@ Automatically activate when the user:
 
 ## Workflow
 
-**ALWAYS use the smart_commit.sh script** - Do NOT use manual git commands:
+**ALWAYS use the script** - do NOT use manual git commands:
 
 ```bash
 bash skills/git-pushing/scripts/smart_commit.sh
 ```
 
-This script handles everything automatically:
-- ✅ Staging all changes
-- ✅ Auto-generating conventional commit messages
-- ✅ Adding Claude Code footer
-- ✅ Pushing to remote (with -u for new branches)
-- ✅ Showing PR link for GitHub repos
-
-**With custom message:**
+With custom message:
 ```bash
-bash skills/git-pushing/scripts/smart_commit.sh "feat: add new feature"
+bash skills/git-pushing/scripts/smart_commit.sh "feat: add feature"
 ```
 
-The script automatically:
-- Determines commit type (feat/fix/docs/test/chore/refactor)
-- Extracts scope from changed files
-- Handles new vs existing branches
-- Shows colored output for better UX
-
-**IMPORTANT**: Do NOT use manual git add/commit/push commands. Always use the script.
-
-## Script Behavior
-
-The script will automatically:
-1. Check git status
-2. Stage all changes with `git add .`
-3. Generate conventional commit message (or use provided one)
-4. Add Claude Code footer
-5. Create commit
-6. Push to remote (with -u flag for new branches)
-7. Show PR creation link for GitHub repos
-
-You just need to run the script - it handles everything.
-
-## Examples
-
-**User:** "Push these changes"
-**Action:**
-```bash
-bash skills/git-pushing/scripts/smart_commit.sh
-```
-
-**User:** "Commit with message 'fix: resolve table extraction issue'"
-**Action:**
-```bash
-bash skills/git-pushing/scripts/smart_commit.sh "fix: resolve table extraction issue"
-```
-
-**User:** "Let's save this to github"
-**Action:**
-```bash
-bash skills/git-pushing/scripts/smart_commit.sh
-# Script auto-generates appropriate commit message
-```
+Script handles: staging, conventional commit message, Claude footer, push with -u flag.
