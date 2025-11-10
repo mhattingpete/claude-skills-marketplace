@@ -1,15 +1,14 @@
 ---
 name: test-fixing
-description: Run tests and systematically fix all failing tests using smart error grouping. Use when user asks to fix failing tests, mentions test failures, runs test suite and failures occur, or requests to make tests pass. Activates on phrases like "fix the tests", "tests are failing", "make the test suite green", "run tests and fix failures", or "tests aren't passing".
+description: Run tests and systematically fix all failing tests using smart error grouping. Use when user asks to fix failing tests, mentions test failures, runs test suite and failures occur, or requests to make tests pass.
 ---
 
-# Test Fixing Workflow
+# Test Fixing
 
 Systematically identify and fix all failing tests using smart grouping strategies.
 
 ## When to Use
 
-Automatically activate when the user:
 - Explicitly asks to fix tests ("fix these tests", "make tests pass")
 - Reports test failures ("tests are failing", "test suite is broken")
 - Completes implementation and wants tests passing

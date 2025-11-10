@@ -1,26 +1,14 @@
 ---
 name: code-auditor
-description: Performs comprehensive codebase analysis covering architecture, code quality, security, performance, testing, and maintainability. Use when user wants to audit code quality, identify technical debt, find security issues, assess test coverage, or get a codebase health check. Also activates when user says "audit the code", "check for issues", "review the codebase", "security audit", or similar analysis requests.
+description: Performs comprehensive codebase analysis covering architecture, code quality, security, performance, testing, and maintainability. Use when user wants to audit code quality, identify technical debt, find security issues, assess test coverage, or get a codebase health check.
 ---
 
-# Code Auditor Skill
+# Code Auditor
 
-## Purpose
-
-Performs comprehensive codebase analysis covering architecture, code quality, security, performance, testing, and maintainability. Provides a detailed audit report with specific findings and prioritized recommendations.
+Comprehensive codebase analysis covering architecture, code quality, security, performance, testing, and maintainability.
 
 ## When to Use
 
-This skill automatically activates when users want to:
-- Understand code quality and technical debt
-- Identify security vulnerabilities or risks
-- Find performance bottlenecks
-- Assess testing coverage and quality
-- Prepare for major refactoring
-- Onboard to an unfamiliar codebase
-- Get a "health check" on their project
-
-**Activation phrases:**
 - "audit the code"
 - "analyze code quality"
 - "check for issues"
@@ -29,9 +17,7 @@ This skill automatically activates when users want to:
 - "security audit"
 - "performance review"
 
-## What It Does
-
-Conducts a thorough analysis across six key dimensions:
+## What It Analyzes
 
 ### 1. Architecture & Design
 - Overall structure and organization
@@ -77,26 +63,19 @@ Conducts a thorough analysis across six key dimensions:
 
 ## Approach
 
-### Analysis Strategy
-
-1. **Explore codebase** using Explore agent (thorough mode)
-2. **Identify patterns** through Grep and Glob
+1. **Explore** using Explore agent (thorough mode)
+2. **Identify patterns** with Grep and Glob
 3. **Read critical files** for detailed analysis
-4. **Run static analysis tools** if available (linters, complexity analyzers)
+4. **Run static analysis tools** if available
 5. **Synthesize findings** into actionable report
 
-### Thoroughness Levels
+## Thoroughness Levels
 
-Adapts analysis depth based on:
-- **Quick** (15-30 min): High-level overview, critical issues only
+- **Quick** (15-30 min): High-level, critical issues only
 - **Standard** (30-60 min): Comprehensive across all dimensions
-- **Deep** (60+ min): Exhaustive analysis with detailed examples
+- **Deep** (60+ min): Exhaustive with detailed examples
 
-User can specify preference, defaults to Standard.
-
-### Output Format
-
-Structured markdown report with:
+## Output Format
 
 ```markdown
 # Code Audit Report
@@ -131,34 +110,13 @@ Structured markdown report with:
 - Complexity hotspots: N
 ```
 
-## Example Interaction
-
-```
-User: "Audit the code quality and find issues"
-
-Skill:
-1. Uses Explore agent to map codebase
-2. Identifies:
-   - 3 files with cyclomatic complexity > 20
-   - SQL injection vulnerability in query builder
-   - 40% code duplication in data processing
-   - Missing tests for critical auth flow
-   - 12 TODO comments indicating incomplete work
-3. Generates report with:
-   - Critical: Fix SQL injection (file:line)
-   - High: Add auth tests
-   - Medium: Refactor duplicated code
-   - Low: Address TODOs
-4. Provides action plan with estimates
-```
-
 ## Tools Used
 
 - **Task (Explore agent)**: Thorough codebase exploration
-- **Grep**: Pattern matching for issues (SQL, secrets, TODOs)
-- **Glob**: Find files by type and pattern
+- **Grep**: Pattern matching for issues
+- **Glob**: Find files by type/pattern
 - **Read**: Detailed file analysis
-- **Bash**: Run linters, test coverage tools if available
+- **Bash**: Run linters, coverage tools
 
 ## Success Criteria
 
@@ -167,21 +125,18 @@ Skill:
 - Severity/priority ratings (Critical/High/Medium/Low)
 - Actionable recommendations (not just observations)
 - Estimated effort for fixes
-- Both quick wins and long-term improvements identified
+- Both quick wins and long-term improvements
 
 ## Integration
 
-Works well with:
-- **feature-planning**: For planning technical debt reduction
-- **test-fixing**: For addressing test gaps identified
-- **project-bootstrapper**: For setting up quality tooling
+- **feature-planning**: Plan technical debt reduction
+- **test-fixing**: Address test gaps identified
+- **project-bootstrapper**: Set up quality tooling
 
 ## Configuration
 
-Can focus analysis on specific areas if requested:
+Can focus on specific areas:
 - Security-only audit
 - Performance-only audit
 - Testing-only assessment
 - Quick architecture review
-
-User can specify focus areas, or skill analyzes all dimensions by default.

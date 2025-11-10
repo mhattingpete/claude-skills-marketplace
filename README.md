@@ -10,6 +10,11 @@ A curated marketplace of Claude Code plugins for software engineering workflows.
 claude-skills-marketplace/
 ├── .claude-plugin/
 │   └── marketplace.json              # Marketplace manifest
+├── execution-runtime/                 # 🚀 Code execution environment (NEW!)
+│   ├── api/                           # Importable API library
+│   ├── mcp-server/                    # FastMCP server
+│   ├── setup.sh                       # One-command installation
+│   └── README.md
 ├── engineering-workflow-plugin/       # Engineering workflow plugin
 │   ├── .claude-plugin/
 │   │   └── plugin.json               # Plugin manifest
@@ -45,6 +50,8 @@ claude-skills-marketplace/
 │   ├── .claude-plugin/
 │   │   └── plugin.json               # Plugin manifest
 │   ├── skills/
+│   │   ├── code-execution/           # 🚀 Python execution skill (NEW!)
+│   │   │   └── examples/             # Example scripts
 │   │   ├── code-transfer/            # Code transfer skill
 │   │   │   └── scripts/
 │   │   │       └── line_insert.py    # Line-based insertion script
@@ -72,6 +79,38 @@ Each Agent consists of an `AGENT.md` file with:
 - Decision-making frameworks for their domain
 
 Skills and Agents work together: Skills can orchestrate when to invoke Agents, and Agents can use Skills while executing their tasks.
+
+## 🚀 NEW: Execution Runtime (90%+ Token Savings)
+
+The marketplace now includes a **code execution environment** implementing the [Anthropic code execution pattern](https://www.anthropic.com/engineering/code-execution-with-mcp). Instead of loading code through context, Claude executes Python locally with API access—achieving **90-99% token reduction** for bulk operations.
+
+### Quick Benefits
+
+✅ **Massive token savings**: Process 100 files with 1K tokens instead of 100K
+✅ **Faster operations**: Local execution vs multiple API round-trips
+✅ **Stateful workflows**: Resume multi-step refactoring across sessions
+✅ **Auto-secure**: PII/secret masking, sandboxed execution
+
+### Setup (2 minutes)
+
+```bash
+# After installing marketplace plugin
+~/.claude/plugins/execution-runtime/setup.sh
+```
+
+### When It Activates
+
+Skills automatically use execution mode for:
+- Bulk operations (10+ files)
+- Complex multi-step workflows
+- Iterative processing
+- Codebase-wide analysis
+
+**Example**: "Rename getUserData to fetchUserData in all Python files"
+- **Without execution**: ~25,000 tokens (read/edit 50 files)
+- **With execution**: ~600 tokens (script + summary) - **97.6% savings**
+
+[Full documentation →](execution-runtime/README.md)
 
 ## Installation
 
@@ -188,8 +227,22 @@ Process and implement code review feedback systematically with todo tracking.
 
 ### Code Operations
 
+#### `code-execution` 🆕
+Execute Python code locally with marketplace API access for 90%+ token savings on bulk operations.
+
+**Activates when:** Bulk operations (10+ files), complex workflows, codebase-wide transformations, performance needs.
+
+**Example usage:**
+- "Refactor 50 files to use new API"
+- "Extract all utility functions to separate files"
+- "Audit code quality across entire codebase"
+
+**Token savings:** 97-99% for bulk operations (25K → 600 tokens)
+
+---
+
 #### `code-transfer`
-Transfer code between files with line-based precision using the included `line_insert.py` script.
+Transfer code between files with line-based precision. Auto-uses execution mode for 10+ file operations.
 
 **Activates when:** User requests copying code between files, moving functions/classes, extracting code, or inserting at specific line numbers.
 
@@ -204,7 +257,7 @@ Transfer code between files with line-based precision using the included `line_i
 ---
 
 #### `code-refactor`
-Perform bulk code refactoring operations like renaming variables/functions across files and replacing patterns.
+Perform bulk code refactoring operations. Auto-switches to execution mode for 10+ files (90% token savings).
 
 **Activates when:** User requests renaming identifiers, replacing deprecated patterns, updating API calls, or making consistent changes across multiple locations.
 
