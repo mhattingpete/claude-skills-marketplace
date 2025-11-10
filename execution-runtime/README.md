@@ -6,6 +6,37 @@
 
 The Execution Runtime enables Claude to execute Python code locally with access to powerful APIs for file operations, code analysis, transformations, and git operations. Instead of loading all code and data through the context window, Claude writes Python scripts that execute locally and return only results—achieving up to **99% token reduction** for complex operations.
 
+## Two Usage Modes
+
+### Claude Code (Direct Import) - Recommended
+
+For Claude Code users, the simplest approach is **direct Python imports**:
+
+```python
+from execution_runtime import fs, code, transform, git
+
+# Find functions (metadata only - massive token savings!)
+functions = code.find_functions('app.py', pattern='handle_.*')
+
+# Rename across codebase
+result = transform.rename_identifier('.', 'oldName', 'newName', '**/*.py')
+```
+
+**Why direct import for Claude Code?**
+- ✅ Simpler - no MCP server process needed
+- ✅ Faster - no protocol overhead
+- ✅ Same 90-99% token savings
+- ✅ Leverages Claude Code's built-in Python execution
+- ✅ Easier debugging
+
+**Claude Code already provides:** Sandboxing, resource limits, timeouts, directory restrictions
+
+**Execution runtime adds:** Pre-built APIs for bulk operations, PII/secret masking, metadata-only code analysis
+
+### MCP Server Mode - For Claude Desktop
+
+For Claude Desktop or when automatic PII masking is required for all operations, use the MCP server approach (see Installation section below).
+
 ## Key Benefits
 
 ✅ **90-99% Token Savings** - Process 100 files using 1,000 tokens instead of 100,000
@@ -33,7 +64,41 @@ execution-runtime/
 └── README.md                 # This file
 ```
 
-## Installation
+## Quick Start (Claude Code)
+
+For Claude Code users, use direct Python imports - no MCP server needed:
+
+**1. Install the package:**
+```bash
+cd ~/.claude/plugins/marketplaces/mhattingpete-claude-skills/execution-runtime
+pip install -e .
+```
+
+**2. Use in your prompts:**
+```python
+from execution_runtime import fs, code, transform, git
+
+# Example: Find all functions
+functions = code.find_functions('app.py')
+print(f"Found {len(functions)} functions")
+
+# Example: Rename identifier across codebase
+result = transform.rename_identifier('.', 'old_name', 'new_name', '**/*.py')
+print(f"Modified {result['files_modified']} files")
+
+# Example: Copy lines between files
+code_block = fs.copy_lines('source.py', 10, 20)
+fs.paste_code('target.py', 50, code_block)
+
+# Example: PII masking when needed
+from execution_runtime import mask_secrets
+result = {'api_key': 'sk_live_abc123'}
+safe_output = mask_secrets(str(result))  # Masks secrets automatically
+```
+
+**That's it!** Claude Code's built-in sandbox handles security, you get the pre-built APIs and token savings.
+
+## Installation (MCP Server for Claude Desktop)
 
 ### Quick Setup (Recommended)
 
