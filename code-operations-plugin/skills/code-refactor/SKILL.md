@@ -7,7 +7,20 @@ description: Perform bulk code refactoring operations like renaming variables/fu
 
 ## Overview
 
-Perform systematic code refactoring operations across files using pattern-based search and replace. This skill focuses on bulk transformations that maintain code functionality while improving structure, naming, or updating APIs.
+Perform systematic code refactoring operations across files. **Auto-switches to execution mode** for 10+ files (90% token savings).
+
+## Mode Selection
+
+- **1-9 files**: Use native tools (Grep + Edit with replace_all)
+- **10+ files**: Automatically use execution mode via `code-execution` skill
+
+**Execution example (50 files):**
+```python
+from api.code_transform import rename_identifier
+result = rename_identifier('.', 'oldName', 'newName', '**/*.py')
+# Returns: {'files_modified': 50, 'total_replacements': 247}
+# Token usage: ~500 tokens vs ~25,000 tokens traditional
+```
 
 ## When to Use This Skill
 

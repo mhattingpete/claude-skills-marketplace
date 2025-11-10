@@ -7,7 +7,31 @@ description: Transfer code between files with line-based precision. Use when use
 
 ## Overview
 
-Transfer code between files with precise line-based control. This skill enables copying, moving, and inserting code at specific line numbers, which complements Claude's native Edit tool that requires exact string matching.
+Transfer code between files with precise line-based control. Supports **dual-mode operation**: basic mode (native tools) for single operations, execution mode (90% token savings) for bulk operations (10+ files).
+
+## Operation Modes
+
+### Basic Mode (Default)
+Use native tools (Read, Edit, Bash scripts) for 1-10 file operations. Works immediately, no setup required.
+
+### Execution Mode (10+ files)
+Use `code-execution` skill for bulk operations. Check if available: `mcp__marketplace_execution__execute_python` tool exists.
+
+**Example execution mode:**
+```python
+from api.filesystem import batch_copy
+from api.code_analysis import find_functions
+
+functions = find_functions('app.py', pattern='handle_.*')
+operations = [{
+    'source_file': 'app.py',
+    'start_line': f['start_line'],
+    'end_line': f['end_line'],
+    'target_file': 'handlers.py',
+    'target_line': -1
+} for f in functions]
+batch_copy(operations)
+```
 
 ## When to Use This Skill
 
