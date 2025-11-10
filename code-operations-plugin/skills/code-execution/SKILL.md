@@ -16,9 +16,7 @@ Execute Python locally with API access. **90-99% token savings** for bulk operat
 
 ## How to Use
 
-### Claude Code (Direct Import - Primary)
-
-Use direct Python imports - simpler and faster:
+Use direct Python imports in Claude Code:
 
 ```python
 from execution_runtime import fs, code, transform, git
@@ -38,28 +36,14 @@ git.git_add(['.'])
 git.git_commit('feat: refactor code')
 ```
 
-If not installed: `pip install -e ~/.claude/plugins/marketplaces/mhattingpete-claude-skills/execution-runtime`
-
-### MCP Server (Alternative - For Claude Desktop)
-
-Use MCP tool if available:
-
-```python
-result = mcp__marketplace_execution__execute_python("""
-from api import code, transform
-functions = code.find_functions('app.py')
-result = transform.rename_identifier('.', 'old', 'new', '**/*.py')
-""")
-```
+**If not installed:** Run `~/.claude/plugins/marketplaces/mhattingpete-claude-skills/execution-runtime/setup.sh`
 
 ## Available APIs
 
-Both approaches provide:
-
-- **Filesystem** (`fs` or `api.filesystem`): copy_lines, paste_code, search_replace, batch_copy
-- **Code Analysis** (`code` or `api.code_analysis`): find_functions, find_classes, analyze_dependencies - returns METADATA only!
-- **Transformations** (`transform` or `api.code_transform`): rename_identifier, remove_debug_statements, batch_refactor
-- **Git** (`git` or `api.git_operations`): git_status, git_add, git_commit
+- **Filesystem** (`fs`): copy_lines, paste_code, search_replace, batch_copy
+- **Code Analysis** (`code`): find_functions, find_classes, analyze_dependencies - returns METADATA only!
+- **Transformations** (`transform`): rename_identifier, remove_debug_statements, batch_refactor
+- **Git** (`git`): git_status, git_add, git_commit, git_push
 
 ## Pattern
 
@@ -78,27 +62,26 @@ result = transform.rename_identifier('.', 'oldName', 'newName', '**/*.py')
 
 **Extract functions:**
 ```python
-from api.code_analysis import find_functions
-from api.filesystem import copy_lines, paste_code
+from execution_runtime import code, fs
 
-functions = find_functions('app.py', pattern='.*_util$')  # Metadata only!
+functions = code.find_functions('app.py', pattern='.*_util$')  # Metadata only!
 for func in functions:
-    code = copy_lines('app.py', func['start_line'], func['end_line'])
-    paste_code('utils.py', -1, code)
+    code_block = fs.copy_lines('app.py', func['start_line'], func['end_line'])
+    fs.paste_code('utils.py', -1, code_block)
 
 result = {'functions_moved': len(functions)}
 ```
 
 **Code audit (100 files):**
 ```python
-from api.code_analysis import analyze_dependencies
+from execution_runtime import code
 from pathlib import Path
 
 files = list(Path('.').glob('**/*.py'))
 issues = []
 
 for file in files:
-    deps = analyze_dependencies(str(file))  # Metadata only!
+    deps = code.analyze_dependencies(str(file))  # Metadata only!
     if deps.get('complexity', 0) > 15:
         issues.append({'file': str(file), 'complexity': deps['complexity']})
 
