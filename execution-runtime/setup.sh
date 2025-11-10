@@ -8,15 +8,15 @@ echo "🚀 Claude Skills Marketplace - Execution Runtime Setup"
 echo "======================================================="
 echo ""
 
-# Detect OS and set config path
+# Detect OS and set config base path
 if [[ "$OSTYPE" == "darwin"* ]]; then
-    CLAUDE_CONFIG="$HOME/Library/Application Support/Claude/claude_desktop_config.json"
+    CONFIG_DIR="$HOME/Library/Application Support/Claude"
     OS_NAME="macOS"
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    CLAUDE_CONFIG="$HOME/.config/Claude/claude_desktop_config.json"
+    CONFIG_DIR="$HOME/.config/Claude"
     OS_NAME="Linux"
 elif [[ "$OSTYPE" == "msys" ]] || [[ "$OSTYPE" == "win32" ]]; then
-    CLAUDE_CONFIG="$APPDATA/Claude/claude_desktop_config.json"
+    CONFIG_DIR="$APPDATA/Claude"
     OS_NAME="Windows"
 else
     echo "❌ Unsupported OS: $OSTYPE"
@@ -24,6 +24,73 @@ else
 fi
 
 echo "📍 Detected OS: $OS_NAME"
+echo ""
+
+# Detect which Claude config exists
+CLAUDE_CODE_CONFIG="$CONFIG_DIR/claude_code_config.json"
+CLAUDE_DESKTOP_CONFIG="$CONFIG_DIR/claude_desktop_config.json"
+
+if [ -f "$CLAUDE_CODE_CONFIG" ] && [ -f "$CLAUDE_DESKTOP_CONFIG" ]; then
+    echo "🔍 Both Claude Code and Claude Desktop configs found"
+    echo ""
+    echo "Which one would you like to configure?"
+    echo "  1) Claude Code (claude_code_config.json)"
+    echo "  2) Claude Desktop (claude_desktop_config.json)"
+    echo "  3) Both"
+    echo ""
+    read -p "Choice (1/2/3): " CHOICE
+
+    case $CHOICE in
+        1)
+            CLAUDE_CONFIG="$CLAUDE_CODE_CONFIG"
+            INSTALL_MODE="code"
+            ;;
+        2)
+            CLAUDE_CONFIG="$CLAUDE_DESKTOP_CONFIG"
+            INSTALL_MODE="desktop"
+            ;;
+        3)
+            CLAUDE_CONFIG="$CLAUDE_CODE_CONFIG"
+            INSTALL_MODE="both"
+            ;;
+        *)
+            echo "❌ Invalid choice"
+            exit 1
+            ;;
+    esac
+elif [ -f "$CLAUDE_CODE_CONFIG" ]; then
+    echo "✅ Found Claude Code config"
+    CLAUDE_CONFIG="$CLAUDE_CODE_CONFIG"
+    INSTALL_MODE="code"
+elif [ -f "$CLAUDE_DESKTOP_CONFIG" ]; then
+    echo "✅ Found Claude Desktop config"
+    CLAUDE_CONFIG="$CLAUDE_DESKTOP_CONFIG"
+    INSTALL_MODE="desktop"
+else
+    echo "❌ No Claude config found"
+    echo ""
+    echo "Please choose which to create:"
+    echo "  1) Claude Code (claude_code_config.json)"
+    echo "  2) Claude Desktop (claude_desktop_config.json)"
+    echo ""
+    read -p "Choice (1/2): " CHOICE
+
+    case $CHOICE in
+        1)
+            CLAUDE_CONFIG="$CLAUDE_CODE_CONFIG"
+            INSTALL_MODE="code"
+            ;;
+        2)
+            CLAUDE_CONFIG="$CLAUDE_DESKTOP_CONFIG"
+            INSTALL_MODE="desktop"
+            ;;
+        *)
+            echo "❌ Invalid choice"
+            exit 1
+            ;;
+    esac
+fi
+
 echo "📁 Config location: $CLAUDE_CONFIG"
 echo ""
 
@@ -88,12 +155,14 @@ echo ""
 echo "📝 Adding MCP server configuration..."
 echo ""
 
-# Update config using Python
-python3 << EOF
+# Function to update a config file
+update_config() {
+    local config_file="$1"
+    python3 << EOF
 import json
 from pathlib import Path
 
-config_path = Path("$CLAUDE_CONFIG")
+config_path = Path("$config_file")
 config = json.loads(config_path.read_text()) if config_path.exists() else {}
 
 if 'mcpServers' not in config:
@@ -111,12 +180,29 @@ config['mcpServers']['marketplace-execution'] = {
 }
 
 config_path.write_text(json.dumps(config, indent=2))
-print("✅ MCP server configured successfully")
+print("✅ MCP server configured in " + str(config_path.name))
 EOF
+    return $?
+}
 
-if [ $? -ne 0 ]; then
-    echo "❌ Failed to update config"
-    exit 1
+# Update config(s) based on install mode
+if [ "$INSTALL_MODE" = "both" ]; then
+    update_config "$CLAUDE_CODE_CONFIG"
+    if [ $? -ne 0 ]; then
+        echo "❌ Failed to update Claude Code config"
+        exit 1
+    fi
+    update_config "$CLAUDE_DESKTOP_CONFIG"
+    if [ $? -ne 0 ]; then
+        echo "❌ Failed to update Claude Desktop config"
+        exit 1
+    fi
+else
+    update_config "$CLAUDE_CONFIG"
+    if [ $? -ne 0 ]; then
+        echo "❌ Failed to update config"
+        exit 1
+    fi
 fi
 
 # Install dependencies if using uv
