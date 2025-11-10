@@ -95,7 +95,7 @@ The marketplace now includes a **code execution environment** implementing the [
 
 ```bash
 # After installing marketplace plugin
-~/.claude/plugins/execution-runtime/setup.sh
+~/.claude/plugins/marketplaces/mhattingpete-claude-skills/execution-runtime/setup.sh
 ```
 
 ### When It Activates

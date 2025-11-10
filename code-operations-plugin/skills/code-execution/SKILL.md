@@ -18,7 +18,7 @@ Execute Python locally with API access. **90-99% token savings** for bulk operat
 
 Tool exists: `mcp__marketplace_execution__execute_python`
 
-If not available, guide user: `~/.claude/plugins/execution-runtime/setup.sh`
+If not available, guide user: `~/.claude/plugins/marketplaces/mhattingpete-claude-skills/execution-runtime/setup.sh`
 
 ## Available APIs
 
