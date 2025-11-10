@@ -17,15 +17,13 @@ Automatically activate when the user:
 
 ## Workflow
 
-### Fast Path (Recommended)
-
-Use the automated script for maximum speed:
+**ALWAYS use the smart_commit.sh script** - Do NOT use manual git commands:
 
 ```bash
-bash scripts/smart_commit.sh
+bash skills/git-pushing/scripts/smart_commit.sh
 ```
 
-This script handles:
+This script handles everything automatically:
 - ✅ Staging all changes
 - ✅ Auto-generating conventional commit messages
 - ✅ Adding Claude Code footer
@@ -34,7 +32,7 @@ This script handles:
 
 **With custom message:**
 ```bash
-bash scripts/smart_commit.sh "feat: add new feature"
+bash skills/git-pushing/scripts/smart_commit.sh "feat: add new feature"
 ```
 
 The script automatically:
@@ -43,72 +41,38 @@ The script automatically:
 - Handles new vs existing branches
 - Shows colored output for better UX
 
-### Manual Path (Fallback)
+**IMPORTANT**: Do NOT use manual git add/commit/push commands. Always use the script.
 
-Use when script is unavailable or custom workflow needed:
+## Script Behavior
 
-**1. Check Git Status**
+The script will automatically:
+1. Check git status
+2. Stage all changes with `git add .`
+3. Generate conventional commit message (or use provided one)
+4. Add Claude Code footer
+5. Create commit
+6. Push to remote (with -u flag for new branches)
+7. Show PR creation link for GitHub repos
 
-Run `git status` to understand:
-- Which files have changed
-- What will be committed
-- Current branch name
-
-**2. Stage Changes**
-
-- Run `git add .` to stage all changes
-- Alternatively, stage specific files if partial commit is needed
-
-**3. Create Commit Message**
-
-**If user provided a message:**
-- Use it directly
-
-**If no message provided:**
-- Analyze changes using `git diff`
-- Generate a conventional commit message:
-  - Format: `type(scope): description`
-  - Types: `feat`, `fix`, `refactor`, `docs`, `test`, `chore`
-  - Keep description concise (50-90 characters)
-  - Use imperative mood: "Add" not "Added"
-- Always append Claude Code footer:
-  ```
-  🤖 Generated with [Claude Code](https://claude.com/claude-code)
-
-  Co-Authored-By: Claude <noreply@anthropic.com>
-  ```
-
-**Use heredoc format:**
-```bash
-git commit -m "$(cat <<'EOF'
-commit message here
-
-🤖 Generated with [Claude Code](https://claude.com/claude-code)
-
-Co-Authored-By: Claude <noreply@anthropic.com>
-EOF
-)"
-```
-
-**4. Push to Remote**
-
-- Run `git push` to push commits
-- If new branch, use `git push -u origin <branch>`
-- If push fails due to diverged branches, inform user and ask how to proceed
-
-**5. Confirm Success**
-
-- Report commit hash
-- Summarize what was committed
-- Confirm push succeeded
+You just need to run the script - it handles everything.
 
 ## Examples
 
-User: "Push these changes"
-→ Check status, stage all, generate commit message, push
+**User:** "Push these changes"
+**Action:**
+```bash
+bash skills/git-pushing/scripts/smart_commit.sh
+```
 
-User: "Commit with message 'fix: resolve table extraction issue'"
-→ Use provided message, push
+**User:** "Commit with message 'fix: resolve table extraction issue'"
+**Action:**
+```bash
+bash skills/git-pushing/scripts/smart_commit.sh "fix: resolve table extraction issue"
+```
 
-User: "Let's save this to github"
-→ Activate workflow, generate appropriate commit message
+**User:** "Let's save this to github"
+**Action:**
+```bash
+bash skills/git-pushing/scripts/smart_commit.sh
+# Script auto-generates appropriate commit message
+```
