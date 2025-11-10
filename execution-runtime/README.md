@@ -42,7 +42,7 @@ execution-runtime/
 /plugin marketplace add mhattingpete/claude-skills-marketplace
 
 # 2. Run setup script
-~/.claude/plugins/execution-runtime/setup.sh
+~/.claude/plugins/marketplaces/mhattingpete-claude-skills/execution-runtime/setup.sh
 ```
 
 The script will:
@@ -60,7 +60,7 @@ The script will:
   "mcpServers": {
     "marketplace-execution": {
       "command": "uv",
-      "args": ["run", "python", "~/.claude/plugins/execution-runtime/mcp-server/mcp_server.py"],
+      "args": ["run", "python", "~/.claude/plugins/marketplaces/mhattingpete-claude-skills/execution-runtime/mcp-server/mcp_server.py"],
       "env": {
         "ALLOWED_DIRECTORIES": "/Users/yourname/Documents,/Users/yourname/Projects",
         "MASK_SECRETS": "true"
@@ -73,7 +73,7 @@ The script will:
 2. **Install dependencies**:
 
 ```bash
-cd ~/.claude/plugins/execution-runtime
+cd ~/.claude/plugins/marketplaces/mhattingpete-claude-skills/execution-runtime
 uv pip install -e .
 ```
 

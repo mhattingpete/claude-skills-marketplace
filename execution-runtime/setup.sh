@@ -28,7 +28,7 @@ echo "📁 Config location: $CLAUDE_CONFIG"
 echo ""
 
 # Get plugin installation directory
-PLUGIN_PATH="$HOME/.claude/plugins/execution-runtime"
+PLUGIN_PATH="$HOME/.claude/plugins/marketplaces/mhattingpete-claude-skills/execution-runtime"
 
 # Check if plugin exists
 if [ ! -d "$PLUGIN_PATH" ]; then
