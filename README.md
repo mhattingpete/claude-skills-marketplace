@@ -1,5 +1,8 @@
 # Claude Skills Marketplace
 
+[![Run in Smithery](https://smithery.ai/badge/skills/mhattingpete)](https://smithery.ai/skills?ns=mhattingpete&utm_source=github&utm_medium=badge)
+
+
 A curated marketplace of Claude Code plugins for software engineering workflows.
 
 <img src="assets/skill-loading.gif" alt="Skill Loading Demo" width="600">
