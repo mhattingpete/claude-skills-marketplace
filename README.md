@@ -403,6 +403,30 @@ Create beautiful HTML timelines and project roadmaps with Gantt charts, mileston
 
 ---
 
+
+### UI/UX Design
+
+#### `oiloil-ui-ux-guide`
+Modern, clean UI/UX guidance and review skill with two modes.
+
+**Activates when:** User needs UI/UX recommendations, design principles, or a design review checklist for new features or existing systems.
+
+**Modes:**
+- `guide`: Actionable do/don't rules for modern clean UI/UX
+- `review`: Prioritized P0/P1/P2 fix lists with design psychology diagnosis
+
+**Covers:** CRAP principles, task-first UX, cognitive load, information architecture, feedback & system status, consistency, affordances, error prevention/recovery.
+
+**Example usage:**
+- "Review the UI/UX of this page"
+- "Give me UI guidance for this feature"
+- "Check this design for UX issues"
+
+Full skill: [oil-oil/oiloil-ui-ux-guide](https://github.com/oil-oil/oiloil-ui-ux-guide)
+Install via: `npx skills add oil-oil/oiloil-ui-ux-guide`
+
+---
+
 ## Available Agents
 
 ### Implementation
