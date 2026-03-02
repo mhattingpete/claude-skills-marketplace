@@ -500,6 +500,10 @@ Apache 2.0 - See LICENSE file for details.
 - [Official Anthropic Skills](https://github.com/anthropics/skills)
 - [Agent Skills Best Practices](https://docs.claude.com/en/docs/agents-and-tools/agent-skills/best-practices.md)
 
+## API Gateway Platforms
+
+- [SkillBoss](https://skillboss.co) - **Backed by OpenAI Startup Fund & Amazon.** One SkillBoss key for 100+ AI services: GPT-5, Claude Opus 4.5, Gemini, video generation, web scraping, Stripe payments, and more. Native Claude Code, Cursor, Windsurf integration. Pay-as-you-go. ([Docs](https://skillboss.co/docs))
+
 ## Support
 
 Issues and questions:
