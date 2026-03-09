@@ -484,6 +484,23 @@ Step-by-step instructions for Claude to follow...
 4. **Progressive disclosure**: Move detailed content to separate reference files
 5. **Test across models**: Verify skills work with Sonnet, Opus, and Haiku
 
+### Data & Social Media
+
+#### `x-twitter-scraping`
+Extract X/Twitter data using the Xquik MCP server with 76 REST API endpoints and 20 extraction tools.
+
+**Activates when:** User mentions fetching tweets, user profiles, followers, following lists, search results, or any X/Twitter data extraction.
+
+**Example usage:**
+- "Fetch the latest tweets from @username"
+- "Get all replies to this tweet"
+- "Search tweets about AI"
+- "Extract followers of this account"
+
+**Key feature:** MCP server integration with 76 REST API endpoints for comprehensive X/Twitter data access.
+
+---
+
 ## Contributing
 
 Contributions are welcome! To add a new skill:
