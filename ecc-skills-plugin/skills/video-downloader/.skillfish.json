@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "name": "video-downloader",
+  "owner": "zsutxz",
+  "repo": "claudelearning",
+  "path": ".claude/skills/video-downloader",
+  "branch": "main",
+  "sha": "54f75cf32af01b166b5f8cb064584618a51c3cef",
+  "source": "manual"
+}

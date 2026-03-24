@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <!-- Checklist paper -->
+    <linearGradient id="paper" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFF9E6"/>
+      <stop offset="100%" stop-color="#F5EDDA"/>
+    </linearGradient>
+    <!-- Pigeon body gradient -->
+    <linearGradient id="body" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8BA4B8"/>
+      <stop offset="100%" stop-color="#6B8299"/>
+    </linearGradient>
+    <!-- Wing gradient -->
+    <linearGradient id="wing" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7A96AC"/>
+      <stop offset="100%" stop-color="#5A7A94"/>
+    </linearGradient>
+  </defs>
+
+  <!-- === CHECKLIST (held in beak, angled) === -->
+  <g transform="translate(18, 58) rotate(-12)">
+    <!-- Paper shadow -->
+    <rect x="2" y="2" width="30" height="38" rx="2" fill="#00000015"/>
+    <!-- Paper -->
+    <rect x="0" y="0" width="30" height="38" rx="2" fill="url(#paper)" stroke="#D4C5A0" stroke-width="0.8"/>
+    <!-- Checkbox rows -->
+    <!-- Row 1: checked -->
+    <rect x="4" y="5" width="5" height="5" rx="0.8" fill="none" stroke="#7B9B5A" stroke-width="1"/>
+    <path d="M5 7.5 L6.5 9 L8.5 5.5" fill="none" stroke="#7B9B5A" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="12" y="6" width="14" height="2" rx="1" fill="#C4B898"/>
+    <!-- Row 2: checked -->
+    <rect x="4" y="13" width="5" height="5" rx="0.8" fill="none" stroke="#7B9B5A" stroke-width="1"/>
+    <path d="M5 15.5 L6.5 17 L8.5 13.5" fill="none" stroke="#7B9B5A" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="12" y="14" width="11" height="2" rx="1" fill="#C4B898"/>
+    <!-- Row 3: unchecked -->
+    <rect x="4" y="21" width="5" height="5" rx="0.8" fill="none" stroke="#B8A88A" stroke-width="1"/>
+    <rect x="12" y="22" width="14" height="2" rx="1" fill="#D4C5A0"/>
+    <!-- Row 4: unchecked -->
+    <rect x="4" y="29" width="5" height="5" rx="0.8" fill="none" stroke="#B8A88A" stroke-width="1"/>
+    <rect x="12" y="30" width="9" height="2" rx="1" fill="#D4C5A0"/>
+  </g>
+
+  <!-- === PIGEON === -->
+  <g>
+    <!-- Tail feathers -->
+    <ellipse cx="100" cy="72" rx="16" ry="6" fill="#5A7A94" transform="rotate(-20, 100, 72)"/>
+    <ellipse cx="103" cy="68" rx="14" ry="5" fill="#6B8299" transform="rotate(-25, 103, 68)"/>
+
+    <!-- Body -->
+    <ellipse cx="72" cy="60" rx="26" ry="20" fill="url(#body)" transform="rotate(-8, 72, 60)"/>
+
+    <!-- Chest/belly (lighter) -->
+    <ellipse cx="60" cy="65" rx="14" ry="13" fill="#C8D4DC" transform="rotate(-5, 60, 65)"/>
+
+    <!-- Wing (raised, in flight) -->
+    <g transform="translate(65, 28)">
+      <!-- Primary wing shape -->
+      <path d="M0 30 Q-5 15, 8 5 Q18 -5, 32 0 Q25 10, 20 20 Q15 28, 5 32 Z"
+            fill="url(#wing)" stroke="#4A6A82" stroke-width="0.5"/>
+      <!-- Wing feather lines -->
+      <path d="M8 5 Q12 15, 5 30" fill="none" stroke="#4A6A82" stroke-width="0.5" opacity="0.5"/>
+      <path d="M18 2 Q18 15, 12 28" fill="none" stroke="#4A6A82" stroke-width="0.5" opacity="0.5"/>
+      <path d="M27 3 Q23 15, 18 25" fill="none" stroke="#4A6A82" stroke-width="0.5" opacity="0.5"/>
+    </g>
+
+    <!-- Neck iridescence -->
+    <ellipse cx="54" cy="48" rx="8" ry="10" fill="#6A8E7A" opacity="0.4" transform="rotate(-10, 54, 48)"/>
+    <ellipse cx="53" cy="50" rx="6" ry="8" fill="#8A6E9A" opacity="0.25" transform="rotate(-10, 53, 50)"/>
+
+    <!-- Head -->
+    <circle cx="46" cy="38" r="11" fill="#8BA4B8"/>
+
+    <!-- Eye -->
+    <circle cx="42" cy="36" r="3.5" fill="#2A2A2A"/>
+    <circle cx="42" cy="36" r="2.2" fill="#E85D26"/>
+    <circle cx="42" cy="36" r="1.2" fill="#1A1A1A"/>
+    <circle cx="40.8" cy="34.8" r="0.8" fill="#FFFFFF" opacity="0.8"/>
+
+    <!-- Beak (holding the checklist) -->
+    <path d="M34 40 L26 43 L34 45 Z" fill="#E8A840" stroke="#D49530" stroke-width="0.5"/>
+    <!-- Beak top half -->
+    <path d="M34 40 L26 43 L34 42.5 Z" fill="#F0B850"/>
+
+    <!-- Feet (tucked, in flight) -->
+    <g fill="#D48040" stroke="#C07030" stroke-width="0.5">
+      <path d="M65 78 L62 85 L60 83 M62 85 L64 83"/>
+      <path d="M72 77 L70 85 L68 83 M70 85 L72 83"/>
+    </g>
+  </g>
+
+  <!-- === Motion lines (speed/dispatch feel) === -->
+  <g stroke="#8BA4B8" stroke-width="1.2" stroke-linecap="round" opacity="0.4">
+    <line x1="108" y1="45" x2="120" y2="42"/>
+    <line x1="110" y1="55" x2="124" y2="54"/>
+    <line x1="108" y1="65" x2="118" y2="66"/>
+  </g>
+</svg>

@@ -1,0 +1,12 @@
+{
+  "name": "self-improving-agent",
+  "version": "1.0.0",
+  "description": "Curate auto-memory, promote learnings to CLAUDE.md and rules, extract proven patterns into reusable skills.",
+  "author": {
+    "name": "Alireza Rezvani"
+  },
+  "repository": "https://github.com/alirezarezvani/claude-skills",
+  "license": "MIT",
+  "skills": "./",
+  "homepage": "https://github.com/alirezarezvani/claude-skills/tree/main/engineering-team/self-improving-agent"
+}

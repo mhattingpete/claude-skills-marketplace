@@ -1,0 +1,9 @@
+{
+  "name": "ecc-skills-collection",
+  "version": "1.0.0",
+  "description": "Comprehensive collection of 142 Claude Code skills covering AI/ML, backend frameworks (Django, Laravel, Spring Boot, Go, Rust, Kotlin), frontend patterns, DevOps, agentic workflows, security, testing, and domain-specific expertise (finance, logistics, manufacturing). From the Everything Claude Code (ECC) ecosystem.",
+  "author": {
+    "name": "m3",
+    "email": "noreply@github.com"
+  }
+}
