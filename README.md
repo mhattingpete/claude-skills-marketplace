@@ -503,6 +503,7 @@ Apache 2.0 - See LICENSE file for details.
 - [Claude Code Documentation](https://docs.claude.com/en/docs/claude-code/skills)
 - [Official Anthropic Skills](https://github.com/anthropics/skills)
 - [Agent Skills Best Practices](https://docs.claude.com/en/docs/agents-and-tools/agent-skills/best-practices.md)
+- [claude-dash](https://github.com/krabat-l/claude-dash) - Real-time statusline for Claude Code showing context, cost, quota, cache, tools, and git status
 
 ## Support
 
