@@ -503,6 +503,7 @@ Apache 2.0 - See LICENSE file for details.
 - [Claude Code Documentation](https://docs.claude.com/en/docs/claude-code/skills)
 - [Official Anthropic Skills](https://github.com/anthropics/skills)
 - [Agent Skills Best Practices](https://docs.claude.com/en/docs/agents-and-tools/agent-skills/best-practices.md)
+- [CCHub](https://github.com/Moresl/cchub) - A desktop control panel for the Claude Code / Codex / Gemini CLI ecosystem. Manage MCP servers, config profiles, agent skills, CLAUDE.md, hooks, and workflow templates from a single Tauri app (Windows / macOS / Linux).
 
 ## Support
 
