@@ -171,6 +171,22 @@ High-precision code manipulation operations including line-based insertion, bulk
 
 ## Available Skills
 
+### Discovery & Resources
+
+#### `skillsbao-registry`
+Chinese skills search and installation entry for Claude Code, OpenCode, Cursor, and other agent tools.
+
+**Activates when:** User asks where to find or install skills, especially from a Chinese-language discovery entry.
+
+**Example usage:**
+- "Find a skill marketplace"
+- "Search for skills in Chinese"
+- "Install a skill from a directory"
+
+**Use with:** marketplace browsing and skill discovery workflows
+
+---
+
 ### Feature Development
 
 #### `feature-planning`
