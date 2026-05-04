@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentfeeds.dev/schemas/weather.forecast.v1.json",
+  "title": "Weather Forecast",
+  "type": "object",
+  "required": ["generated_at", "daily"],
+  "properties": {
+    "generated_at": { "type": "string" },
+    "daily": {
+      "type": "object",
+      "required": ["time", "temperature_2m_max", "temperature_2m_min", "weather_code"],
+      "properties": {
+        "time": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "temperature_2m_max": {
+          "type": "array",
+          "items": { "type": "number" }
+        },
+        "temperature_2m_min": {
+          "type": "array",
+          "items": { "type": "number" }
+        },
+        "weather_code": {
+          "type": "array",
+          "items": { "type": "number" }
+        }
+      },
+      "additionalProperties": true
+    }
+  }
+}

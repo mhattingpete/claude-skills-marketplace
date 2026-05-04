@@ -1,0 +1,78 @@
+id: mac/imessage-unread
+title: Unread iMessage conversations
+description: Current unread incoming Messages.app conversations with unread counts and last-message snippets.
+type: mac.imessage-thread
+mode: event
+event_retention: current
+schema_url: https://agentfeeds.dev/schemas/mac.imessage-thread.v1.json
+schema_version: 1.0.0
+parameters: []
+source_uri_template: "feed://mac.imessage/unread?limit=25"
+adapter:
+  kind: sqlite_query
+  database: "~/Library/Messages/chat.db"
+  read_only: true
+  tcc_permission: Full Disk Access
+  query: |
+    WITH unread AS (
+      SELECT
+        chat.ROWID AS thread_id,
+        COALESCE(chat.display_name, '') AS display_name,
+        COALESCE(handle.id, '') AS sender,
+        message.ROWID AS message_id,
+        message.text AS snippet,
+        message.attributedBody AS attributed_body,
+        message.service AS service,
+        message.date AS last_message_at
+      FROM message
+      LEFT JOIN handle ON message.handle_id = handle.ROWID
+      JOIN chat_message_join ON message.ROWID = chat_message_join.message_id
+      JOIN chat ON chat.ROWID = chat_message_join.chat_id
+      WHERE message.is_read = 0
+        AND message.is_from_me = 0
+    ), latest AS (
+      SELECT
+        *,
+        ROW_NUMBER() OVER (PARTITION BY thread_id ORDER BY last_message_at DESC) AS rn,
+        COUNT(*) OVER (PARTITION BY thread_id) AS unread_count
+      FROM unread
+    )
+    SELECT
+      thread_id,
+      display_name,
+      sender,
+      message_id,
+      snippet,
+      attributed_body,
+      service,
+      unread_count,
+      last_message_at
+    FROM latest
+    WHERE rn = 1
+    ORDER BY last_message_at DESC
+    LIMIT 25
+  columns:
+    - thread_id
+    - display_name
+    - sender
+    - message_id
+    - snippet
+    - attributed_body
+    - service
+    - {name: unread_count, type: integer}
+    - last_message_at
+  timestamp_columns:
+    last_message_at: mac_absolute_ns
+  static:
+    participants: []
+  id_column: thread_id
+  time_column: last_message_at
+recommended_poll_interval_seconds: 900
+auth: none
+tags: [mac, imessage, messages, unread, sqlite, tcc, no-auth]
+quality_tier: experimental
+catalog_tier: 1
+catalog_order: 60
+platforms: [macos]
+requires: [full_disk_access]
+contributed_by: agentfeeds

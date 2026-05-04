@@ -1,0 +1,47 @@
+id: dev/github-issues
+title: GitHub repository issues
+description: Recent issues for a GitHub repository visible to the configured token.
+type: github.issue
+mode: event
+schema_url: https://agentfeeds.dev/schemas/github.issue.v1.json
+schema_version: 1.0.0
+parameters:
+- name: owner
+  type: string
+  description: GitHub repository owner
+  required: true
+- name: repo
+  type: string
+  description: GitHub repository name
+  required: true
+- name: state
+  type: string
+  description: Issue state, such as open, closed, or all
+  required: true
+source_uri_template: feed://api.github.com/repos/{owner}/{repo}/issues?state={state}
+adapter:
+  kind: paginated_json_http
+  url: https://api.github.com/repos/{owner}/{repo}/issues?state={state}&per_page=30
+  method: GET
+  headers:
+    Accept: application/vnd.github+json
+  transform:
+    language: jmespath
+    expression: "[?pull_request==`null`].{\n  number: number,\n  title: title,\n \
+      \ state: state,\n  html_url: html_url,\n  user: user.login,\n  labels: labels[].name,\n\
+      \  created_at: created_at,\n  updated_at: updated_at,\n  closed_at: closed_at,\n\
+      \  body: body\n}\n"
+  id_from: number
+  auth_service: github
+recommended_poll_interval_seconds: 900
+auth: bearer_token
+tags:
+- dev
+- github
+- issues
+- keychain
+- auth
+quality_tier: verified
+catalog_tier: 4
+catalog_order: 70
+contributed_by: agentfeeds

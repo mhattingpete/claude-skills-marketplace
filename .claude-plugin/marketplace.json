@@ -40,6 +40,15 @@
       "author": {
         "name": "mhattingpete"
       }
+    },
+    {
+      "name": "agentfeeds",
+      "source": "./agentfeeds-plugin",
+      "description": "Ready-to-read context cache for personal agents: calendars, inbox, GitHub, RSS, notes, dashboards, and local streams kept fresh on disk.",
+      "version": "0.1.1",
+      "author": {
+        "name": "verkyyi"
+      }
     }
   ]
 }

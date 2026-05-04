@@ -50,6 +50,12 @@ claude-skills-marketplace/
 │   │   ├── conversation-analyzer/    # Usage analysis skill
 │   │   └── project-bootstrapper/     # Project setup skill
 │   └── README.md
+├── agentfeeds-plugin/                 # Ready-to-read context cache for personal agents
+│   ├── .claude-plugin/
+│   │   └── plugin.json               # Plugin manifest
+│   ├── skills/
+│   │   └── agentfeeds/               # Fresh local context cache skill
+│   └── README.md
 ├── code-operations-plugin/            # Code manipulation plugin
 │   ├── .claude-plugin/
 │   │   └── plugin.json               # Plugin manifest
@@ -141,6 +147,9 @@ To install individual plugins:
 
 # Install only code operations
 /plugin marketplace add mhattingpete/claude-skills-marketplace/code-operations-plugin
+
+# Install only AgentFeeds
+/plugin marketplace add mhattingpete/claude-skills-marketplace/agentfeeds-plugin
 ```
 
 ## Available Plugins
@@ -169,7 +178,30 @@ High-precision code manipulation operations including line-based insertion, bulk
 
 [View Plugin Documentation →](code-operations-plugin/README.md)
 
+### AgentFeeds Plugin
+
+Ready-to-read context cache for personal agents: calendars, inbox, GitHub, RSS, notes, dashboards, and local streams kept fresh on disk so Claude can read local context before searching the web or re-fetching APIs.
+
+[View Plugin Documentation →](agentfeeds-plugin/README.md)
+
 ## Available Skills
+
+### Personal Agent Context
+
+#### `agentfeeds`
+Keep fresh local context ready for Claude: calendars, inbox, reminders, GitHub, RSS/news, weather, notes, dashboards, local files, and approved local sources.
+
+**Activates when:** User asks Claude to set up AgentFeeds, check fresh context, subscribe to local/personal streams, or use cached context before web search.
+
+**Example usage:**
+- "Set up AgentFeeds with useful safe default streams for this agent"
+- "What fresh context does AgentFeeds already have available?"
+- "Use AgentFeeds first. What should I pay attention to today?"
+- "Before searching the web, check AgentFeeds for relevant cached context"
+
+**Core benefit:** Avoid repeated skill scanning, web searches, API refetching, and user repetition by reading refreshable local stream state first.
+
+---
 
 ### Feature Development
 
