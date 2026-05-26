@@ -1,6 +1,6 @@
 # Engineering Workflow Skills
 
-Automate common software engineering workflows including feature planning, testing, git operations, and code review implementation.
+Automate common software engineering workflows including pre-build risk review, feature planning, testing, git operations, and code review implementation.
 
 **Version:** 1.1.0
 
@@ -8,7 +8,23 @@ Automate common software engineering workflows including feature planning, testi
 
 ## Skills
 
-### 1. feature-planning
+### 1. before-you-build
+
+**Activates when you say:**
+- "Is this worth building?"
+- "Should I add this feature?"
+- "Sanity-check this idea before implementation"
+- "Pour cold water on this product idea"
+
+**What it does:**
+- Checks whether the product or feature should move into implementation planning
+- Identifies the biggest likely failure mode
+- Challenges demand, distribution, pricing, positioning, retention, and trust assumptions
+- Recommends the smallest validation step before coding
+
+---
+
+### 2. feature-planning
 
 **Activates when you say:**
 - "Add user authentication"
@@ -24,7 +40,7 @@ Automate common software engineering workflows including feature planning, testi
 
 ---
 
-### 2. test-fixing
+### 3. test-fixing
 
 **Activates when you say:**
 - "Fix the tests"
@@ -39,7 +55,7 @@ Automate common software engineering workflows including feature planning, testi
 
 ---
 
-### 3. git-pushing
+### 4. git-pushing
 
 **Activates when you say:**
 - "Push these changes"
@@ -54,7 +70,7 @@ Automate common software engineering workflows including feature planning, testi
 
 ---
 
-### 4. review-implementing
+### 5. review-implementing
 
 **Activates when you say:**
 - "Implement this review feedback"
@@ -84,6 +100,8 @@ Focused agent for implementing code from detailed plans. Uses Haiku model for co
 
 ```
 User: "Add user authentication"
+  ↓
+before-you-build → checks whether this should be built now
   ↓
 feature-planning → creates plan, asks questions
   ↓
