@@ -266,3 +266,10 @@ def detect_secrets(text: str) -> List[Dict]:
         List of detections
     """
     return _default_detector.detect(text)
+
+
+# ponytail: module-level shim — upstream __init__.py imports mask_result as a
+# module function, but it only exists as a PIIDetector method. Delegate.
+def mask_result(result: any, aggressive: bool = False) -> any:
+    """Mask PII/secrets in an arbitrary result via the default detector."""
+    return _default_detector.mask_result(result, aggressive=aggressive)

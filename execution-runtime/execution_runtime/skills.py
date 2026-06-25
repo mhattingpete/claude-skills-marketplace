@@ -91,7 +91,7 @@ def load_skill(name: str) -> str:
     Example:
         >>> code = load_skill("remove_debug_logs")
         >>> print(code[:50])
-        """Remove debug print and pdb statements"""
+        '''Remove debug print and pdb statements'''
         ...
     """
     skill_path = SKILLS_DIR / f"{name}.py"
