@@ -1,0 +1,8 @@
+{
+  "name": "360-review-skills",
+  "version": "1.0.0",
+  "description": "Multi-perspective 360 review that generates positive and negative user stories using Sigil expert lenses. Apply to any codebase, skill, design, or idea.",
+  "author": {
+    "name": "Sigil Project"
+  }
+}

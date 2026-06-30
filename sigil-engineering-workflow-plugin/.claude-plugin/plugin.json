@@ -1,0 +1,8 @@
+{
+  "name": "sigil-engineering-workflow",
+  "version": "1.0.0",
+  "description": "Prompt-driven engineering workflow skills: plan-execute, test-doctor, safe-commit, review-apply, solution-ensemble. Language-aware, security-gated, smoke-checked.",
+  "author": {
+    "name": "Sigil Project"
+  }
+}

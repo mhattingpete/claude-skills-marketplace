@@ -1,0 +1,22 @@
+{
+  "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
+  "name": "sigil",
+  "version": "0.2.0",
+  "description": "Multi-perspective review engine + certification authority. Spawns parallel expert agents (Engineering, Security, UX, CEO/Strategy, QA) to audit any codebase, design doc, or skill. Emits structured certificates for marketplace listing qualification.",
+  "author": {
+    "name": "Sigil Project"
+  },
+  "repository": "github:BlueBoobyAI/sigil",
+  "homepage": "https://github.com/BlueBoobyAI/sigil",
+  "license": "MIT",
+  "skills": [
+    "./"
+  ],
+  "agents": [
+    "./agents/engineering.md",
+    "./agents/security.md",
+    "./agents/ux.md",
+    "./agents/ceo.md",
+    "./agents/qa.md"
+  ]
+}

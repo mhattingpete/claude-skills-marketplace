@@ -1,0 +1,209 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/BlueBoobyAI/sigil/main/docs/certificate.schema.json",
+  "title": "Sigil Certificate",
+  "description": "Structured certification for Claude Code skills, produced by the Sigil multi-perspective review engine. Skills must be re-certified every 90 days or after any version bump.",
+  "type": "object",
+  "required": [
+    "certificate_version",
+    "skill_name",
+    "skill_version",
+    "content_digest",
+    "tier",
+    "verdict",
+    "sigil_score",
+    "gate_results",
+    "findings",
+    "validity",
+    "metadata"
+  ],
+  "properties": {
+    "certificate_version": {
+      "type": "string",
+      "description": "Version of the certificate format (semver). Currently 0.2.0.",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "skill_name": {
+      "type": "string",
+      "description": "Name of the skill being certified.",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "skill_version": {
+      "type": "string",
+      "description": "Version of the skill at time of certification (semver).",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "skill_source": {
+      "type": "string",
+      "description": "Path, URL, or GitHub reference to the skill being reviewed.",
+      "maxLength": 1024
+    },
+    "content_digest": {
+      "type": "string",
+      "description": "SHA-256 hex digest of the skill's manifest (all SKILL.md, agent, and reference files). Enables tamper detection.",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "tier": {
+      "type": "string",
+      "description": "Review depth tier used.",
+      "enum": ["quick", "standard", "deep"]
+    },
+    "verdict": {
+      "type": "string",
+      "description": "Overall gate decision.",
+      "enum": ["GO", "NO-GO", "UNCERTAIN"]
+    },
+    "sigil_score": {
+      "type": "integer",
+      "description": "Aggregate quality score 0-100. Calculated from weighted agent verdicts.",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "gate_results": {
+      "type": "object",
+      "description": "Per-lens verdict results. null for unused lenses (e.g., QA in Standard tier).",
+      "properties": {
+        "engineering": { "$ref": "#/definitions/verdict_grade" },
+        "security": { "$ref": "#/definitions/verdict_grade" },
+        "ux": { "$ref": "#/definitions/verdict_grade" },
+        "ceo": { "$ref": "#/definitions/verdict_grade" },
+        "qa": { "$ref": "#/definitions/verdict_grade" }
+      },
+      "additionalProperties": false
+    },
+    "findings": {
+      "type": "array",
+      "description": "All discovered issues across lenses, with evidence markers and severity.",
+      "items": { "$ref": "#/definitions/finding" },
+      "minItems": 0
+    },
+    "uncertainties": {
+      "type": "array",
+      "description": "What the Sigil review panel could not verify and requires human investigation.",
+      "items": {
+        "type": "string",
+        "maxLength": 1024
+      }
+    },
+    "validity": {
+      "type": "object",
+      "description": "Certificate validity period.",
+      "required": ["issued", "expires", "validity_days"],
+      "properties": {
+        "issued": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 timestamp of certification."
+        },
+        "expires": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 timestamp of expiry (90 days from issue by default)."
+        },
+        "validity_days": {
+          "type": "integer",
+          "description": "Number of days the certificate is valid.",
+          "minimum": 1,
+          "maximum": 365,
+          "default": 90
+        }
+      },
+      "additionalProperties": false
+    },
+    "signature": {
+      "type": "object",
+      "description": "Optional Ed25519 or Sigstore signature for supply-chain integrity. Present only when certificate is signed.",
+      "required": ["algorithm", "value", "public_key_ref"],
+      "properties": {
+        "algorithm": {
+          "type": "string",
+          "enum": ["ed25519", "sigstore-cosign", "sigstore-keyless"]
+        },
+        "value": {
+          "type": "string",
+          "description": "Hex or base64-encoded signature over content_digest + verdict."
+        },
+        "public_key_ref": {
+          "type": "string",
+          "description": "URL or reference to the public key for verification."
+        }
+      },
+      "additionalProperties": false
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Review metadata.",
+      "required": ["sigil_version", "agents_used"],
+      "properties": {
+        "sigil_version": {
+          "type": "string",
+          "description": "Version of the Sigil skill that produced this certificate."
+        },
+        "agents_used": {
+          "type": "array",
+          "description": "Which agents were active in this review.",
+          "items": {
+            "type": "string",
+            "enum": ["engineering", "security", "ux", "ceo", "qa"]
+          },
+          "minItems": 1,
+          "maxItems": 5
+        },
+        "total_agent_cost_estimate": {
+          "type": "string",
+          "description": "Estimated total cost of API calls for this review (for billing transparency).",
+          "pattern": "^\\$[0-9]+(\\.[0-9]{2})?$"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "definitions": {
+    "verdict_grade": {
+      "oneOf": [
+        { "type": "string", "enum": ["PASS", "PASS_W_CONCERNS", "FAIL", "BLOCKER"] },
+        { "type": "null" }
+      ],
+      "description": "Per-lens verdict. null when the lens was not used (e.g., QA not used in Standard tier)."
+    },
+    "finding": {
+      "type": "object",
+      "required": ["evidence", "lens", "severity", "description"],
+      "properties": {
+        "evidence": {
+          "type": "string",
+          "description": "Evidence marker: ✅ verified from source, ⚠️ plausible but unverified, ❌ cannot verify.",
+          "enum": ["✅", "⚠️", "❌"]
+        },
+        "lens": {
+          "type": "string",
+          "description": "Which agent lens found this issue.",
+          "enum": ["engineering", "security", "ux", "ceo", "qa"]
+        },
+        "severity": {
+          "type": "string",
+          "enum": ["low", "med", "high", "critical"]
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the finding.",
+          "minLength": 1,
+          "maxLength": 2048
+        },
+        "location": {
+          "type": "string",
+          "description": "File:line reference where the issue was found.",
+          "maxLength": 256
+        },
+        "source": {
+          "type": "string",
+          "description": "Source citation for the claim (e.g., CVE ID, docs URL, file:line).",
+          "maxLength": 512
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
