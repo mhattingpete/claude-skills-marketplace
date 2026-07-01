@@ -5,11 +5,11 @@ Compares consecutive runs in reddit-pain-state.json and outputs structured
 diff: persistent pains, new pains, resolved pains, and readiness changes.
 
 Usage:
-  python3 pain-trend-diff.py <state-file> [--markdown] [--json] [--runs N N]
+  python3 pain-trend-diff.py <state-file> [--markdown] [--json]
 
 Examples:
   python3 pain-trend-diff.py reddit-pain-state.json --markdown
-  python3 pain-trend-diff.py reddit-pain-state.json --json --runs 1 3
+  python3 pain-trend-diff.py reddit-pain-state.json --json
 """
 import json
 import sys
@@ -26,8 +26,14 @@ def find_pain(pains_dict, pain_id):
     return pains_dict.get(pain_id)
 
 
-def compute_diff(state):
-    """Compare consecutive runs and return structured diff."""
+def compute_diff(state, run_range=None):
+    """Compare consecutive runs and return structured diff.
+
+    Args:
+        state: The loaded state dict.
+        run_range: Optional tuple (start_run_id, end_run_id) to diff specific runs.
+                   If None, diffs the last two runs.
+    """
     runs = state.get("runs", [])
     if len(runs) < 2:
         return {
@@ -39,8 +45,7 @@ def compute_diff(state):
     # Get pains from state
     all_pains = {p["id"]: p for p in state.get("pains", [])}
 
-    # Track which pains appeared in each run by reconstructing from run data
-    # We use the state's trend tracking as authoritative
+    # Use state's trend tracking as authoritative
     trends = state.get("trends", {})
 
     persistent = trends.get("persistent_pains", [])
@@ -213,24 +218,17 @@ def format_json(diff):
 
 def main():
     if len(sys.argv) < 2:
-        print(f"Usage: {sys.argv[0]} <state-file> [--markdown] [--json] [--runs N N]", file=sys.stderr)
+        print(f"Usage: {sys.argv[0]} <state-file> [--markdown] [--json]", file=sys.stderr)
         sys.exit(2)
 
     state_path = sys.argv[1]
     output_format = "markdown"  # default
-    runs_filter = None
 
     for i, arg in enumerate(sys.argv[2:], start=2):
         if arg == "--markdown":
             output_format = "markdown"
         elif arg == "--json":
             output_format = "json"
-        elif arg == "--runs":
-            if i + 2 < len(sys.argv):
-                runs_filter = (int(sys.argv[i + 1]), int(sys.argv[i + 2]))
-            else:
-                print("--runs requires two integers (start end)", file=sys.stderr)
-                sys.exit(2)
 
     if not os.path.exists(state_path):
         print(f"Error: state file not found: {state_path}", file=sys.stderr)

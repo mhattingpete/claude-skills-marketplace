@@ -5,7 +5,6 @@
 #   ./scripts/pain-trend-diff.sh                    # uses reddit-pain-state.json in current dir
 #   ./scripts/pain-trend-diff.sh path/to/state.json
 #   ./scripts/pain-trend-diff.sh --json
-#   ./scripts/pain-trend-diff.sh path/to/state.json --json --runs 1 2
 
 set -euo pipefail
 

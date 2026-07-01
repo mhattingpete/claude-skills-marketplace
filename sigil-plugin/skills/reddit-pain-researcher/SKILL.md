@@ -35,7 +35,6 @@ allowed-tools:
   - mcp__reddit-mcp__get_subreddit_rising_posts
   - mcp__reddit-mcp__get_post_content
   - mcp__reddit-mcp__get_post_comments
-  - mcp__reddit-mcp__get_frontpage_posts
   - mcp__aeo-platform__web_search
 ---
 # Reddit Pain Researcher
@@ -100,7 +99,7 @@ The researcher maintains persistence in `reddit-pain-state.json` at the current 
     {
       "id": "pp-001",
       "title": "Content marketing overwhelm",
-      "subreddit": "smallbusiness",
+      "subreddits": ["smallbusiness"],
       "thread_ids": ["1ujiq5a"],
       "first_seen": "2026-07-01",
       "last_seen": "2026-07-01",
@@ -401,8 +400,6 @@ If a previous report file exists with today's date, ask the user if they want to
 | `get_subreddit_hot_posts` | 1 | Initial thread discovery |
 | `get_subreddit_new_posts` | 1 | Catch threads that didn't make hot but are fresh |
 | `get_subreddit_top_posts` | 1 | Timeframe-specific search (week/month/year) |
-| `get_post_content` | 2 | Full post text + threaded comments |
-| `get_post_comments` | 2 | Deeper comment extraction |
 | `web_search` | 3,4 | Validate automation approaches, find n8n templates |
 | `Bash` | 4,5 | Write report file, update state JSON |
 | `AskUserQuestion` | 0 | Clarify research scope if ambiguous |
