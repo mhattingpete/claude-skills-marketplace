@@ -391,6 +391,8 @@ If a previous report file exists with today's date, ask the user if they want to
 - This skill works with **sigil** for automation-feasibility scoring on specific pain points
 - Use with **n8n** playbook generation for immediate implementation
 - Trend data accumulates in `reddit-pain-state.json` — keep this in a version-controlled or synced directory for long-term trend tracking
+- Trend diff engine: `scripts/pain-trend-diff.py` — computes structured comparison between runs. Usage: `python3 scripts/pain-trend-diff.py reddit-pain-state.json --markdown`
+- Trend diff wrapper: `scripts/pain-trend-diff.sh` — convenience shell wrapper. Usage: `./scripts/pain-trend-diff.sh` from the plugin root
 
 ## Tool Usage Summary
 
