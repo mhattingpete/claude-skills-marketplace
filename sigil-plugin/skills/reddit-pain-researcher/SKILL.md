@@ -68,7 +68,7 @@ allowed-tools:
 
 ### State Tracking
 
-The researcher maintains persistence in `reddit-pain-state.json` at the current working directory:
+The researcher maintains persistence in `reddit-pain-state.json` at the sigil-plugin root (alongside the skill, in the repository that owns it):
 
 ```json
 {
