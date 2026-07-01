@@ -31,15 +31,6 @@
       "author": {
         "name": "mhattingpete"
       }
-    },
-    {
-      "name": "sigil",
-      "source": "./sigil-plugin",
-      "description": "Certification authority for Claude Code skills. Multi-perspective review engine spawning expert agents (Engineering, Security, UX, CEO/Strategy, QA) to audit codebases, designs, and skills. Emits structured certificates with evidence markers and SHA-256 digests. Includes readme-doctor and build-optimizer skills. The quality gate for AI skills marketplaces.",
-      "version": "0.4.0",
-      "author": {
-        "name": "Sigil Project"
-      }
     }
   ]
 }
