@@ -1,0 +1,8 @@
+{
+  "name": "xquik-data-skills",
+  "version": "1.0.0",
+  "description": "Skills for Xquik REST API and remote MCP integration for X data workflows",
+  "author": {
+    "name": "Xquik"
+  }
+}

@@ -86,7 +86,7 @@ Skills and Agents work together: Skills can orchestrate when to invoke Agents, a
 
 ## 🚀 NEW: Execution Runtime (90%+ Token Savings)
 
-The marketplace now includes a **code execution environment** implementing the [Anthropic code execution pattern](https://www.anthropic.com/engineering/code-execution-with-mcp). Instead of loading code through context, Claude executes Python locally with API access—achieving **90-99% token reduction** for bulk operations.
+The marketplace now includes a **code execution environment** implementing the [Anthropic code execution pattern](https://www.anthropic.com/engineering/code-execution-with-mcp). Instead of loading code through context, Claude executes Python locally with API access - achieving **90-99% token reduction** for bulk operations.
 
 ### Quick Benefits
 
@@ -141,6 +141,9 @@ To install individual plugins:
 
 # Install only code operations
 /plugin marketplace add mhattingpete/claude-skills-marketplace/code-operations-plugin
+
+# Install only Xquik data skills
+/plugin marketplace add mhattingpete/claude-skills-marketplace/xquik-data-skills-plugin
 ```
 
 ## Available Plugins
@@ -168,6 +171,12 @@ Productivity and workflow optimization skills for analyzing usage patterns, audi
 High-precision code manipulation operations including line-based insertion, bulk refactoring, and file analysis. Converted from [code-copy-mcp](https://github.com/mhattingpete/code-copy-mcp) to native Claude Code skills.
 
 [View Plugin Documentation →](code-operations-plugin/README.md)
+
+### Xquik Data Skills Plugin
+
+Skills for Xquik REST API and remote MCP integration for X data workflows.
+
+[View Plugin Documentation →](xquik-data-skills-plugin/README.md)
 
 ## Available Skills
 
@@ -283,6 +292,21 @@ Analyze files and get detailed metadata without modifying them.
 - "How many lines in app.py?"
 - "Compare the sizes of all Python files"
 - "Give me code quality metrics for the project"
+
+---
+
+### API Integrations
+
+#### `xquik-integrating`
+Integrate Xquik REST API and remote MCP for X data workflows.
+
+**Activates when:** User mentions Xquik, X data API, tweet search, user lookup, follower export, monitors, webhooks, or Xquik MCP setup.
+
+**Example usage:**
+- "Set up Xquik MCP"
+- "Use Xquik to search tweets"
+- "Build an app with the Xquik API"
+- "Export followers with Xquik"
 
 ---
 
@@ -541,8 +565,8 @@ Here's how the skills and agent work together for a typical feature development 
 
 ## Other Projects by the Author
 
-- **[personal-ai-os](https://github.com/mhattingpete/personal-ai-os)** — Automate your digital life with natural language
-- **[agent-composer](https://github.com/mhattingpete/agent-composer)** — Local-first multi-agent AI platform
-- **[outlook-mcp](https://github.com/mhattingpete/outlook-mcp)** — MCP server for Microsoft Outlook
-- **[nemlig-shopper](https://github.com/mhattingpete/nemlig-shopper)** — CLI grocery shopping tool ([PyPI](https://pypi.org/project/nemlig-shopper/))
-- **[Portfolio](https://mhattingpete.github.io)** — Personal portfolio site
+- **[personal-ai-os](https://github.com/mhattingpete/personal-ai-os)** - Automate your digital life with natural language
+- **[agent-composer](https://github.com/mhattingpete/agent-composer)** - Local-first multi-agent AI platform
+- **[outlook-mcp](https://github.com/mhattingpete/outlook-mcp)** - MCP server for Microsoft Outlook
+- **[nemlig-shopper](https://github.com/mhattingpete/nemlig-shopper)** - CLI grocery shopping tool ([PyPI](https://pypi.org/project/nemlig-shopper/))
+- **[Portfolio](https://mhattingpete.github.io)** - Personal portfolio site

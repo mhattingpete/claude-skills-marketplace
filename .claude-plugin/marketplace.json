@@ -40,6 +40,15 @@
       "author": {
         "name": "mhattingpete"
       }
+    },
+    {
+      "name": "xquik-data-skills",
+      "source": "./xquik-data-skills-plugin",
+      "description": "Skills for Xquik REST API and remote MCP integration for X data workflows",
+      "version": "1.0.0",
+      "author": {
+        "name": "Xquik"
+      }
     }
   ]
 }
