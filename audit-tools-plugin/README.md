@@ -24,7 +24,27 @@ Deep codebase auditing skills for Claude Code. Every tool is free and open-sourc
 - Semgrep static analysis
 - **3-Phase Pipeline**: Audit → Triage & Fix Plan → Fix Execution
 
-### 2. 360-deep-audit
+### 2. lit-auto-fix
+
+**Purpose:** Detect and auto-fix 8 Lit framework anti-patterns that off-the-shelf linters miss — serialization bugs, lifecycle leaks, missing a11y, and redundant renders.
+
+**Activates when you say:**
+- "audit the Lit components"
+- "check for Lit anti-patterns"
+- "fix the widget Lit issues"
+- "run lit-detect"
+
+**What it does:**
+- P1: `<button>` missing `type="button"` (form submission risk)
+- P2: `renderRoot.querySelector` instead of `@query` decorator
+- P3: HTML strings rendered without `unsafeHTML` import
+- P4: `@property({type: Object/Array})` missing `attribute: false`
+- P5: Lifecycle methods missing `super.()` call
+- P6: `addEventListener` without matching `removeEventListener`
+- P7: Redundant `requestUpdate()` calls (Lit auto-queues)
+- P8: Interactive elements missing role/aria/keyboard handlers
+
+### 3. 360-deep-audit
 
 **Purpose:** 360-degree deep audit of any repository — 12 layers covering what off-the-shelf tools miss.
 
@@ -63,7 +83,7 @@ Claude: Runs all 12 layers → scores findings → generates fix plan
 
 ## Version
 
-1.0.0
+1.1.0
 
 ## Author
 
