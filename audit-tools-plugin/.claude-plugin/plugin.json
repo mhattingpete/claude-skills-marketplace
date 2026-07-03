@@ -1,0 +1,8 @@
+{
+  "name": "audit-tools",
+  "version": "1.4.0",
+  "description": "Deep codebase auditing skills \u2014 security posture, secrets, code quality, dependencies, CI/CD, architecture, and project-specific custom gates. 80/20 tools at every layer.",
+  "author": {
+    "name": "charlesliuson"
+  }
+}
