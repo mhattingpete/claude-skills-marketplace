@@ -14,6 +14,10 @@ Deep codebase auditing skills for Claude Code. Every tool is free and open-sourc
 - "due diligence on org/repo"
 - "is this dependency safe to use?"
 - "security audit of the repository"
+- "should we trust this library?"
+- "scorecard this project"
+- "is this package still maintained?"
+- "vet this before we add it as a dependency"
 
 **What it does:**
 - OSSF Scorecard (18 security dimensions)
@@ -33,6 +37,10 @@ Deep codebase auditing skills for Claude Code. Every tool is free and open-sourc
 - "check for Lit anti-patterns"
 - "fix the widget Lit issues"
 - "run lit-detect"
+- "check Shadow DOM for listener leaks"
+- "audit the Lit widget before merge"
+- "scan Lit components for serialization bugs"
+- "is this Lit component clean?"
 
 **What it does:**
 - P1: `<button>` missing `type="button"` (form submission risk)
@@ -54,6 +62,10 @@ Deep codebase auditing skills for Claude Code. Every tool is free and open-sourc
 - "audit everything including custom gates"
 - "check our project-specific hooks and invariants"
 - "comprehensive codebase health check"
+- "audit our pre-commit gates"
+- "run the 12-layer audit"
+- "OWASP ASVS check on this repo"
+- "what's our dead code and CI/CD hygiene look like?"
 
 **What it does:**
 - Layers 1-3: Scorecard, Gitleaks, MegaLinter
@@ -62,6 +74,41 @@ Deep codebase auditing skills for Claude Code. Every tool is free and open-sourc
 - Layers 8-9: CI/CD audit, maintenance health
 - Layers 10-12: OWASP ASVS, AI safety, meta-audit tracking
 - **3-Phase Pipeline**: Audit → Triage & Fix Plan → Fix Execution
+
+### 4. system-qa
+
+**Purpose:** 360-degree QA for running systems — discover, test, and auto-fix defects across test infrastructure, API contracts, integration health, edge cases, and silent failures. Audit AND fix in a 4-phase pipeline.
+
+**Activates when you say:**
+- "grep the codebase for problems, then fix them"
+- "lint the whole stack — static, runtime, integration"
+- "deep scan — find all the bugs, dead code, and gaps"
+- "linguist: analyze the code quality and fix what's broken"
+- "full diagnostics: static analysis, runtime checks, auto-repair"
+- "diff against best practices — find and fix every gap"
+- "syscheck: audit test infra, API contracts, runtime edge cases"
+- "survey the system — every layer, every contract, every failure mode"
+
+**What it does:**
+- Phase 1: 20 static checks (zero-day CVE, Unix security, pytest quality, type checking)
+- Phase 2: 14 runtime checks (health, API contracts, auth, error handling, prompt injection, SSRF)
+- **Adversarial triage**: ambiguous P0/P1 findings get a forced-verdict QA-Skeptic + Severity-Realist pass before entering the fix pipeline — catches false positives and severity misgrades, self-contained (no external plugin dependency)
+- Phase 3: Auto-fix with P0-P3 severity — verifies every fix by re-running the check
+- Phase 4: Composite report with score, before/after, and ranked recommendations
+- **Key differentiator**: Other QA skills test OR audit OR fix. This skill does ALL THREE — discover defects in running code, then fix them and verify.
+
+## Which Skill?
+
+These four overlap on purpose — pick by target, not by vibe:
+
+| Target | Skill |
+|--------|-------|
+| A third-party repo you're evaluating (not yours) | `github-audit` |
+| Your own repo, static analysis only (no server running) | `360-deep-audit` |
+| Your own repo's Lit/TypeScript components specifically | `lit-auto-fix` |
+| A running system — server up, endpoints live | `system-qa` |
+
+If unsure whether static or runtime, default to `360-deep-audit` first — it's faster and will point you to `system-qa` if runtime checks are needed.
 
 ## Usage
 
@@ -83,7 +130,7 @@ Claude: Runs all 12 layers → scores findings → generates fix plan
 
 ## Version
 
-1.1.0
+1.3.1
 
 ## Author
 

@@ -20,6 +20,16 @@ description: Use when auditing Lit/TypeScript components for framework anti-patt
 - After `tsc --noEmit` passes but before merge
 - Before declaring a widget/bundle "ready for preview"
 
+**Activation phrases:**
+- "audit the Lit components"
+- "check for Lit anti-patterns"
+- "fix the widget Lit issues"
+- "run lit-detect"
+- "check Shadow DOM for listener leaks"
+- "audit the Lit widget before merge"
+- "scan Lit components for serialization bugs"
+- "is this Lit component clean?"
+
 **Skip if:**
 - Non-Lit code (use standard lint/typecheck)
 - Third-party Lit components you don't own

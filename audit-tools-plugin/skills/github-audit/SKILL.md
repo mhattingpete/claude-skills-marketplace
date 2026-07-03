@@ -9,6 +9,21 @@ description: "Audit a GitHub repository for security, CI/CD health, code quality
 
 Systematic audit of any public GitHub repo across 6 dimensions. Every tool listed is free, open-source, and battle-tested (1k-28k★). The 80/20 recommendation is marked at each layer.
 
+**Activation phrases:**
+- "audit this repo"
+- "check this GitHub project"
+- "due diligence on org/repo"
+- "is this dependency safe to use?"
+- "security audit of the repository"
+- "should we trust this library?"
+- "scorecard this project"
+- "is this package still maintained?"
+- "vet this before we add it as a dependency"
+
+**Skip if:**
+- The target is your own repo and you want project-specific gates too (use 360-deep-audit instead)
+- You need runtime/API-contract checks against a live system (use system-qa)
+
 ## Quick Start
 
 ```bash

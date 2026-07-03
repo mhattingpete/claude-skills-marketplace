@@ -9,6 +9,21 @@ description: "360-degree deep audit of any repository — code quality, secrets,
 
 Multi-layer audit covering standard linter coverage AND project-specific custom gates that no off-the-shelf tool catches. Designed for serious codebases that have outgrown a single MegaLinter config.
 
+**Activation phrases:**
+- "deep audit this codebase"
+- "full security review"
+- "audit everything including our custom gates"
+- "check our project-specific hooks and invariants"
+- "comprehensive codebase health check"
+- "audit our pre-commit gates"
+- "run the 12-layer audit"
+- "OWASP ASVS check on this repo"
+- "what's our dead code and CI/CD hygiene look like?"
+
+**Skip if:**
+- The target is a third-party repo you don't own (use github-audit instead)
+- You need runtime/live-system checks, not static analysis (use system-qa)
+
 ## Quick Start (80/20 — 3 commands, 90% coverage)
 
 ```bash
