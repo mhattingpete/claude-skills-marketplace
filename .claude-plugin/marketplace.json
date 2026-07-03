@@ -31,6 +31,15 @@
       "author": {
         "name": "mhattingpete"
       }
+    },
+    {
+      "name": "audit-tools",
+      "source": "./audit-tools-plugin",
+      "description": "Deep codebase auditing skills — security posture, secrets, code quality, dependencies, CI/CD, architecture, and project-specific custom gates. 80/20 tools at every layer with 3-phase fix pipeline.",
+      "version": "1.0.0",
+      "author": {
+        "name": "charlesliuson"
+      }
     }
   ]
 }
