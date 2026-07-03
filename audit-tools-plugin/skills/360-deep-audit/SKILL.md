@@ -154,6 +154,7 @@ These are the custom checks that no off-the-shelf tool provides. They catch proj
 | **Architecture** | Invariant assertions | Custom rules: translation maps non-empty, version sources synced, etc. | `audit-envvar-constants.sh`, `check-cs-version-drift.sh` |
 | **Deploy** | Publish/flag guards | Prevents accidental production publish | `grep -n '\-\-publish' scripts/` |
 | **Auth** | Endpoint exposure check | Detects new public endpoints added without review | Diff on `PUBLIC_ENDPOINTS` array |
+| **Resilience** | Network call circuit breaker audit | Detects curl/wget/http calls in hooks and scripts NOT wrapped in a circuit breaker — missing graceful degradation on that path | `grep -rn 'curl\|wget\|requests\.' scripts/ .githooks/ .pre-commit-config.yaml 2>/dev/null \| grep -v circuit-breaker \| grep -v breaker-network-check` |
 
 **80/20:** Audit for custom gates by checking the `.pre-commit-config.yaml` and `scripts/` directory for hooks/sh scripts that aren't standard linters. Each custom hook represents a failure mode you've already been burned by.
 
@@ -287,11 +288,19 @@ For repos that use LLM tools or AI:
 
 These are often project-specific (concierge safety shields, agent rate limits, etc.) — check the repo's architecture docs and middleware stack.
 
+**Circuit breaker audit — grep-based network call scan:**
+```bash
+# Find curl/wget/http calls in hooks and scripts NOT wrapped in a circuit breaker
+grep -rn 'curl\|wget\|requests\.' scripts/ .githooks/ .pre-commit-config.yaml 2>/dev/null | \
+  grep -v 'circuit-breaker\|breaker-network-check' || echo "ALL COVERED"
+```
+Each uncovered call is a finding: missing graceful degradation on that path. After 3 consecutive failures of an unprotected call, a downstream service failure will block the entire pipeline or hook with no automatic recovery.
+
 **Fix actions:**
 - **No output moderation gate**: Add pattern-based output scan + API-based moderation — dispatch subagent with architecture context (M effort)
 - **No input sanitization**: Add control-char stripping, entity decoding, pattern detection — auto-fix (S effort, known patterns)
 - **No rate limiting**: Add per-IP sliding window middleware — auto-fix (S effort, standard pattern)
-- **No circuit breakers**: Add N-request-per-minute limit with exponential backoff — dispatch subagent (M effort)
+- **No circuit breakers — uncovered network call found**: Wrap the specific call with `circuit-breaker.sh --name <name> -- <original command>` in shell, or `circuit-breaker.py --name <name> -- <command>` for Python. Use 3-failure threshold, 60s recovery timeout. See open-source implementations: pybreaker (Python), node-redis-circuit-breaker (Node), or Hystrix (Java) — auto-fix (S effort per call)
 
 ### Layer 12: Meta-Audit (Recommendation Tracking)
 

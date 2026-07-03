@@ -119,9 +119,30 @@ Deep codebase auditing skills for Claude Code. Every tool is free and open-sourc
 - Delivery hardening: per-deploy version params, served-bytes verification
 - **Key differentiator**: timing-window cleanups (run-early, observe-then-disconnect) all race the parser and the cache; the identity-based pattern is time-independent and cannot lose the race
 
+### 6. compaction-optimize
+
+**Purpose:** Reduce wasted tokens from conversation compaction. Each compaction costs 30-40K tokens of overhead. In a long session (15-20 compactions) that's 500K+ wasted tokens + $3-6 in unnecessary API costs.
+
+**Activates when you say:**
+- "reduce compaction overhead"
+- "optimize context usage"
+- "too many compactions"
+- "token waste in this session"
+- "trim context bloat"
+- "make sessions last longer before compaction"
+- "reduce conversation overhead"
+
+**What it does:**
+- Phase 1: Diagnose — measure compaction frequency and cost
+- Phase 2: Execute — 7 reduction levers (session structure, output discipline, targeted reads, pre-emptive archiving, short-lived monitors, stale context pruning, skill usage)
+- Phase 3: Verify — measure turns-per-compaction before/after
+- Phase 4: Report — cost table with estimated waste
+- **Key differentiator**: The other skills audit code. This one audits how the agent uses the agent — the meta-lever that makes all other skills cheaper
+
+
 ## Which Skill?
 
-These five overlap on purpose — pick by target, not by vibe:
+These six overlap on purpose — pick by target, not by vibe:
 
 | Target | Skill |
 |--------|-------|
@@ -130,6 +151,7 @@ These five overlap on purpose — pick by target, not by vibe:
 | Your own repo's Lit/TypeScript components specifically | `lit-auto-fix` |
 | A running system — server up, endpoints live | `system-qa` |
 | Duplicate/ghost elements from an embedded widget on a live page | `widget-embed-qa` |
+| Reducing token waste from conversation compaction | `compaction-optimize` |
 
 If unsure whether static or runtime, default to `360-deep-audit` first — it's faster and will point you to `system-qa` if runtime checks are needed.
 
@@ -153,7 +175,7 @@ Claude: Runs all 12 layers → scores findings → generates fix plan
 
 ## Version
 
-1.4.0
+1.5.0
 
 ## Author
 

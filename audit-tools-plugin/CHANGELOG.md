@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.5.0] - 2026-07-03
+
+### Added
+- New skill: compaction-optimize — reduces wasted tokens from conversation compaction
+  - 4-phase pipeline: Diagnose → Execute (7 reduction levers) → Verify → Report
+  - Cost table by session type (quick bug fix through overnight autonomous)
+  - Activation phrases for natural language triggers
+- 360-deep-audit Layer 4 & 11: circuit breaker audit with concrete grep command and fix actions
+  - Layer 4: new "Resilience" row in custom gates table
+  - Layer 11: replaced vague bullet with grep procedure + circuit-breaker.sh fix pattern
+
 ## [1.4.0] - 2026-07-02
 
 ### Added
