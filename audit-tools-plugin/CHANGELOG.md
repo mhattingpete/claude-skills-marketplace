@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.4.0] - 2026-07-02
+
+### Added
+- New skill: widget-embed-qa — diagnoses and fixes duplicate-element bugs in embedded widgets (Shopify script_tags, chat bubbles, third-party JS embeds)
+  - 6-layer diagnostic ladder: census → provenance → timing → identity → delivery → root source
+  - Identity-based cleanup fix pattern (marker attribute + idempotent sweep + persistent observer) — replaces timing-window cleanups that race the parser
+  - `scripts/diagnose-widget-dom.js`: one-shot live-page diagnostic (paste into console or run via Playwright/preview evaluate), returns JSON verdict
+  - Iron Rules + rationalization table distilled from a real production debug: getElementById-removes-only-first, observer-disconnected-before-legacy-script-ran, cached-bundle-onload-race, stale-CDN-delivery
+  - Verification gate: zero duplicate IDs on the LIVE page + served-bytes version check + widget still functional
+
 ## [1.3.1] - 2026-07-02
 
 ### Added

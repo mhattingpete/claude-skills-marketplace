@@ -97,9 +97,31 @@ Deep codebase auditing skills for Claude Code. Every tool is free and open-sourc
 - Phase 4: Composite report with score, before/after, and ranked recommendations
 - **Key differentiator**: Other QA skills test OR audit OR fix. This skill does ALL THREE — discover defects in running code, then fix them and verify.
 
+### 5. widget-embed-qa
+
+**Purpose:** Diagnose and fix the "two chat buttons" class of bug in embedded widgets — duplicate elements from a legacy script coexisting with a new implementation, cleanup code that loses timing races, and deploys that don't reach the live page.
+
+**Activates when you say:**
+- "there are two widget buttons"
+- "duplicate widget elements on the page"
+- "the cleanup only removed the first duplicate"
+- "old widget still shows after deploy"
+- "element comes back after I remove it"
+- "the fix is deployed but the page didn't change"
+- "getElementById only returns one of them"
+- "the MutationObserver didn't catch it"
+- "qa the widget embed"
+
+**What it does:**
+- 6-layer diagnostic ladder: census → provenance → timing → identity → delivery → root source
+- One-shot live-page diagnostic script (`diagnose-widget-dom.js`) returning a JSON verdict
+- Identity-based cleanup fix pattern: marker attribute on new elements + idempotent sweep + persistent MutationObserver — no timing window to lose
+- Delivery hardening: per-deploy version params, served-bytes verification
+- **Key differentiator**: timing-window cleanups (run-early, observe-then-disconnect) all race the parser and the cache; the identity-based pattern is time-independent and cannot lose the race
+
 ## Which Skill?
 
-These four overlap on purpose — pick by target, not by vibe:
+These five overlap on purpose — pick by target, not by vibe:
 
 | Target | Skill |
 |--------|-------|
@@ -107,6 +129,7 @@ These four overlap on purpose — pick by target, not by vibe:
 | Your own repo, static analysis only (no server running) | `360-deep-audit` |
 | Your own repo's Lit/TypeScript components specifically | `lit-auto-fix` |
 | A running system — server up, endpoints live | `system-qa` |
+| Duplicate/ghost elements from an embedded widget on a live page | `widget-embed-qa` |
 
 If unsure whether static or runtime, default to `360-deep-audit` first — it's faster and will point you to `system-qa` if runtime checks are needed.
 
@@ -130,7 +153,7 @@ Claude: Runs all 12 layers → scores findings → generates fix plan
 
 ## Version
 
-1.3.1
+1.4.0
 
 ## Author
 
