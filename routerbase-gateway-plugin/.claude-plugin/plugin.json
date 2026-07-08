@@ -1,0 +1,8 @@
+{
+  "name": "routerbase-gateway-skills",
+  "version": "1.0.0",
+  "description": "Skills for integrating OpenAI-compatible AI apps with RouterBase model routing, safe API key handling, fallbacks, and media-generation workflows",
+  "author": {
+    "name": "zenlee123"
+  }
+}

@@ -169,7 +169,29 @@ High-precision code manipulation operations including line-based insertion, bulk
 
 [View Plugin Documentation →](code-operations-plugin/README.md)
 
+### RouterBase Gateway Plugin
+
+Skills for integrating OpenAI-compatible AI apps with [routerbase](https://routerbase.com/) model routing, safe API key handling, fallbacks, and media-generation workflows.
+
+[View Plugin Documentation →](routerbase-gateway-plugin/README.md)
+
 ## Available Skills
+
+### API Integrations
+
+#### `routing-with-routerbase`
+Integrate OpenAI-compatible clients with RouterBase, choose model routing and fallbacks, and plan media generation workflows.
+
+**Activates when:** User needs RouterBase migration, model routing, fallback design, or image/video/audio generation setup.
+
+**Example usage:**
+- "Route this OpenAI client through RouterBase"
+- "Choose RouterBase models and fallbacks"
+- "Add RouterBase image generation with polling for video jobs"
+
+**Works with:** OpenAI-compatible SDKs and server-side environment variables
+
+---
 
 ### Feature Development
 
