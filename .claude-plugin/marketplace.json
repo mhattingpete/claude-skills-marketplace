@@ -40,6 +40,15 @@
       "author": {
         "name": "mhattingpete"
       }
+    },
+    {
+      "name": "software-graph-skills",
+      "source": "./software-graph-plugin",
+      "description": "Skills for using Ontoly's deterministic Software Graph and MCP capabilities for architecture review, request tracing, dependency analysis, configuration lookup, and impact analysis",
+      "version": "1.0.0",
+      "author": {
+        "name": "0xsarwagya"
+      }
     }
   ]
 }

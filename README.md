@@ -169,6 +169,12 @@ High-precision code manipulation operations including line-based insertion, bulk
 
 [View Plugin Documentation →](code-operations-plugin/README.md)
 
+### Software Graph Plugin
+
+Skills for using Ontoly's deterministic Software Graph and MCP capabilities for architecture review, request tracing, dependency analysis, configuration lookup, and impact analysis.
+
+[View Plugin Documentation →](software-graph-plugin/README.md)
+
 ## Available Skills
 
 ### Feature Development
@@ -230,6 +236,19 @@ Process and implement code review feedback systematically with todo tracking.
 ---
 
 ### Code Operations
+
+#### `graph-querying` 🆕
+Use Ontoly's deterministic Software Graph and MCP capabilities before falling back to source-file search.
+
+**Activates when:** User mentions Ontoly, Software Graph, codebase understanding, dependency graph, request trace, architecture review, or graph-backed evidence.
+
+**Example usage:**
+- "Explain this repository using Ontoly"
+- "Trace the login request through the graph"
+- "What depends on AuthModule?"
+- "What breaks if I remove UserRepository?"
+
+---
 
 #### `code-execution` 🆕
 Execute Python code locally with marketplace API access for 90%+ token savings on bulk operations.

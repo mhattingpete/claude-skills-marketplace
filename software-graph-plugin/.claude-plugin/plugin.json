@@ -1,0 +1,8 @@
+{
+  "name": "software-graph-skills",
+  "version": "1.0.0",
+  "description": "Skills for using Ontoly's deterministic Software Graph and MCP capabilities for architecture review, request tracing, dependency analysis, configuration lookup, and impact analysis.",
+  "author": {
+    "name": "0xsarwagya"
+  }
+}
