@@ -149,7 +149,7 @@ To install individual plugins:
 
 ### Engineering Workflow Plugin
 
-Skills for common software engineering workflows including git operations, test fixing, code review implementation, and feature planning.
+Skills for common software engineering workflows including pre-build risk review, feature planning, git operations, test fixing, and code review implementation.
 
 [View Plugin Documentation →](engineering-workflow-plugin/README.md)
 
@@ -174,6 +174,18 @@ High-precision code manipulation operations including line-based insertion, bulk
 ## Available Skills
 
 ### Feature Development
+
+#### `before-you-build`
+Review product and feature risk before implementation planning starts.
+
+**Activates when:** User asks whether to build a new product, add a feature, change scope, or pivot direction before implementation.
+
+**Example usage:**
+- "Is this SaaS idea worth building?"
+- "Should I add this feature?"
+- "Sanity-check this before we implement it"
+
+---
 
 #### `feature-planning`
 Break down feature requests into detailed, implementable plans with clear tasks that can be executed by the plan-implementer agent.

@@ -8,7 +8,7 @@
     {
       "name": "engineering-workflow-skills",
       "source": "./engineering-workflow-plugin",
-      "description": "Skills for common software engineering workflows including git operations, test fixing, code review implementation, and feature planning with plan-implementer agent",
+      "description": "Skills for common software engineering workflows including pre-build risk review, feature planning, git operations, test fixing, and code review implementation",
       "version": "1.1.0",
       "author": {
         "name": "mhattingpete"
