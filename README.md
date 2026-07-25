@@ -1,5 +1,7 @@
 # Claude Skills Marketplace
 
+[![Run in Smithery](https://smithery.ai/badge/skills/mhattingpete)](https://smithery.ai/skills?ns=mhattingpete&utm_source=github&utm_medium=badge)
+
 [![GitHub stars](https://img.shields.io/github/stars/mhattingpete/claude-skills-marketplace)](https://github.com/mhattingpete/claude-skills-marketplace/stargazers)
 [![License](https://img.shields.io/github/license/mhattingpete/claude-skills-marketplace)](LICENSE)
 [![Last Commit](https://img.shields.io/github/last-commit/mhattingpete/claude-skills-marketplace)](https://github.com/mhattingpete/claude-skills-marketplace/commits)
