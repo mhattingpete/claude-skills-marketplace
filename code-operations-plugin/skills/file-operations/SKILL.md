@@ -19,7 +19,10 @@ Analyze files and retrieve metadata using Claude's native tools without modifyin
 
 ### File Size & Metadata
 ```bash
-stat -f "%z bytes, modified %Sm" [file_path]  # Single file
+# macOS / BSD:
+stat -f "%z bytes, modified %Sm" [file_path]   # Single file
+# GNU / Linux:
+stat -c "%s bytes, modified %y" [file_path]    # Single file
 ls -lh [directory]                             # Multiple files
 du -h [file_path]                              # Human-readable size
 ```
@@ -49,7 +52,7 @@ Glob(pattern="**/*.py")
 ## Workflow Examples
 
 ### Comprehensive File Analysis
-1. Get size/mod time: `stat -f "%z bytes, modified %Sm" file.py`
+1. Get size/mod time: `stat -f "%z bytes, modified %Sm" file.py` (macOS/BSD) or `stat -c "%s bytes, modified %y" file.py` (GNU/Linux)
 2. Count lines: `wc -l file.py`
 3. Read file: `Read(file_path="file.py")`
 4. Count functions: `Grep(pattern="^def ", output_mode="count")`
