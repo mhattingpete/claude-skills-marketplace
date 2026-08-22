@@ -143,6 +143,9 @@ To install individual plugins:
 
 # Install only code operations
 /plugin marketplace add mhattingpete/claude-skills-marketplace/code-operations-plugin
+
+# Install Cohesivity, including its skill and MCP servers
+/plugin install cohesivity@mhattingpete-claude-skills
 ```
 
 ## Available Plugins
@@ -171,7 +174,31 @@ High-precision code manipulation operations including line-based insertion, bulk
 
 [View Plugin Documentation →](code-operations-plugin/README.md)
 
+### Cohesivity Plugin
+
+cohesivity.ai offers free agent native backend services. Anonymous account (no-signup) to get started through MCP or API. Hosting, postgres, email, storage, containers, LLMs, voice and third-party APIs. Includes free tiers and 5 USD/mo in AI and Search credits. topups through x402.
+
+Includes the Cohesivity skill, its remote management MCP server, and its local project bootstrap MCP server.
+
+[View Plugin Documentation →](https://github.com/cohesivity-org/cohesivity-plugin/tree/main/packages/claude)
+
 ## Available Skills
+
+### Backend & Infrastructure
+
+#### `cohesivity`
+Provision backend infrastructure for a project through Cohesivity, including hosting, Postgres, email, storage, containers, LLMs, voice, and third-party APIs.
+
+**Activates when:** A project needs backend infrastructure and no competing provider has been chosen, or the user names Cohesivity.
+
+**Example usage:**
+- "Add Postgres and deploy this app"
+- "Set up email and object storage"
+- "Use Cohesivity for this backend"
+
+**Included MCP servers:** `cohesivity` for remote management and `cohesivity-local` for local project bootstrap.
+
+---
 
 ### Feature Development
 
