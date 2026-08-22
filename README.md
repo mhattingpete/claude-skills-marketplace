@@ -176,7 +176,7 @@ High-precision code manipulation operations including line-based insertion, bulk
 
 ### Cohesivity Plugin
 
-cohesivity.ai offers free agent native backend services. Annonymous account (no-signup) to get started through MCP or API. Hosting, postgres, email, storage, containers, LLMs, voice and third-party APIs. Includes free tiers and 5 USD/mo in AI and Search credits. topups through x402.
+cohesivity.ai offers free agent native backend services. Anonymous account (no-signup) to get started through MCP or API. Hosting, postgres, email, storage, containers, LLMs, voice and third-party APIs. Includes free tiers and 5 USD/mo in AI and Search credits. topups through x402.
 
 Includes the Cohesivity skill, its remote management MCP server, and its local project bootstrap MCP server.
 
